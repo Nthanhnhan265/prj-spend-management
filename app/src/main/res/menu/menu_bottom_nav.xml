@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/nhap"
+            android:icon="@drawable/outline_border_color_black_48"
+            android:title="@string/nhap"
+            >
+        </item>
+        <item
+            android:id="@+id/lich"
+            android:icon="@drawable/outline_calendar_month_black_48"
+            android:title="@string/lich">
+        </item>
+        <item android:id="@+id/baocao"
+            android:icon="@drawable/outline_motion_photos_on_black_48"
+            android:title="@string/baocao"
+            >
+        </item>
+        <item android:id="@+id/khac"
+            android:icon="@drawable/outline_more_horiz_black_48"
+            android:title="@string/khac"
+            >
+        </item>
+</menu>
