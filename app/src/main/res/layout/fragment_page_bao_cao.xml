@@ -1,17 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PageBaoCao">
+    tools:context=".HomeFragment"
+    android:background="@color/dark_blue"
+    android:orientation="vertical"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/darker_blue"
 
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/baocao"
+        android:textSize="22sp"
+        android:textColor="@color/lighter_blue"
+        android:padding="20dp"
+        android:textStyle="bold"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_search"
+
+        />
+
+
+</LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="5dp"
+        >
+
+
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_before"
+
+        />
+    <TextView
+        android:layout_weight="8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10/2023"
+        android:textColor="@color/lighter_blue"
+        android:textSize="22dp"
+        android:background="@color/darker_blue"
+        android:padding="10dp"
+        android:textAlignment="center"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:src="@drawable/ic_next"
+
+        />
+
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+
+        >
+<!--    Chi tieu-->
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape"
+        android:padding="8dp"
+        android:layout_marginEnd="5dp"
+        >
+    <TextView
+        android:layout_weight="8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chitieu"
+        android:textSize="15sp"
+        android:textColor="@color/lighter_blue"
+        />
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10,000,000"
+        android:textSize="16sp"
+        android:textColor="@android:color/holo_red_dark"
+         android:textStyle="bold"
+        />
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vnd"
+        android:textSize="15sp" android:textColor="@android:color/holo_red_dark"
+
+        />
+    </LinearLayout>
+<!--thu nhap-->
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape"
+        android:padding="8dp"
+
+
+        >
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thunhap"
+            android:textSize="15sp"
+            android:textColor="@color/lighter_blue"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="16sp"
+            android:textColor="@color/lighter_blue"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="@string/vnd"
+            android:textColor="@color/lighter_blue"
+            />
+    </LinearLayout>
+
+    </LinearLayout>
+
+<!--Thu chi-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/shape"
+    android:paddingVertical="8dp"
+    android:paddingHorizontal="5dp"
+    >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Page Bao Cao"
-        android:textSize="25sp"
-        android:layout_centerInParent="true">
-
-    </TextView>
-
-</RelativeLayout>
+        android:text="@string/thuchi"
+        android:textSize="15sp"
+        android:textColor="@color/lighter_blue"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="16sp"
+        android:textColor="@color/lighter_blue"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vnd"
+        android:textSize="15sp"
+        android:textColor="@color/lighter_blue"
+        />
+</LinearLayout>
+<!--   Close main layout-->
+</LinearLayout>
