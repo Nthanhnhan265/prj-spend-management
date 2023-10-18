@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Spend Management Application</string>
+    <string name="nhap">Home</string>
+    <string name="lich">Lịch</string>
+    <string name="baocao">Báo Cáo</string>
+    <string name="khac">Khác</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

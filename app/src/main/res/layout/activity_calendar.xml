@@ -1,6 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity"
+android:orientation="vertical"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="89dp"
+
+    >
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15sp"
+        android:layout_weight="1"
+        android:backgroundTint="#214663"
+        android:text="Tiền Chi"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="15sp"
+
+        />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15sp"
+        android:layout_weight="1"
+        android:backgroundTint="#214663"
+        android:text="Tiền Thu "
+        android:textSize="20sp"
+        android:layout_marginTop="15sp"
+        />
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:layout_width="91dp"
+        android:layout_height="42dp"
+        android:text="Ngày"
+        android:textSize="20sp"
+        android:layout_marginLeft="15sp"
+
+        >
+
+    </TextView>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50sp"
+        android:text="15/10/2023(CN)"
+        android:layout_marginRight="20sp"
+        android:backgroundTint="#3DA0EF"
+        />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:text="Ghi Chu"
+        android:textSize="15sp">
+
+    </TextView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Không Được Nhập"
+
+        >
+
+    </EditText>
+
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_width="100sp"
+        android:layout_height="30sp"
+        android:text="Tien Chi"
+        android:textSize="15sp"
+        android:layout_marginLeft="10sp"
+        >
+
+    </TextView>
+
+    <Button
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+
+        >
+
+    </Button>
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:text="đ"
+        android:layout_marginLeft="20sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        >
+
+    </TextView>
+</LinearLayout>
+<TextView
+    android:id="@+id/tvDanhMuc"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Danh Muc"
+    android:textSize="20sp"
+    ></TextView>
+
+</LinearLayout>
