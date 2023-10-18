@@ -1,17 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    android:background="@color/dark_blue"
+    android:orientation="vertical"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/darker_blue"
+    >
 
     <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/baocao"
+        android:textSize="22sp"
+        android:textColor="@color/lighter_blue"
+        android:padding="20dp"
+        android:textStyle="bold"
+        />
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Page Bao Cao"
-        android:textSize="25sp"
-        android:layout_centerInParent="true">
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_search"
 
-    </TextView>
+        />
 
-</RelativeLayout>
+
+</LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        >
+
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_before"
+
+        />
+    <TextView
+        android:layout_weight="8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10/2023"
+        android:textColor="@color/lighter_blue"
+        android:textSize="22dp"
+        android:background="@color/darker_blue"
+        android:padding="10dp"
+        android:textAlignment="center"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_next"
+
+        />
+
+    </LinearLayout>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+
+        >
+<!--    Chi tieu-->
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape"
+        android:padding="5dp"
+        android:layout_marginEnd="5dp"
+        >
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chitieu"
+        android:textSize="22dp"
+        android:textColor="@color/lighter_blue"
+        />
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="22dp"
+        android:textColor="@color/lighter_blue"
+        />
+    </LinearLayout>
+<!--thu nhap-->
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape"
+        android:padding="5dp"
+
+        >
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thunhap"
+            android:textSize="22dp"
+            android:textColor="@color/lighter_blue"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="22dp"
+            android:textColor="@color/lighter_blue"
+            />
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+<!--   Close main layout-->
+</LinearLayout>
