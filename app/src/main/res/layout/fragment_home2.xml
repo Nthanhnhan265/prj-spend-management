@@ -33,7 +33,9 @@
             android:id="@+id/btnTienThu"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/xanh1"
+            android:backgroundTint="@color/xanh2"
+
+
             android:text="Tien Thu"
             android:textColor="@color/black"
             android:textSize="15sp"
@@ -58,22 +60,29 @@
             android:text="Ngày"
             android:textSize="15sp"
             android:textStyle="bold"></TextView>
+      <ImageView
+          android:layout_width="50sp"
+          android:layout_height="50sp"
+          android:layout_marginLeft="45sp"
 
-        <EditText
-            android:id="@+id/dateEditText"
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="35sp"
+          >
 
-            android:clickable="true"
-            android:focusable="false"
-            android:hint="Nhap Ngay Thang" />
-
+      </ImageView>
         <Button
             android:id="@+id/datepickerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chọn ngày" />
+
+        <ImageView
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginRight="45sp"
+            >
+
+        </ImageView>
+
+
 
     </LinearLayout>
 
@@ -143,141 +152,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Doanh Muc"
-        android:layout_marginLeft="15sp"
         android:textSize="25sp"
         android:layout_marginTop="320sp">
 
     </TextView>
 
+
     <LinearLayout
-      android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="330sp"
-        android:layout_marginEnd="25dp"
-
-        android:layout_marginRight="25sp"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25sp"
-            android:layout_marginTop="15sp"
-            android:background="@drawable/button_background"
-            android:text="Ăn uống"></Button>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5sp"
-            android:background="@drawable/button_background"
-            android:text="Ăn uống"></Button>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5sp"
-            android:background="@drawable/button_background"
-            android:text="Ăn uống"></Button>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background"
-            android:text="Ăn uống"></Button>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="380sp"
-        android:orientation="horizontal"
-        android:padding="25sp"
-
-        >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ăn uống"
-            android:layout_marginRight="5sp"
-            android:background="@drawable/button_background"
-            >
-        </Button>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ăn uống"
-            android:layout_marginRight="5sp"
-            android:background="@drawable/button_background"
-            >
-        </Button>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ăn uống"
-            android:layout_marginRight="5sp"
-            android:background="@drawable/button_background"
-            >
-        </Button>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ăn uống"
-            android:background="@drawable/button_background"
-            >
-        </Button>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="430sp"
-        android:orientation="horizontal"
-        android:padding="25sp"
-
-        >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ăn uống"
-            android:layout_marginEnd="5sp"
-            android:background="@drawable/button_background"
-            >
-        </Button>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ăn uống"
-            android:layout_marginRight="5sp"
-            android:background="@drawable/button_background"
-            >
-        </Button>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thêm"
-
-
-            >
-        </Button>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="420sp"
+        android:layout_height="100sp"
         android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginTop="500sp"
+
         >
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="550sp"
         android:text="Nhập Khoản Tiền Chi"
         android:padding="20sp"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_marginLeft="35sp"
         android:layout_marginRight="35sp"
         >
-
     </Button>
     </LinearLayout>
 </RelativeLayout>
