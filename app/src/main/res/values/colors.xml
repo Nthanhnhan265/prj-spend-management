@@ -2,9 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="darker_blue">#214177</color>
-    <color name="dark_blue">#3667A6</color>
-    <color name="light_blue">#82A6CB</color>
-    <color name="lighter_blue">#BDD8F1</color>
-
+    <color name="xanh1">#214177</color>
+    <color name="xanh2">#3667A6</color>
+    <color name="xanh3">#82A6CB</color>
+    <color name="xanh4">#BDD8F1</color>
 </resources>
