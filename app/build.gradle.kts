@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.project.spendmanagement"
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.project.spendmanagement"
