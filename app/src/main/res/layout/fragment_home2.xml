@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment"
-    android:background="@color/xanh3"
-    >
+    android:background="@color/xanh2">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,26 +18,26 @@
         <Button
             android:layout_width="200sp"
             android:layout_height="wrap_content"
-            android:text="Tien Chi"
+            android:text="Tiền Chi"
+
             android:textSize="15sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:id="@+id/btnTienChi"
-            android:backgroundTint="@color/xanh2"
-            android:background="@drawable/button_background"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
             >
 
         </Button>
 
         <Button
             android:id="@+id/btnTienThu"
-            android:layout_width="200sp"
+            android:layout_width="180sp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/xanh2"
-
-
-            android:text="Tien Thu"
-            android:textColor="@color/black"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:text="Tiền Thu"
+            android:textColor="#EEECE3E3"
             android:textSize="15sp"
             android:textStyle="bold">
 
@@ -56,47 +56,61 @@
             android:id="@+id/tvNgay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15sp"
+            android:layout_marginLeft="20sp"
             android:text="Ngày"
+            android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold">
+
+        </TextView>
+
       <ImageView
           android:layout_width="50sp"
           android:layout_height="50sp"
-          android:layout_marginLeft="45sp"
-
+          android:layout_marginLeft="25sp"
+          android:src="@drawable/ic_before"
+          android:id="@+id/ivBefore"
           >
-
       </ImageView>
         <Button
             android:id="@+id/datepickerButton"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:text="18/10/2023"
+            android:textSize="18sp"
+            android:backgroundTint="@color/xanh1"
+            android:onClick="showDatePicker"
+            />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:background="@drawable/custom_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chọn ngày" />
+            android:visibility="gone" />
+
 
         <ImageView
             android:layout_width="50sp"
             android:layout_height="50sp"
             android:layout_marginRight="45sp"
+            android:src="@drawable/ic_next"
+            android:id="@+id/ivNext"
             >
-
         </ImageView>
-
-
-
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="180sp"
+        android:layout_marginTop="120sp"
         android:padding="25sp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ghi Chu"
+            android:text="Ghi Chú"
+            android:textColor="@color/white"
             android:textSize="15sp">
 
         </TextView>
@@ -108,21 +122,22 @@
                 android:layout_marginLeft="20sp"
                 android:padding="15sp"
                 >
-
             </EditText>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="260sp"
+        android:layout_marginTop="200sp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tien Chi "
+            android:text="Tiền Chi "
+            android:textColor="@color/white"
             android:textSize="15sp"
-            android:layout_marginLeft="25sp"
+            android:layout_marginLeft="15sp"
+
             >
 
         </TextView>
@@ -130,10 +145,11 @@
                 android:layout_width="260sp"
                 android:layout_height="wrap_content"
                 android:hint="0"
+                android:background="@drawable/custom_editext"
                 android:textStyle="bold"
                 android:padding="15sp"
                 android:inputType="number"
-                android:layout_marginLeft="15sp"
+                android:layout_marginLeft="20sp"
                 android:autofillHints="">
 
             </EditText>
@@ -151,29 +167,148 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Doanh Muc"
+        android:text="Doanh Mục"
+        android:textColor="@color/white"
+        android:textStyle="italic"
         android:textSize="25sp"
-        android:layout_marginTop="320sp">
+        android:layout_marginTop="260sp">
 
     </TextView>
 
 
     <LinearLayout
         android:layout_width="420sp"
+        android:layout_height="70sp"
+        android:layout_marginTop="300sp"
+        android:orientation="horizontal"
+
+       >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370sp"
+        android:orientation="horizontal"
+
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="440sp"
+        android:orientation="horizontal"
+
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_fastfood_24"
+            ></Button>
+
+        <Button
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:text="Thêm "
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:drawableBottom="@drawable/baseline_add_24"
+            ></Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="420sp"
         android:layout_height="100sp"
         android:orientation="vertical"
-        android:layout_marginTop="500sp"
-
+        android:layout_marginTop="520sp"
         >
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nhập Khoản Tiền Chi"
-        android:padding="20sp"
-        android:textSize="20sp"
+        android:padding="15sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:layout_marginLeft="35sp"
         android:layout_marginRight="35sp"
+        android:backgroundTint="@color/xanh1"
         >
     </Button>
     </LinearLayout>

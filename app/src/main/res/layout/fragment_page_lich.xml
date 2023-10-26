@@ -3,15 +3,386 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Page Lich"
-        android:textSize="25sp"
-        android:layout_centerInParent="true">
+        android:orientation="horizontal"
+        android:background="@color/xanh1"
+        android:padding="10sp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lịch"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="@color/xanh3"
+            android:layout_marginLeft="15sp"
+            >
 
-    </TextView>
+        </TextView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40sp"
+        android:orientation="horizontal"
+        android:background="@color/xanh2"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_before"
+            android:layout_marginLeft="30sp">
+            
+        </ImageView>
+        <Button
+            android:id="@+id/datepickerButton"
+            android:layout_width="270sp"
+            android:layout_height="wrap_content"
+            android:text="18/10/2023"
+            android:textSize="18sp"
+            android:backgroundTint="@color/xanh1"
+            android:onClick="showDatePicker"
+            />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:background="@drawable/custom_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+
+        <ImageView
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginRight="45sp"
+            android:src="@drawable/ic_next"
+            android:id="@+id/ivNext"
+            >
+        </ImageView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="350sp"
+        android:background="@color/xanh2"
+        android:padding="15sp"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tien Thu"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginStart="15sp"
+
+            android:textColor="@color/white"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tien Chi"
+            android:textSize="15sp"
+
+            android:textStyle="bold"
+            android:layout_marginStart="75sp"
+            android:textColor="@color/white"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tong"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginStart="120sp"
+            android:textColor="@color/white"
+            >
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="390sp"
+
+        android:background="@color/xanh2"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100,000d"
+            android:textStyle="bold"
+            android:layout_marginStart="25sp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginLeft="15sp"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100,000 d"
+            android:textStyle="bold"
+            android:layout_marginStart="70sp"
+            android:textColor="#EF0E0E"
+            android:textSize="15sp"
+
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 d"
+            android:textStyle="bold"
+            android:layout_marginStart="120sp"
+            android:textColor="#D6B1B1"
+            android:textSize="18sp"
+            >
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="415sp"
+        android:padding="1sp"
+        android:orientation="horizontal"
+        android:background="@color/xanh3"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22/09/2023(Th 5)"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="-100,000d"
+            android:layout_marginStart="200sp"
+            ></TextView>
+    </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="440sp"
+        android:orientation="horizontal"
+        android:background="@color/xanh1"
+        android:padding="15sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_fastfood_24"
+            android:layout_marginLeft="5sp"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong(Pho)"
+            android:textColor="@color/white"
+            android:layout_marginLeft="25sp"
+            android:textStyle="bold"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30,000d"
+            android:textColor="@color/white"
+            android:layout_marginStart="180sp"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500sp"
+        android:orientation="horizontal"
+        android:background="@color/xanh1"
+        android:padding="15sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_fastfood_24"
+            android:layout_marginLeft="5sp"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong(Pho)"
+            android:textColor="@color/white"
+            android:layout_marginLeft="25sp"
+            android:textStyle="bold"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30,000d"
+            android:textColor="@color/white"
+            android:layout_marginStart="180sp"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="445sp"
+        android:orientation="horizontal"
+        android:background="@color/xanh1"
+        android:padding="15sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_fastfood_24"
+            android:layout_marginLeft="5sp"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong(Pho)"
+            android:textColor="@color/white"
+            android:layout_marginLeft="25sp"
+            android:textStyle="bold"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30,000d"
+            android:textColor="@color/white"
+            android:layout_marginStart="180sp"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500sp"
+        android:orientation="horizontal"
+        android:background="@color/xanh1"
+        android:padding="15sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_fastfood_24"
+            android:layout_marginLeft="5sp"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong(Pho)"
+            android:textColor="@color/white"
+            android:layout_marginLeft="25sp"
+            android:textStyle="bold"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30,000d"
+            android:textColor="@color/white"
+            android:layout_marginStart="180sp"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="450sp"
+        android:orientation="horizontal"
+        android:background="@color/xanh1"
+        android:padding="15sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_fastfood_24"
+            android:layout_marginLeft="5sp"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong(Pho)"
+            android:textColor="@color/white"
+            android:layout_marginLeft="25sp"
+            android:textStyle="bold"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30,000d"
+            android:textColor="@color/white"
+            android:layout_marginStart="180sp"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="555sp"
+        android:orientation="horizontal"
+        android:background="@color/xanh1"
+        android:padding="15sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_fastfood_24"
+            android:layout_marginLeft="5sp"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong(Pho)"
+            android:textColor="@color/white"
+            android:layout_marginLeft="25sp"
+            android:textStyle="bold"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30,000d"
+            android:textColor="@color/white"
+            android:layout_marginStart="180sp"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="610sp"
+        android:orientation="horizontal"
+        android:background="@color/xanh1"
+        android:padding="15sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_fastfood_24"
+            android:layout_marginLeft="5sp"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An Uong(Pho)"
+            android:textColor="@color/white"
+            android:layout_marginLeft="25sp"
+            android:textStyle="bold"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30,000d"
+            android:textColor="@color/white"
+            android:layout_marginStart="180sp"
+            ></TextView>
+    </LinearLayout>
 
 </RelativeLayout>
