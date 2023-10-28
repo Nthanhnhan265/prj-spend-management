@@ -1,6 +1,5 @@
 package com.project.spendmanagement;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -9,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 
 import java.text.ParseException;
@@ -25,10 +24,11 @@ public class HomeFragment extends Fragment {
   private IconAdapter icon_apt;
   private List<Category> data_category;
   private Button datepickerButton;
-  private ListView lvExpenseCategory;
+  private GridView gvExtenseCategory;
+  private Button btnThuChi;
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_home2, container, false);
+    View view = inflater.inflate(R.layout.fragment_home_chitieu, container, false);
     setControl(view);
     setEvent();
 
@@ -36,6 +36,8 @@ public class HomeFragment extends Fragment {
   }
 
   private void setEvent() {
+    //lien ket man hinh nhap thu ở đây
+    //btnThuChi.setOnClickListener();
     datepickerButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -43,7 +45,6 @@ public class HomeFragment extends Fragment {
       }
 
     });
-
     datepickerButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -75,14 +76,15 @@ public class HomeFragment extends Fragment {
       }
     });
 
-    //lvExpenseCategory.setAdapter(icon_apt);
+    gvExtenseCategory.setAdapter(icon_apt);
   }
 
   private void setControl(View view) {
+    btnThuChi=view.findViewById(R.id.btnTienThu);
     data_category=new ArrayList<>();
     constructListView();
     icon_apt=new IconAdapter(requireContext(),data_category);
-    //lvExpenseCategory=view.findViewById(R.id.lvExpense_Category);
+    gvExtenseCategory=view.findViewById(R.id.gvExtenseCategory);
     datepickerButton = view.findViewById(R.id.datepickerButton);
 
   }
@@ -90,9 +92,12 @@ public class HomeFragment extends Fragment {
     data_category.add(new Category("mua sam","ok"));
     data_category.add(new Category("Mua sắm","a"));
     data_category.add(new Category("Đi nhậu","a"));
+    data_category.add(new Category("Điện","a"));data_category.add(new Category("Mua sắm","a"));
+    data_category.add(new Category("Đi nhậu","a"));
     data_category.add(new Category("Điện","a"));
 
   }
+
   private void showCustomDatePickerDialog() {
     final Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);

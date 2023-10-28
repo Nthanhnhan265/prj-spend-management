@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 import java.util.List;
 
 public class IconAdapter extends BaseAdapter {
@@ -40,11 +42,12 @@ public class IconAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.custom_item_category, null);
         }
 
-        Button btnCategory =view.findViewById(R.id.btnCategory);
+        AppCompatButton btnCategory = view.findViewById(R.id.btnCategory);
         Category item=data.get(i);
-        Drawable top = context.getResources().getDrawable(R.drawable.baseline_fastfood_24);
+        Drawable top = context.getResources().getDrawable(R.drawable.baseline_fastfood_24,null);
         btnCategory.setText(item.getTen_category());
         btnCategory.setCompoundDrawables(null,top,null,null);
-        return null;
+        btnCategory.setCompoundDrawablePadding(100);
+        return view;
     }
 }
