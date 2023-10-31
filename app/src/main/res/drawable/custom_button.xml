@@ -2,15 +2,15 @@
 <shape android:shape="rectangle"
 
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <size android:width="20dp"
-        android:height="20dp">
+    <size android:width="25dp"
+        android:height="25dp">
 
     </size>
-    <gradient android:startColor="@color/xanh2"
-        android:endColor="@color/xanh2">
+    <gradient android:startColor="@color/dark_blue"
+        android:endColor="@color/dark_blue">
 
     </gradient>
-        <corners android:radius="15dp"></corners>
-        <stroke android:color="@color/white"
+        <corners android:radius="8dp"></corners>
+        <stroke android:color="@color/lighter_blue"
             android:width="2dp"></stroke>
     </shape>

@@ -6,6 +6,19 @@
     <string name="khac">Khác</string>
     <string name="thunhap">Thu nhập</string>
     <string name="chitieu">Chi tiêu</string>
+    <string name="tienchi">Tiền chi</string>
+    <string name="nhaptienchi">Nhập tiền chi</string>
+    <string name="nhaptienthu">Nhập tiền thu</string>
+    <string name="tienthu">Tiền thu</string>
+    <string name="nhapghichu">Nhập ghi chú</string>
+    <string name="ghichu">Ghi chú</string>
+    <string name="khong">0</string>
+    <string name="ngay">Ngày</string>
+    <string name="ngayTruoc">Ngày trước</string>
+    <string name="ngaySau">Ngày sau</string>
+    <string name="danhmuc">Danh mục</string>
+    <string name="tong">Tổng</string>
+
     <string name="thuchi">Thu chi</string>
     <string name="vnd">₫</string>
     <!-- TODO: Remove or change this placeholder text -->

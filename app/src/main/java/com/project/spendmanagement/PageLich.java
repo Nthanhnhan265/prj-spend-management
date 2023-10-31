@@ -1,6 +1,7 @@
 package com.project.spendmanagement;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,18 +9,27 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+
 
 
 public class PageLich extends Fragment {
 
     private Button datepickerButton;
+    // them moi
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,13 +78,19 @@ public class PageLich extends Fragment {
                 datePickerDialog.show();
             }
         });
+
     }
 
     private void setControl(View view) {
 
         datepickerButton = view.findViewById(R.id.datepickerButton);
+        // them moi
+
+
 
     }
+
+
     private void showCustomDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
