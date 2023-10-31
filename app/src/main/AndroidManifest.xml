@@ -21,5 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Thêm hoạt động "PageLich" vào AndroidManifest.xml -->
+        <activity
+            android:name=".HomeFragment"
+            android:exported="true">
+        </activity>
     </application>
+
 </manifest>
