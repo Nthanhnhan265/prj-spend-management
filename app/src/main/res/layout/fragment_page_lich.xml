@@ -7,7 +7,11 @@
     tools:context=".HomeFragment"
     android:background="@color/dark_blue"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:layout_marginBottom="100sp"
+
+    >
+
 
 
     <LinearLayout
@@ -174,14 +178,12 @@
         android:layout_marginTop="5dp"
 
         >
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcShow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
-
             />
 
     </LinearLayout>

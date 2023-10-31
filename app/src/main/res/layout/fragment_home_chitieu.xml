@@ -7,14 +7,14 @@
     tools:context=".HomeFragment"
     android:orientation="vertical"
     android:background="@color/dark_blue"
-    android:layout_marginHorizontal="0dp"
+
 
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="15dp"
+        android:padding="15sp"
         android:background="@color/darker_blue"
         >
         <Button
@@ -26,7 +26,7 @@
             android:textColor="@color/lighter_blue"
             android:textStyle="bold"
             android:id="@+id/btnTienChi"
-            android:background="@drawable/custom_btn_selected"
+            android:background="@drawable/custom_button"
             app:backgroundTint="@null"
             style="?android:attr/buttonBarButtonStyle"
             />
@@ -36,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/custom_btn_selected"
             app:backgroundTint="@null"
             android:text="@string/tienthu"
             android:textColor="@color/lighter_blue"
@@ -76,12 +76,11 @@
       </ImageView>
         <Button
             android:id="@+id/datepickerButton"
-            android:layout_width="0sp"
-            android:layout_weight="6"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:text="@string/ngay"
             android:textColor="@color/lighter_blue"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:backgroundTint="@color/darker_blue"
             android:onClick="showDatePicker"
             />
@@ -155,6 +154,7 @@
             />
             <EditText
                 android:layout_width="0dp"
+                android:id="@+id/edtTienChi"
                 android:layout_height="wrap_content"
                 android:hint="@string/khong"
                 android:textColorHint="@color/lighter_blue"
@@ -165,7 +165,6 @@
                 android:layout_marginStart="20sp"
                 android:layout_weight="8"
                 android:autofillHints="">
-
             </EditText>
         <TextView
             android:layout_width="0dp"
@@ -177,7 +176,6 @@
             android:layout_marginStart="15sp"
             android:layout_weight="1"
             >
-
         </TextView>
     </LinearLayout>
     <TextView
@@ -199,7 +197,6 @@
         android:orientation="horizontal"
         android:paddingHorizontal="20dp">
 
-
         <GridView
             android:id="@+id/gvExtenseCategory"
             android:layout_width="match_parent"
@@ -211,7 +208,14 @@
             android:stretchMode="columnWidth"
             android:verticalSpacing="10dp"
             tools:listitem="@layout/custom_item_category"
+            >
+        </GridView>
+
+
+
+            
             />
+
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
@@ -221,8 +225,7 @@
         android:text="@string/nhaptienchi"
         android:textColor="@color/lighter_blue"
         android:background="@drawable/custom_editext"
+        android:id="@+id/btnNhapTienChi"
         android:layout_marginBottom="15dp"
-        >
-
-    </androidx.appcompat.widget.AppCompatButton>
+        />
 </LinearLayout>
