@@ -14,38 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="15dp"
         android:background="@color/darker_blue"
+        android:padding="10dp"
         >
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/tienchi"
-            android:textSize="15sp"
-            android:textColor="@color/lighter_blue"
-            android:textStyle="bold"
-            android:id="@+id/btnTienChi"
-            android:background="@drawable/custom_btn_selected"
-            app:backgroundTint="@null"
-            style="?android:attr/buttonBarButtonStyle"
-            />
-
-        <Button
-            android:id="@+id/btnTienThu"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button"
-            app:backgroundTint="@null"
-            android:text="@string/tienthu"
-            android:textColor="@color/lighter_blue"
-            android:textSize="15sp"
-            style="?android:attr/buttonBarButtonStyle"
-            android:textStyle="bold">
-
-
-        </Button>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+            android:textSize="25sp"
+           android:layout_marginLeft="15sp"
+           android:paddingVertical="10dp"
+           android:text="@string/chinhsua"
+           android:textColor="@color/lighter_blue"
+           android:textStyle="bold"
+           />
     </LinearLayout>
 
     <LinearLayout
@@ -218,7 +199,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="60dp"
         android:layout_gravity="center_horizontal"
-        android:text="@string/nhaptienchi"
+        android:text="@string/chinhsua"
         android:textColor="@color/lighter_blue"
         android:background="@drawable/custom_editext"
         android:layout_marginBottom="15dp"

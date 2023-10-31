@@ -3,6 +3,8 @@ package com.project.spendmanagement;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,8 @@ public class HomeFragment extends Fragment {
   private Button datepickerButton;
   private GridView gvExtenseCategory;
   private Button btnThuChi;
+
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_home_chitieu, container, false);
@@ -80,6 +84,7 @@ public class HomeFragment extends Fragment {
   }
 
   private void setControl(View view) {
+
     btnThuChi=view.findViewById(R.id.btnTienThu);
     data_category=new ArrayList<>();
     constructListView();
