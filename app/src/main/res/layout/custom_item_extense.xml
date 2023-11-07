@@ -11,6 +11,7 @@
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
         android:background="@color/darker_blue"
+        android:id="@+id/itemThuChi"
     >
         <ImageView
             android:id="@+id/ivCategory"

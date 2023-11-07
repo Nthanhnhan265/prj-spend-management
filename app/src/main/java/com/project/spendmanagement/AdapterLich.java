@@ -1,12 +1,17 @@
 package com.project.spendmanagement;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -48,23 +53,23 @@ public class AdapterLich extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(listGiaoDich.size()!=0) {
             String ngayHienTai= listNgayGiaoDich.get(position).toString();
-            List<GiaoDich> giaoDichHienTai=new ArrayList<>();
+            List<GiaoDich> giaoDichTrongNgay=new ArrayList<>();
             //khi ngày hiện tại được đổi thì duyệt for để lấy các giao dịch của ngày đó
             for (GiaoDich giaoDich: listGiaoDich) {
                 if(giaoDich.getNgayGD().equals(ngayHienTai)) {
-                    giaoDichHienTai.add(giaoDich);
+                    giaoDichTrongNgay.add(giaoDich);
                 }
             }
             //khi có giao dịch của ngày đó rồi thi tạo adapter cho giao dịch
-            adapterGiaoDich =new AdapterGiaoDich(giaoDichHienTai);
-
+            adapterGiaoDich =new AdapterGiaoDich(context,giaoDichTrongNgay);
+            
             if (holder instanceof MyViewHolder) {
                 MyViewHolder myViewHolder = (MyViewHolder) holder; // Ép kiểu ViewHolder của bạn
 
                 // Gắn dữ liệu vào TextView
                 myViewHolder.tvDate.setText(ngayHienTai);
                 //Gắn dữ liệu cho recyclerView của ngày hiện tại
-                myViewHolder.rcExtenseIcome.setAdapter(adapterGiaoDich);
+                myViewHolder.rcThuChi.setAdapter(adapterGiaoDich);
 
             }
         }
@@ -81,12 +86,17 @@ public class AdapterLich extends RecyclerView.Adapter {
 
          TextView tvDate;
 
-         RecyclerView rcExtenseIcome;
+         RecyclerView rcThuChi;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDate=itemView.findViewById(R.id.tvNgay);
-            rcExtenseIcome=itemView.findViewById(R.id.rcExtenseIcome);
+            rcThuChi=itemView.findViewById(R.id.rcExtenseIcome);
+
+
         }
+
+
     }
 }

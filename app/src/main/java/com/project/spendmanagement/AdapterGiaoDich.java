@@ -1,12 +1,17 @@
 package com.project.spendmanagement;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -14,9 +19,11 @@ import java.util.List;
 public class AdapterGiaoDich extends RecyclerView.Adapter {
     //fields
     private List<GiaoDich> data;
-
-    public AdapterGiaoDich(List<GiaoDich> data) {
+    private Context context; 
+    private OnItemClickListener clickListener; // Thêm trường này
+    public AdapterGiaoDich(Context ct,List<GiaoDich> data) {
         this.data=data;
+        context=ct; 
     }
     @NonNull
     @Override
@@ -34,9 +41,22 @@ public class AdapterGiaoDich extends RecyclerView.Adapter {
             ((MyHolder) holder).tvDesc.setText(giaoDichHienTai.getGhiChu());
             ((MyHolder) holder).tvValue.setText(giaoDichHienTai.getTextOfValue());
             ((MyHolder) holder).ivCategory.setImageResource(giaoDichHienTai.getDanhMuc().getIcon());
+            ((MyHolder) holder).lnItemThuChi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentChinhSua newFragment = new FragmentChinhSua();
+                    FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, newFragment); // Thay thế R.id.fragment_container bằng ID của Container Fragment của bạn
+                    transaction.addToBackStack(null); // (Tùy chọn) Cho phép người dùng quay lại Fragment trước đó
+                    transaction.commit();
+                }
+            });
         }
-    }
 
+    }
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
     @Override
     public int getItemCount() {
         return data.size();
@@ -47,12 +67,18 @@ public class AdapterGiaoDich extends RecyclerView.Adapter {
         TextView tvDesc;
         TextView tvValue;
         ImageView ivCategory;
+        LinearLayout lnItemThuChi;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
              ivCategory=itemView.findViewById(R.id.ivCategory);
              tvCategory=itemView.findViewById(R.id.tvCategory);
              tvDesc=itemView.findViewById(R.id.tvDesc);
              tvValue=itemView.findViewById(R.id.tvValue);
+             lnItemThuChi=itemView.findViewById(R.id.itemThuChi);
+             
         }
+    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        clickListener = listener;
     }
 }
