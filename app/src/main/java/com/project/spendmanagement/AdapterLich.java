@@ -12,23 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DateAdapter extends RecyclerView.Adapter {
+public class AdapterLich extends RecyclerView.Adapter {
     //fields
     private Context context;
-    private List<Transaction>list_transaction;
-    private List<String>list_Dates;
-    private TransactionAdapter adt_transaction;
+    private List<GiaoDich> listGiaoDich;
+    private List<String> listNgayGiaoDich;
+    private AdapterGiaoDich adapterGiaoDich;
 
 
-    public DateAdapter(Context context, List<Transaction> list_transaction) {
-        if(list_transaction.size()!=0) {
-            list_Dates=new ArrayList<>();
+    public AdapterLich(Context context, List<GiaoDich> listGiaoDich) {
+        if(listGiaoDich.size()!=0) {
+            listNgayGiaoDich =new ArrayList<>();
             this.context = context;
-            this.list_transaction = list_transaction;
-            list_Dates.add(list_transaction.get(0).getDate()); //them 1 phan tu vao danh sach ngay truoc
-            for (Transaction transaction:list_transaction) {
-                if(list_Dates.indexOf(transaction.getDate())==-1) {//khong ton tai ngay trong danh sach
-                    list_Dates.add(transaction.getDate());
+            this.listGiaoDich = listGiaoDich;
+            listNgayGiaoDich.add(listGiaoDich.get(0).getNgayGD()); //them 1 phan tu vao danh sach ngay truoc
+            for (GiaoDich giaodich:listGiaoDich) {
+                if(listNgayGiaoDich.indexOf(giaodich.getNgayGD())==-1) {//khong ton tai ngay trong danh sach
+                    listNgayGiaoDich.add(giaodich.getNgayGD());
                 }
             }
         }
@@ -46,25 +46,25 @@ public class DateAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(list_transaction.size()!=0) {
-            String currentDate=list_Dates.get(position).toString();
-            List<Transaction> currentItems=new ArrayList<>();
+        if(listGiaoDich.size()!=0) {
+            String ngayHienTai= listNgayGiaoDich.get(position).toString();
+            List<GiaoDich> giaoDichHienTai=new ArrayList<>();
             //khi ngày hiện tại được đổi thì duyệt for để lấy các giao dịch của ngày đó
-            for (Transaction transaction: list_transaction) {
-                if(transaction.getDate().equals(currentDate)) {
-                    currentItems.add(transaction);
+            for (GiaoDich giaoDich: listGiaoDich) {
+                if(giaoDich.getNgayGD().equals(ngayHienTai)) {
+                    giaoDichHienTai.add(giaoDich);
                 }
             }
             //khi có giao dịch của ngày đó rồi thi tạo adapter cho giao dịch
-            adt_transaction=new TransactionAdapter(currentItems);
+            adapterGiaoDich =new AdapterGiaoDich(giaoDichHienTai);
 
             if (holder instanceof MyViewHolder) {
                 MyViewHolder myViewHolder = (MyViewHolder) holder; // Ép kiểu ViewHolder của bạn
 
                 // Gắn dữ liệu vào TextView
-                myViewHolder.tvDate.setText(currentDate);
+                myViewHolder.tvDate.setText(ngayHienTai);
                 //Gắn dữ liệu cho recyclerView của ngày hiện tại
-                myViewHolder.rcExtenseIcome.setAdapter(adt_transaction);
+                myViewHolder.rcExtenseIcome.setAdapter(adapterGiaoDich);
 
             }
         }
@@ -74,7 +74,7 @@ public class DateAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
 
-        return list_Dates.size();
+        return listNgayGiaoDich.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

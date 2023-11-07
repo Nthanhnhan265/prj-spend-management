@@ -1,15 +1,9 @@
 package com.project.spendmanagement;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 
 import java.text.ParseException;
@@ -32,8 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    private IconAdapter icon_adapter;
-  private List<Category> data_Extensecategory;
+    private AdapterDanhMuc icon_adapter;
+  private List<DanhMuc> data_Extensecategory;
   private Button datepickerButton;
   private GridView gvExtenseCategory;
 
@@ -117,9 +108,9 @@ public class HomeFragment extends Fragment {
     btnTienThu=view.findViewById(R.id.btnTienThu);
     data_Extensecategory=new ArrayList<>();
     constructListView();
-    icon_adapter=new IconAdapter(requireContext(),data_Extensecategory);
+    icon_adapter=new AdapterDanhMuc(requireContext(),data_Extensecategory);
     gvExtenseCategory=view.findViewById(R.id.gvExtenseCategory);
-    datepickerButton = view.findViewById(R.id.datepickerButton);
+    datepickerButton = view.findViewById(R.id.btnDatePicker);
     // them moi
 
 
@@ -141,13 +132,13 @@ public class HomeFragment extends Fragment {
     }
   }
   private void constructListView() {
-    data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_25));
-    data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_24));
-    data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_24));
-    data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_24));
-    data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_24));
-    data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_24));
-    data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_24));
+    data_Extensecategory.add(new DanhMuc("Mua sam",R.drawable.baseline_fastfood_25));
+    data_Extensecategory.add(new DanhMuc("Mua sam",R.drawable.baseline_fastfood_24));
+    data_Extensecategory.add(new DanhMuc("Mua sam",R.drawable.baseline_fastfood_24));
+    data_Extensecategory.add(new DanhMuc("Mua sam",R.drawable.baseline_fastfood_24));
+    data_Extensecategory.add(new DanhMuc("Mua sam",R.drawable.baseline_fastfood_24));
+    data_Extensecategory.add(new DanhMuc("Mua sam",R.drawable.baseline_fastfood_24));
+    data_Extensecategory.add(new DanhMuc("Mua sam",R.drawable.baseline_fastfood_24));
 //    data_Extensecategory.add(new Category("Mua sắm","a"));
 //    data_Extensecategory.add(new Category("Đi nhậu","a"));
 //    data_Extensecategory.add(new Category("Điện","a"));

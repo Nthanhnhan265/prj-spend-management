@@ -12,7 +12,7 @@
             android:text="@string/danhmuc"
             android:textSize="15sp"
             android:padding="13dp"
-            android:background="@drawable/custom_ic_category"
+            android:background="@drawable/custom_ic_danhmuc"
             android:drawableTop="@drawable/baseline_fastfood_24"
             />
 

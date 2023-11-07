@@ -13,14 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements DataUpdateListener {
+public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
 
     HomeFragment homeFragment;
     PageLich pageLich;
     PageBaoCao pageBaoCao;
     PageKhac pageKhac;
 
-     List<Transaction> listTransaction=new ArrayList<>();
+     List<GiaoDich> listTransaction=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements DataUpdateListene
     public void chuyenDenNhapThu() {
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new PageThu())
+                .replace(R.id.container, new FragmentThuNhap())
                 .addToBackStack(null)  // (Tùy chọn) cho phép quay lại Fragment trước đó
                 .commit();
     }
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements DataUpdateListene
                 .commit();
     }
     @Override
-    public void onAddTransaction(Transaction transaction) {
+    public void themGiaoDich(GiaoDich transaction) {
         if (listTransaction != null) {
             listTransaction.add(transaction);
 

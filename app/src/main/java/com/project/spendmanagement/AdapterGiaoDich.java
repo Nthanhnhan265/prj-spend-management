@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class TransactionAdapter extends RecyclerView.Adapter {
+public class AdapterGiaoDich extends RecyclerView.Adapter {
     //fields
-    private List<Transaction> data;
+    private List<GiaoDich> data;
 
-    public TransactionAdapter(List<Transaction> data) {
+    public AdapterGiaoDich(List<GiaoDich> data) {
         this.data=data;
     }
     @NonNull
@@ -27,13 +27,13 @@ public class TransactionAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Transaction currentObj=data.get(position);
+        GiaoDich giaoDichHienTai=data.get(position);
         if(holder instanceof MyHolder) {
             MyHolder myHolder=(MyHolder) holder;
-            ((MyHolder) holder).tvCategory.setText(currentObj.getCategory().getTen_category());
-            ((MyHolder) holder).tvDesc.setText(currentObj.getDescription());
-            ((MyHolder) holder).tvValue.setText(currentObj.getTextOfValue());
-            ((MyHolder) holder).ivCategory.setImageResource(currentObj.getCategory().getIcon());
+            ((MyHolder) holder).tvCategory.setText(giaoDichHienTai.getDanhMuc().getTenDanhMuc());
+            ((MyHolder) holder).tvDesc.setText(giaoDichHienTai.getGhiChu());
+            ((MyHolder) holder).tvValue.setText(giaoDichHienTai.getTextOfValue());
+            ((MyHolder) holder).ivCategory.setImageResource(giaoDichHienTai.getDanhMuc().getIcon());
         }
     }
 

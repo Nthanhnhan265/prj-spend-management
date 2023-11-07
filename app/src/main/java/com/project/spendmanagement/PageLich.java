@@ -1,35 +1,28 @@
 package com.project.spendmanagement;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ListView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
 
 
 public class PageLich extends Fragment  {
     private RecyclerView rcShow;
     private Button datepickerButton;
 
-    public static DateAdapter dateAdapter;
+    public static AdapterLich dateAdapter;
 
 
     MainActivity main;
@@ -92,10 +85,10 @@ public class PageLich extends Fragment  {
         main=(MainActivity) getActivity() ;
         rcShow=view.findViewById(R.id.rcShow);
         if(main.listTransaction.size()!=0) {
-            dateAdapter=new DateAdapter(requireContext(),main.listTransaction);
+            dateAdapter=new AdapterLich(requireContext(),main.listTransaction);
         }
 
-        datepickerButton = view.findViewById(R.id.datepickerButton);
+        datepickerButton = view.findViewById(R.id.btnDatePicker);
         // them moi
 
 
