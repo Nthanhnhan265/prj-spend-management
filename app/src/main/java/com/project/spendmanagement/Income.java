@@ -2,18 +2,18 @@ package com.project.spendmanagement;
 
 public class Income extends Transaction {
         //fields
-        private String category;
+        private Category category;
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
     //constructor
-        public Income(String date, String description, double value, String category) {
+        public Income(String date, String description, int value, Category category) {
             super(date, description, value);
             this.category = category;
 

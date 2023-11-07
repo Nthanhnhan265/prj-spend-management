@@ -30,10 +30,10 @@ public class TransactionAdapter extends RecyclerView.Adapter {
         Transaction currentObj=data.get(position);
         if(holder instanceof MyHolder) {
             MyHolder myHolder=(MyHolder) holder;
-            ((MyHolder) holder).tvCategory.setText(currentObj.getCategory());
+            ((MyHolder) holder).tvCategory.setText(currentObj.getCategory().getTen_category());
             ((MyHolder) holder).tvDesc.setText(currentObj.getDescription());
             ((MyHolder) holder).tvValue.setText(currentObj.getTextOfValue());
-            ((MyHolder) holder).ivCategory.setImageResource(R.drawable.baseline_fastfood_24);
+            ((MyHolder) holder).ivCategory.setImageResource(currentObj.getCategory().getIcon());
         }
     }
 

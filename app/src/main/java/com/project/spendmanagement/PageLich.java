@@ -25,14 +25,14 @@ import java.util.List;
 
 
 
-public class PageLich extends Fragment {
+public class PageLich extends Fragment  {
     private RecyclerView rcShow;
     private Button datepickerButton;
 
-    private List<String>list_dates;
-    private DateAdapter dateAdapter;
-    private List<Transaction> list_Transaction;
+    public static DateAdapter dateAdapter;
 
+
+    MainActivity main;
 
 
     @Override
@@ -89,13 +89,12 @@ public class PageLich extends Fragment {
     }
 
     private void setControl(View view) {
-        list_dates=new ArrayList<>();
-        list_Transaction=new ArrayList<>();
-        constructExtense();
-        constructDate();
+        main=(MainActivity) getActivity() ;
         rcShow=view.findViewById(R.id.rcShow);
+        if(main.listTransaction.size()!=0) {
+            dateAdapter=new DateAdapter(requireContext(),main.listTransaction);
+        }
 
-        dateAdapter=new DateAdapter(requireContext(),list_Transaction);
         datepickerButton = view.findViewById(R.id.datepickerButton);
         // them moi
 
@@ -103,15 +102,7 @@ public class PageLich extends Fragment {
 
     }
 
-    private void constructDate() {
-    }
-    private  void constructExtense() {
-        list_Transaction.add(new Extense("28/1/2023","Mua hang shopee",280000,"Mua sam"));
-        list_Transaction.add(new Extense("28/1/2023","Mua hang bach hoa",30000,"Mua sam"));
-        list_Transaction.add(new Extense("29/1/2023","Mua quan ao",30000,"Mua sam"));
-        list_Transaction.add(new Income("30/1/2023","Trung so",300000,"Tro cap"));
-        list_Transaction.add(new Income("1/2/2023","Ba me gui tien",3000000,"Tro cap"));
-    }
+
 
     private void showCustomDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();
@@ -127,4 +118,7 @@ public class PageLich extends Fragment {
         datePickerDialog.show();
     }
 
+    public static void capNhatList() {
+        dateAdapter.notifyDataSetChanged();
+    }
 }

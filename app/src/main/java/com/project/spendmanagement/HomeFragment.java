@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,6 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private IconAdapter icon_adapter;
   private List<Category> data_Extensecategory;
-  private List<Category> data_Icomecategory;
   private Button datepickerButton;
   private GridView gvExtenseCategory;
 
@@ -44,19 +44,29 @@ public class HomeFragment extends Fragment {
 
 
 
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_home_chitieu, container, false);
     setControl(view);
     setEvent();
     return view;
+
   }
 
 
 
   private void setEvent() {
     //lien ket man hinh nhap thu ở đây
-    //btnThuChi.setOnClickListener();
+    btnTienThu.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        MainActivity main = (MainActivity) getActivity();
+        if(main!=null) {
+          main.chuyenDenNhapThu();
+        }
+      }
+    });
     setCurrentDate();
 
     datepickerButton.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +113,7 @@ public class HomeFragment extends Fragment {
 
 
   private void setControl(View view) {
+
     btnTienThu=view.findViewById(R.id.btnTienThu);
     data_Extensecategory=new ArrayList<>();
     constructListView();
@@ -130,8 +141,6 @@ public class HomeFragment extends Fragment {
     }
   }
   private void constructListView() {
-   // Drawable top =getResources().getDrawable(R.drawable.baseline_fastfood_24, null);
-
     data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_25));
     data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_24));
     data_Extensecategory.add(new Category("Mua sam",R.drawable.baseline_fastfood_24));
@@ -159,8 +168,8 @@ public class HomeFragment extends Fragment {
 
     // Đặt background cho DatePickerDialog từ drawable custom_background.xml
     datePickerDialog.getDatePicker().setBackgroundResource(R.drawable.custom_background);
-
     datePickerDialog.show();
   }
+
 
 }

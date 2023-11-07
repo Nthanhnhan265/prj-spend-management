@@ -19,16 +19,20 @@ public class DateAdapter extends RecyclerView.Adapter {
     private List<String>list_Dates;
     private TransactionAdapter adt_transaction;
 
+
     public DateAdapter(Context context, List<Transaction> list_transaction) {
-        list_Dates=new ArrayList<>();
-        this.context = context;
-        this.list_transaction = list_transaction;
-        list_Dates.add(list_transaction.get(0).getDate()); //them 1 phan tu vao danh sach ngay truoc
-        for (Transaction transaction:list_transaction) {
-            if(list_Dates.indexOf(transaction.getDate())==-1) {//khong ton tai ngay trong danh sach
-                list_Dates.add(transaction.getDate());
+        if(list_transaction.size()!=0) {
+            list_Dates=new ArrayList<>();
+            this.context = context;
+            this.list_transaction = list_transaction;
+            list_Dates.add(list_transaction.get(0).getDate()); //them 1 phan tu vao danh sach ngay truoc
+            for (Transaction transaction:list_transaction) {
+                if(list_Dates.indexOf(transaction.getDate())==-1) {//khong ton tai ngay trong danh sach
+                    list_Dates.add(transaction.getDate());
+                }
             }
         }
+
 
     }
 
@@ -42,36 +46,41 @@ public class DateAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        String currentDate=list_Dates.get(position).toString();
-        List<Transaction> currentItems=new ArrayList<>();
-        //khi ngày hiện tại được đổi thì duyệt for để lấy các giao dịch của ngày đó
-        for (Transaction transaction: list_transaction) {
-            if(transaction.getDate().equals(currentDate)) {
-                currentItems.add(transaction);
+        if(list_transaction.size()!=0) {
+            String currentDate=list_Dates.get(position).toString();
+            List<Transaction> currentItems=new ArrayList<>();
+            //khi ngày hiện tại được đổi thì duyệt for để lấy các giao dịch của ngày đó
+            for (Transaction transaction: list_transaction) {
+                if(transaction.getDate().equals(currentDate)) {
+                    currentItems.add(transaction);
+                }
+            }
+            //khi có giao dịch của ngày đó rồi thi tạo adapter cho giao dịch
+            adt_transaction=new TransactionAdapter(currentItems);
+
+            if (holder instanceof MyViewHolder) {
+                MyViewHolder myViewHolder = (MyViewHolder) holder; // Ép kiểu ViewHolder của bạn
+
+                // Gắn dữ liệu vào TextView
+                myViewHolder.tvDate.setText(currentDate);
+                //Gắn dữ liệu cho recyclerView của ngày hiện tại
+                myViewHolder.rcExtenseIcome.setAdapter(adt_transaction);
+
             }
         }
-        //khi có giao dịch của ngày đó rồi thi tạo adapter cho giao dịch
-        adt_transaction=new TransactionAdapter(currentItems);
 
-        if (holder instanceof MyViewHolder) {
-            MyViewHolder myViewHolder = (MyViewHolder) holder; // Ép kiểu ViewHolder của bạn
-
-            // Gắn dữ liệu vào TextView
-            myViewHolder.tvDate.setText(currentDate);
-            //Gắn dữ liệu cho recyclerView của ngày hiện tại
-            myViewHolder.rcExtenseIcome.setAdapter(adt_transaction);
-
-        }
     }
 
     @Override
     public int getItemCount() {
+
         return list_Dates.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
          TextView tvDate;
+
          RecyclerView rcExtenseIcome;
 
         public MyViewHolder(@NonNull View itemView) {

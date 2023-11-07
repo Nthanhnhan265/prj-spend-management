@@ -4,11 +4,11 @@ public abstract class Transaction {
     //fields
     String Date;
     private String Description;
-    private double Value;
+    private int Value;
 
     //construct
 
-    public Transaction(String date, String description, double value) {
+    public Transaction(String date, String description, int value) {
         Date = date;
         Description = description;
         Value = value;
@@ -34,9 +34,9 @@ public abstract class Transaction {
         return Value+"";
     }
 
-    public void setValue(double value) {
+    public void setValue(int value) {
         Value = value;
     }
 
-    public abstract String getCategory();
+    public abstract Category getCategory();
 }

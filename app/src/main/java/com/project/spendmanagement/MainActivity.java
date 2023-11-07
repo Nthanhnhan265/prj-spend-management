@@ -9,14 +9,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements DataUpdateListener {
 
     HomeFragment homeFragment;
     PageLich pageLich;
     PageBaoCao pageBaoCao;
     PageKhac pageKhac;
 
+     List<Transaction> listTransaction=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         pageLich = new PageLich();
         pageBaoCao = new PageBaoCao();
         pageKhac = new PageKhac();
+
+
         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
         navigationView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -54,6 +60,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+    public void chuyenDenNhapThu() {
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new PageThu())
+                .addToBackStack(null)  // (Tùy chọn) cho phép quay lại Fragment trước đó
+                .commit();
+    }
+    public void chuyenDenNhapChi() {
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, homeFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+    @Override
+    public void onAddTransaction(Transaction transaction) {
+        if (listTransaction != null) {
+            listTransaction.add(transaction);
+
+        }
     }
 
 }

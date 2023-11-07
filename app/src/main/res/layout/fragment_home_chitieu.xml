@@ -76,7 +76,7 @@
       </ImageView>
         <Button
             android:id="@+id/datepickerButton"
-            android:layout_width="210dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:text="@string/ngay"
             android:textColor="@color/lighter_blue"
