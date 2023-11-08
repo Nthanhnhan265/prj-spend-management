@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
     PageBaoCao pageBaoCao;
     PageKhac pageKhac;
 
-     List<GiaoDich> listTransaction=new ArrayList<>();
+     List<GiaoDich> listGiaoDich =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +76,16 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
                 .addToBackStack(null)
                 .commit();
     }
+    public void chuyenDenLich() {
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, pageLich)
+                .commit();
+    }
     @Override
     public void themGiaoDich(GiaoDich transaction) {
-        if (listTransaction != null) {
-            listTransaction.add(transaction);
+        if (listGiaoDich != null) {
+            listGiaoDich.add(transaction);
 
         }
     }

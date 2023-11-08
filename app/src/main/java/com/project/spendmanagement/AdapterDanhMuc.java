@@ -74,7 +74,7 @@ public class AdapterDanhMuc extends BaseAdapter {
 
             return view;
         }
-        public DanhMuc getSelectedText() {
+        public DanhMuc getDanhMucDuocChon() {
             if(danhMucDuocChon==null) {
                 throw new RuntimeException("Chua chon danh muc");
             }
@@ -85,5 +85,9 @@ public class AdapterDanhMuc extends BaseAdapter {
             btnDanhMuc.setBackground(context.getDrawable(R.drawable.custom_ic_danhmuc));
             notifyDataSetChanged();
         }
+        public void setViTri(int i) {
+            viTri=i;
+        }
+        
 
 }

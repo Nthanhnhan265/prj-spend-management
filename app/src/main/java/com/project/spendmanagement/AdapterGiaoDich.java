@@ -18,6 +18,7 @@ import java.util.List;
 
 public class AdapterGiaoDich extends RecyclerView.Adapter {
     //fields
+    public static int maDuocChon;
     private List<GiaoDich> data;
     private Context context; 
     private OnItemClickListener clickListener; // Thêm trường này
@@ -38,17 +39,19 @@ public class AdapterGiaoDich extends RecyclerView.Adapter {
         if(holder instanceof MyHolder) {
             MyHolder myHolder=(MyHolder) holder;
             ((MyHolder) holder).tvCategory.setText(giaoDichHienTai.getDanhMuc().getTenDanhMuc());
-            ((MyHolder) holder).tvDesc.setText(giaoDichHienTai.getGhiChu());
-            ((MyHolder) holder).tvValue.setText(giaoDichHienTai.getTextOfValue());
+            ((MyHolder) holder).tvDesc.setText("("+giaoDichHienTai.getGhiChu()+")");
+            ((MyHolder) holder).tvValue.setText(giaoDichHienTai.getGiaTri());
             ((MyHolder) holder).ivCategory.setImageResource(giaoDichHienTai.getDanhMuc().getIcon());
             ((MyHolder) holder).lnItemThuChi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FragmentChinhSua newFragment = new FragmentChinhSua();
+                    maDuocChon=giaoDichHienTai.getMaGD();
+                    FragmentChinhSuaThu newFragment = new FragmentChinhSuaThu();
                     FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.container, newFragment); // Thay thế R.id.fragment_container bằng ID của Container Fragment của bạn
-                    transaction.addToBackStack(null); // (Tùy chọn) Cho phép người dùng quay lại Fragment trước đó
+                    transaction.replace(R.id.container, newFragment);
+                    transaction.addToBackStack(null);
                     transaction.commit();
+
                 }
             });
         }

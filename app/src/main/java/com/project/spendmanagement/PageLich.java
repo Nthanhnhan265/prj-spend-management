@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +24,7 @@ import java.util.Date;
 public class PageLich extends Fragment  {
     private RecyclerView rcShow;
     private Button datepickerButton;
-
+    private TextView tvThu, tvChi;
     public static AdapterLich dateAdapter;
 
 
@@ -38,6 +41,7 @@ public class PageLich extends Fragment  {
     }
 
     private void setEvent() {
+        tvThu.setText(tinhTongThu()+"");
 
         rcShow.setAdapter(dateAdapter);
         datepickerButton.setOnClickListener(new View.OnClickListener() {
@@ -84,18 +88,25 @@ public class PageLich extends Fragment  {
     private void setControl(View view) {
         main=(MainActivity) getActivity() ;
         rcShow=view.findViewById(R.id.rcShow);
-        if(main.listTransaction.size()!=0) {
-            dateAdapter=new AdapterLich(requireContext(),main.listTransaction);
+        tvThu=view.findViewById(R.id.tvTienThu);
+        tvChi=view.findViewById(R.id.tvTienChi);
+
+        if(main.listGiaoDich.size()!=0) {
+            dateAdapter=new AdapterLich(requireContext(),main.listGiaoDich);
         }
 
         datepickerButton = view.findViewById(R.id.btnDatePicker);
-        // them moi
-
-
-
     }
 
-
+    private int tinhTongThu(){
+        int tong=0;
+        for(GiaoDich gd: main.listGiaoDich) {
+            if(gd instanceof ThuNhap) {
+                tong+=Integer.parseInt(gd.getGiaTri());
+            }
+        }
+        return tong;
+    }
 
     private void showCustomDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();
