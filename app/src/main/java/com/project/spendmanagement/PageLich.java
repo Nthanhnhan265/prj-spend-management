@@ -11,26 +11,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class PageLich extends Fragment  {
     private RecyclerView rcShow;
-    private Button datepickerButton;
+    private Button datepickerButton,btnxoa;
 
-    public static AdapterLich dateAdapter;
-
-
+     static AdapterLich dateAdapter;
     MainActivity main;
 
+    //private RecyclerView rcShow;
+    private AdapterGiaoDich adapterGiaoDich;
+    Button btnChinhSua;
+     List<DanhMuc>data_danhmuc=new ArrayList<>();
+    static List<ChiTieu>data_chitieu=new ArrayList<>();
+     EditText edtNhapGhiChu,edtTienChi;
+     private int index=-1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_lich, container, false);
+
         setControl(view);
         setEvent();
 
@@ -39,6 +48,7 @@ public class PageLich extends Fragment  {
 
     private void setEvent() {
 
+      //  rcShow.setAdapter(adapterGiaoDich);
         rcShow.setAdapter(dateAdapter);
         datepickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,9 +56,7 @@ public class PageLich extends Fragment  {
                 showCustomDatePickerDialog();
             }
         });
-
         datepickerButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 final Calendar calendar = Calendar.getInstance();
@@ -68,7 +76,7 @@ public class PageLich extends Fragment  {
                             String dayOfWeek = dayFormat.format(date); // Lấy thứ
 
                             // Xuất ngày và thứ
-                            datepickerButton.setText(selectedDate + "("+ dayOfWeek+")");
+                            datepickerButton.setText(selectedDate);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -84,18 +92,17 @@ public class PageLich extends Fragment  {
     private void setControl(View view) {
         main=(MainActivity) getActivity() ;
         rcShow=view.findViewById(R.id.rcShow);
-        if(main.listTransaction.size()!=0) {
-            dateAdapter=new AdapterLich(requireContext(),main.listTransaction);
+        if(main.listgiaodich.size()!=0) {
+            dateAdapter=new AdapterLich(requireContext(),main.listgiaodich);
         }
-
         datepickerButton = view.findViewById(R.id.btnDatePicker);
         // them moi
 
-
-
+        rcShow=view.findViewById(R.id.rcShow);
+//        btnChinhSua=view.findViewById(R.id.btnChinhSua);
+        edtNhapGhiChu=view.findViewById(R.id.edtNhapGhiChu);
+        edtTienChi=view.findViewById(R.id.edtTienChi);
     }
-
-
 
     private void showCustomDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();

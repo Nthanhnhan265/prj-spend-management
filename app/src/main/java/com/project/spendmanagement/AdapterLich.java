@@ -18,11 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterLich extends RecyclerView.Adapter {
+
+
     //fields
     private Context context;
     private List<GiaoDich> listGiaoDich;
     private List<String> listNgayGiaoDich;
     private AdapterGiaoDich adapterGiaoDich;
+    private AdapterGiaoDich.OnItemClickListener clickListener; // Thêm trường này
+    List<ChiTieu>list_chitieu=new ArrayList<>();
 
 
     public AdapterLich(Context context, List<GiaoDich> listGiaoDich) {
@@ -36,12 +40,14 @@ public class AdapterLich extends RecyclerView.Adapter {
                     listNgayGiaoDich.add(giaodich.getNgayGD());
                 }
             }
-        }
 
+        }
 
     }
 
-
+    public void setOnItemClickListener(AdapterGiaoDich.OnItemClickListener listener) {
+        clickListener = listener;
+    }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,6 +81,7 @@ public class AdapterLich extends RecyclerView.Adapter {
         }
 
     }
+
 
     @Override
     public int getItemCount() {

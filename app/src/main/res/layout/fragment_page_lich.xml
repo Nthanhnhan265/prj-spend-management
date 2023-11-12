@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment"
+    tools:context=".HomeFragment_ChiTieu"
     android:background="@color/dark_blue"
     android:orientation="vertical"
 
@@ -172,7 +172,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="300dp"
         android:paddingVertical="5dp"
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
@@ -187,4 +187,7 @@
             />
 
     </LinearLayout>
+
+
+
 </LinearLayout>

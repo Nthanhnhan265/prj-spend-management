@@ -22,9 +22,10 @@
         </activity>
         <!-- Thêm hoạt động "PageLich" vào AndroidManifest.xml -->
         <activity
-            android:name=".HomeFragment"
+            android:name=".HomeFragment_ChiTieu"
             android:exported="true">
         </activity>
+
     </application>
 
 </manifest>

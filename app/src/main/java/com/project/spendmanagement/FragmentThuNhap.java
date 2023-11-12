@@ -69,7 +69,7 @@ public class FragmentThuNhap extends Fragment {
                 if (listener != null) {
                     try {
                         // Thêm mục mới thông qua DataUpdateListener
-                        listener.themGiaoDich(new ChiTieu(btnDatePicker.getText().toString(),
+                        listener.themGiaoDich(new ThuNhap(btnDatePicker.getText().toString(),
                                 "("+edtNhapGhiChu.getText().toString()+")",
                                 Integer.parseInt(edtTienThu.getText().toString()),
                                 iconDanhMucAdapter.getSelectedText()));

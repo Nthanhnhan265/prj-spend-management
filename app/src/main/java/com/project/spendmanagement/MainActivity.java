@@ -15,12 +15,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
 
-    HomeFragment homeFragment;
+    HomeFragment_ChiTieu homeFragmentChiTieu;
     PageLich pageLich;
     PageBaoCao pageBaoCao;
     PageKhac pageKhac;
 
-     List<GiaoDich> listTransaction=new ArrayList<>();
+     List<GiaoDich> listgiaodich =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +29,18 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
            BottomNavigationView navigationView=findViewById(R.id.bottom_nav);
 
         // Khoi Tao Cac Fragment
-        homeFragment = new HomeFragment();
+        homeFragmentChiTieu = new HomeFragment_ChiTieu();
         pageLich = new PageLich();
         pageBaoCao = new PageBaoCao();
         pageKhac = new PageKhac();
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragmentChiTieu).commit();
         navigationView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.nhap) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragmentChiTieu).commit();
                     return true;
 
                 }
@@ -72,17 +72,20 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
     public void chuyenDenNhapChi() {
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, homeFragment)
+                .replace(R.id.container, homeFragmentChiTieu)
                 .addToBackStack(null)
                 .commit();
     }
     @Override
     public void themGiaoDich(GiaoDich transaction) {
-        if (listTransaction != null) {
-            listTransaction.add(transaction);
+        if (listgiaodich != null) {
+            listgiaodich.add(transaction);
 
         }
     }
+
+
+
 
 }
 

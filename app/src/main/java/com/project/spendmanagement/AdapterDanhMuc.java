@@ -76,7 +76,7 @@ public class AdapterDanhMuc extends BaseAdapter {
         }
         public DanhMuc getSelectedText() {
             if(danhMucDuocChon==null) {
-                throw new RuntimeException("Chua chon danh muc");
+                throw new RuntimeException("Ban Chua Chon Danh Muc Nao ");
             }
             return danhMucDuocChon;
         }

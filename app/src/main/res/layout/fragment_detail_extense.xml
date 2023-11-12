@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment"
+    tools:context=".HomeFragment_ChiTieu"
     android:orientation="vertical"
     android:background="@color/dark_blue"
     android:layout_marginHorizontal="0dp"
@@ -26,7 +26,22 @@
            android:text="@string/chinhsua"
            android:textColor="@color/lighter_blue"
            android:textStyle="bold"
+
            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="60dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/xoa"
+            android:textColor="@color/lighter_blue"
+            android:background="@drawable/custom_editext"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/btnXoa"
+            android:layout_marginLeft="80dp"
+            >
+        </androidx.appcompat.widget.AppCompatButton>
+
     </LinearLayout>
 
     <LinearLayout
@@ -56,7 +71,7 @@
           >
       </ImageView>
         <Button
-            android:id="@+id/btnDatePicker"
+            android:id="@+id/btnDatePickerSua"
             android:layout_width="0sp"
             android:layout_weight="6"
             android:layout_height="wrap_content"
@@ -110,7 +125,7 @@
                 android:inputType="text"
                 android:layout_weight="8"
                 android:textColorHint="@color/lighter_blue"
-                android:id="@+id/edtNhapGhiChu"
+                android:id="@+id/edtNhapGhiChuSua"
                 android:hint="@string/nhapghichu"
                 android:textColor="@color/lighter_blue"
                 android:layout_marginStart="20sp"
@@ -136,6 +151,7 @@
             />
             <EditText
                 android:layout_width="0dp"
+                android:id="@+id/edtTienChiSua"
                 android:layout_height="wrap_content"
                 android:hint="@string/khong"
                 android:textColorHint="@color/lighter_blue"
@@ -203,6 +219,7 @@
         android:textColor="@color/lighter_blue"
         android:background="@drawable/custom_editext"
         android:layout_marginBottom="15dp"
+        android:id="@+id/btnChinhSua"
         >
 
     </androidx.appcompat.widget.AppCompatButton>

@@ -13,6 +13,10 @@ public abstract class GiaoDich {
         this.ghiChu = ghiChu;
         this.giaTri = giaTri;
     }
+    public GiaoDich()
+    {
+
+    }
 
     public String getNgayGD() {
         return ngayGD;
@@ -39,4 +43,6 @@ public abstract class GiaoDich {
     }
 
     public abstract DanhMuc getDanhMuc();
+
+
 }
