@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -70,9 +68,9 @@ public class FragmentThuNhap extends Fragment {
                     try {
                         // Thêm mục mới thông qua DataUpdateListener
                         listener.themGiaoDich(new ThuNhap(btnDatePicker.getText().toString(),
-                                "("+edtNhapGhiChu.getText().toString()+")",
+                                edtNhapGhiChu.getText().toString(),
                                 Integer.parseInt(edtTienThu.getText().toString()),
-                                iconDanhMucAdapter.getSelectedText()));
+                                iconDanhMucAdapter.getDanhMucDuocChon()));
                         Toast.makeText(requireContext(), "Thêm thành công!", Toast.LENGTH_SHORT).show();
                         edtNhapGhiChu.setText("");
                         edtTienThu.setText("");

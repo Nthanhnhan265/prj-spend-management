@@ -15,10 +15,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/darker_blue"
-        android:padding="10dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
         >
        <TextView
-           android:layout_width="wrap_content"
+
+           android:layout_width="0dp"
+           android:layout_weight="1"
            android:layout_height="wrap_content"
             android:textSize="25sp"
            android:layout_marginLeft="15sp"
@@ -27,6 +30,16 @@
            android:textColor="@color/lighter_blue"
            android:textStyle="bold"
            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Xóa"
+            android:textColor="@color/light_blue"
+            android:textSize="20sp"
+            android:paddingRight="5dp"
+            android:textAlignment="textEnd"
+            android:id="@+id/tvXoa"/>
     </LinearLayout>
 
     <LinearLayout
@@ -128,16 +141,18 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/tienchi"
+            android:text="@string/tienthu"
             android:textColor="@color/lighter_blue"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_weight="2"
             />
             <EditText
+                android:id="@+id/edtTienThu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/khong"
+                android:textColor="@color/lighter_blue"
                 android:textColorHint="@color/lighter_blue"
                 android:background="@drawable/custom_editext"
                 android:textStyle="bold"
@@ -179,7 +194,7 @@
         android:orientation="horizontal"
         android:paddingHorizontal="20dp">
         <GridView
-            android:id="@+id/gvExtenseCategory"
+            android:id="@+id/gvDanhSachDMThu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnWidth="100dp"
@@ -192,6 +207,7 @@
             />
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnChinhSuaThu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="60dp"

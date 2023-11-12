@@ -1,21 +1,21 @@
 package com.project.spendmanagement;
 
+import java.util.List;
+
 public abstract class GiaoDich {
     //fields
-    String ngayGD;
+    static int maGD=0;
+    private String ngayGD;
     private String ghiChu;
     private int giaTri;
 
     //construct
 
     public GiaoDich(String ngayGD, String ghiChu, int giaTri) {
+        this.maGD++;
         this.ngayGD = ngayGD;
         this.ghiChu = ghiChu;
         this.giaTri = giaTri;
-    }
-    public GiaoDich()
-    {
-
     }
 
     public String getNgayGD() {
@@ -34,7 +34,7 @@ public abstract class GiaoDich {
         this.ghiChu = ghiChu;
     }
 
-    public String getTextOfValue() {
+    public String getGiaTri() {
         return giaTri +"";
     }
 
@@ -43,6 +43,21 @@ public abstract class GiaoDich {
     }
 
     public abstract DanhMuc getDanhMuc();
+
+
+    public int getMaGD() {
+        return maGD;
+    }
+    public static GiaoDich LayGiaoDichQuaMa(List<GiaoDich>data,int id){
+
+            for (GiaoDich gd:data) {
+                if(gd.getMaGD()==id) {
+                    return gd;
+                }
+            }
+
+         return null;
+    }
 
 
 }
