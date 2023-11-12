@@ -86,37 +86,41 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@color/darker_blue"
-            android:padding="15sp"
+            android:padding="15dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
                 android:text="@string/tienthu"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginStart="15sp"
                 android:textColor="@color/lighter_blue"
                 >
 
             </TextView>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
                 android:text="@string/tienchi"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginStart="75sp"
                 android:textColor="@color/lighter_blue"
                 >
 
             </TextView>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
                 android:text="@string/tong"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginStart="120sp"
+
                 android:textColor="@color/lighter_blue"
                 >
 
@@ -126,28 +130,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
-
+            android:paddingHorizontal="10dp"
             android:background="@color/lighter_blue"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTienThu"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="100,000d"
+                android:layout_weight="1"
+                android:text="0"
                 android:textStyle="bold"
-                android:layout_marginStart="25sp"
+                android:textAlignment="center"
                 android:textColor="@color/darker_blue"
                 android:textSize="15sp"
-                android:layout_marginLeft="15sp"
                 >
 
             </TextView>
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTienChi"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="100,000 d"
+                android:layout_weight="1"
+                android:text="0"
+                android:textAlignment="center"
                 android:textStyle="bold"
-                android:layout_marginStart="70sp"
                 android:textColor="#EF0E0E"
                 android:textSize="15sp"
 
@@ -155,11 +161,13 @@
 
             </TextView>
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTong"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/khong"
+                android:textAlignment="center"
                 android:textStyle="bold"
-                android:layout_marginStart="120sp"
                 android:textColor="#D6B1B1"
                 android:textSize="18sp"
                 >

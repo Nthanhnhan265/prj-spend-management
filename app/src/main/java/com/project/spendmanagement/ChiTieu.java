@@ -18,4 +18,6 @@ public class ChiTieu extends GiaoDich {
         return danhMuc;
     }
 
+
+
 }
