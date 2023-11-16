@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/dark_blue"
+
+
+    >
+    <!--    Thanh điều hướng-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/darker_blue"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_before"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/ivThoat"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:textColor="@color/lighter_blue"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/taomoi"
+            />
+    </LinearLayout>
+    <!-- Nơi nhập tên-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="15dp"
+        android:layout_marginVertical="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ten"
+            android:textSize="23dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/lighter_blue"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtTenDM"
+            android:textColorHint="@color/light_blue"
+            android:hint="@string/nhaptendanhmuc"
+            android:paddingHorizontal="15dp"
+            />
+
+    </LinearLayout>
+    <!--    hiển thị danh sách icon ở đây-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:layout_marginVertical="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bieutuong"
+            android:textSize="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/lighter_blue"
+            android:layout_marginBottom="10dp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDanhSachIcon"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:spanCount="5"
+            />
+    </LinearLayout>
+    <!--    Hiển thị nơi chọn màu sắc-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:layout_marginVertical="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mausac"
+            android:textSize="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/lighter_blue"
+            android:layout_marginBottom="10dp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDanhSachMau"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:spanCount="5"/>
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/luu"
+        android:textColor="@color/lighter_blue"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/custom_editext"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/btnLuuDanhMuc"
+        />
+</LinearLayout>

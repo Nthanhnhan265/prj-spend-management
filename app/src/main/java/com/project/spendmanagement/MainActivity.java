@@ -15,7 +15,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
 
-    HomeFragment homeFragment;
+    HomeFragment_ChiTieu homeFragment;
     PageLich pageLich;
     PageBaoCao pageBaoCao;
     PageKhac pageKhac;
@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
            BottomNavigationView navigationView=findViewById(R.id.bottom_nav);
 
         // Khoi Tao Cac Fragment
-        homeFragment = new HomeFragment();
+        homeFragment = new HomeFragment_ChiTieu();
         pageLich = new PageLich();
         pageBaoCao = new PageBaoCao();
         pageKhac = new PageKhac();
-
+        FragmentDSDanhMuc pageDSDanhMuc=new FragmentDSDanhMuc();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
         navigationView.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
                 .replace(R.id.container, pageLich)
                 .commit();
     }
+
+
     @Override
     public void themGiaoDich(GiaoDich transaction) {
         if (listGiaoDich != null) {

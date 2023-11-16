@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,7 +115,7 @@ public class HomeFragment_ChiTieu extends Fragment {
             // Thêm Giao dich moi
             listener.themGiaoDich(new ChiTieu(datepickerButton.getText().toString(),
                     "("+edtNhapGhiChu.getText().toString()+")",
-                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getSelectedText()));
+                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getDanhMucDuocChon()));
             Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
             edtNhapGhiChu.setText("");
             edtTienChi.setText("");
@@ -166,7 +167,7 @@ public class HomeFragment_ChiTieu extends Fragment {
     listChiTieu.add(new DanhMuc("Ăn chơi",R.drawable.baseline_fastfood_24));
     listChiTieu.add(new DanhMuc("Giáo dục",R.drawable.baseline_fastfood_24));
     listChiTieu.add(new DanhMuc("Tiền Nhà",R.drawable.baseline_fastfood_24));
-    listChiTieu.add(new DanhMuc("Đi xe",R.drawable.baseline_fastfood_24));
+    listChiTieu.add(new DanhMuc("Thêm",R.drawable.ic_add));
 
 //    data_Extensecategory.add(new Category("Mua sắm","a"));
 //    data_Extensecategory.add(new Category("Đi nhậu","a"));
@@ -187,5 +188,6 @@ public class HomeFragment_ChiTieu extends Fragment {
     datePickerDialog.getDatePicker().setBackgroundResource(R.drawable.custom_background);
     datePickerDialog.show();
   }
+
 
 }

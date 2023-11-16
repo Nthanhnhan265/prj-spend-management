@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="13dp"
+        android:paddingHorizontal="20dp"
+        android:background="@color/dark_blue"
+        android:layout_marginVertical="2dp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:id="@+id/ivIconDanhMuc"
+        />
+        <TextView
+            android:id="@+id/tvTenDanhMuc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Danh Mục"
+            android:textSize="20sp"
+            android:textColor="@color/lighter_blue"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="30dp"
+            />
+    </LinearLayout>
+</LinearLayout>
