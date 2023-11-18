@@ -35,28 +35,33 @@ public class AdapterGiaoDich extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        GiaoDich giaoDichHienTai=data.get(position);
-        if(holder instanceof MyHolder) {
-            MyHolder myHolder=(MyHolder) holder;
-            ((MyHolder) holder).tvCategory.setText(giaoDichHienTai.getDanhMuc().getTenDanhMuc());
-            ((MyHolder) holder).tvDesc.setText("("+giaoDichHienTai.getGhiChu()+")");
-            ((MyHolder) holder).tvValue.setText(giaoDichHienTai.getGiaTri());
-            ((MyHolder) holder).ivCategory.setImageResource(giaoDichHienTai.getDanhMuc().getIcon());
-            ((MyHolder) holder).lnItemThuChi.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    maDuocChon=giaoDichHienTai.getMaGD();
-                    FragmentChinhSuaThu newFragment = new FragmentChinhSuaThu();
-                    FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.container, newFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
-                }
-            });
+        GiaoDich giaoDichHienTai = data.get(position);
+        if (holder instanceof MyHolder) {
+            MyHolder myHolder = (MyHolder) holder;
+            DanhMuc danhMuc = giaoDichHienTai.getDanhMuc();
+            if (danhMuc != null) {
+                myHolder.tvCategory.setText(danhMuc.getTenDanhMuc());
+                myHolder.tvDesc.setText("(" + giaoDichHienTai.getGhiChu() + ")");
+                myHolder.tvValue.setText(giaoDichHienTai.getGiaTri());
+                myHolder.ivCategory.setImageResource(danhMuc.getIcon());
+                myHolder.lnItemThuChi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        maDuocChon = giaoDichHienTai.getMaGD();
+                        FragmentChinhSuaThu newFragment = new FragmentChinhSuaThu();
+                        FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.container, newFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+                });
+            } else {
+                // Xử lý trường hợp danhMuc là null nếu cần
+                Toast.makeText(context, "Danh mục là null", Toast.LENGTH_SHORT).show();
+            }
         }
-
     }
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }

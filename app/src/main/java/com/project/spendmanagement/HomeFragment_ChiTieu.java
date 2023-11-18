@@ -1,6 +1,7 @@
 package com.project.spendmanagement;
 
 import android.app.DatePickerDialog;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -35,7 +36,7 @@ public class HomeFragment_ChiTieu extends Fragment {
   private EditText edtNhapGhiChu,edtTienChi;
   MainActivity main;
   private GridView gvDanhMucChi;
-
+  GiaoDich_Db giaoDich_db;
 
 
   @Override
@@ -43,15 +44,8 @@ public class HomeFragment_ChiTieu extends Fragment {
     View view = inflater.inflate(R.layout.fragment_home_chitieu, container, false);
     setControl(view);
     setEvent();
-    // Kiểm tra null trước khi sử dụng requireContext()
-//    if (getActivity() != null) {
-//      icon_adapter = new AdapterDanhMuc(requireContext(), listChiTieu);
-//    }
-
     return view;
-
   }
-
   private void setEvent() {
     //lien ket man hinh nhap thu ở đây
     btnTienThu.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +97,42 @@ public class HomeFragment_ChiTieu extends Fragment {
       }
     });
     // Thêm sự kiện nhập tiền chi
+//    btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v) {
+//        try {
+//          // Get the selected date from the button
+//          String selectedDate = datepickerButton.getText().toString();
+//
+//          // Get other input values
+//          String ghiChu = edtNhapGhiChu.getText().toString();
+//          int tienThu = Integer.parseInt(edtTienChi.getText().toString());
+//          DanhMuc selectedDanhMuc = icon_adapter.getDanhMucDuocChon();
+//
+//          // Create a new GiaoDich object based on the input values
+//          ChiTieu chiTieu = new ChiTieu(selectedDate, "(" + ghiChu + ")", tienThu, selectedDanhMuc);
+//
+//          // Get the database instance
+//          SQLiteDatabase db = giaoDich_db.getWritableDatabase();
+//
+//          // Insert the data into the database
+//          long newRowId = giaoDich_db.ThemDl(chiTieu);
+//
+//          // Check if the insertion was successful
+//          if (newRowId != -1) {
+//            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
+//            edtNhapGhiChu.setText("");
+//            edtTienChi.setText("");
+//            edtNhapGhiChu.requestFocus();
+//            icon_adapter.resetSelectedItem();
+//          } else {
+//            Toast.makeText(requireContext(), "Lỗi khi thêm vào database!", Toast.LENGTH_SHORT).show();
+//          }
+//        } catch (Exception ex) {
+//          Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
+//        }
+//      }
+//    });
     btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -114,7 +144,8 @@ public class HomeFragment_ChiTieu extends Fragment {
             // Thêm Giao dich moi
             listener.themGiaoDich(new ChiTieu(datepickerButton.getText().toString(),
                     "("+edtNhapGhiChu.getText().toString()+")",
-                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getSelectedText()));
+                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getDanhMucDuocChon()));
+
             Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
             edtNhapGhiChu.setText("");
             edtTienChi.setText("");
@@ -122,9 +153,7 @@ public class HomeFragment_ChiTieu extends Fragment {
             icon_adapter.resetSelectedItem();
           } catch (Exception ex) {
             Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
-
           }
-
         }
       }
     });
@@ -142,6 +171,7 @@ public class HomeFragment_ChiTieu extends Fragment {
      btnNhapTienChi=view.findViewById(R.id.btnNhapTienChi);
      edtNhapGhiChu=view.findViewById(R.id.edtNhapGhiChu);
      edtTienChi=view.findViewById(R.id.edtTienChi);
+    giaoDich_db = new GiaoDich_Db(requireContext(), "dbGiaoDich", null, 1);
 
   }
   private void setCurrentDate() {
@@ -160,20 +190,14 @@ public class HomeFragment_ChiTieu extends Fragment {
     }
   }
   private void constructListView() {
-    listChiTieu.add(new DanhMuc("Y Tế",R.drawable.baseline_bloodtype_24));
-    listChiTieu.add(new DanhMuc("Mua sắm",R.drawable.baseline_fastfood_25));
-    listChiTieu.add(new DanhMuc("Điện",R.drawable.baseline_battery_charging_full_24));
-    listChiTieu.add(new DanhMuc("Ăn chơi",R.drawable.baseline_fastfood_24));
-    listChiTieu.add(new DanhMuc("Giáo dục",R.drawable.baseline_fastfood_24));
-    listChiTieu.add(new DanhMuc("Tiền Nhà",R.drawable.baseline_fastfood_24));
-    listChiTieu.add(new DanhMuc("Đi xe",R.drawable.baseline_fastfood_24));
+    listChiTieu.add(new DanhMuc(111,"Y Tế",R.drawable.baseline_bloodtype_24));
+    listChiTieu.add(new DanhMuc(112,"Mua sắm",R.drawable.baseline_fastfood_25));
+    listChiTieu.add(new DanhMuc(113,"Điện",R.drawable.baseline_battery_charging_full_24));
+    listChiTieu.add(new DanhMuc(114,"Ăn chơi",R.drawable.baseline_fastfood_24));
+    listChiTieu.add(new DanhMuc(115,"Giáo dục",R.drawable.baseline_fastfood_24));
+    listChiTieu.add(new DanhMuc(116,"Tiền Nhà",R.drawable.baseline_fastfood_24));
+    listChiTieu.add(new DanhMuc(117,"Đi xe",R.drawable.baseline_fastfood_24));
 
-//    data_Extensecategory.add(new Category("Mua sắm","a"));
-//    data_Extensecategory.add(new Category("Đi nhậu","a"));
-//    data_Extensecategory.add(new Category("Điện","a"));
-//    data_Extensecategory.add(new Category("Mua sắm","a"));
-//    data_Extensecategory.add(new Category("Đi nhậu","a"));
-//    data_Extensecategory.add(new Category("Điện","a"));
   }
   private void showCustomDatePickerDialog() {
     final Calendar calendar = Calendar.getInstance();
