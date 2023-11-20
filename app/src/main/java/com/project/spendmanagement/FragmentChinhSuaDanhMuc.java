@@ -46,8 +46,8 @@ public class FragmentChinhSuaDanhMuc extends Fragment {
             btnLuuDanhMuc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!edtTenDM.getText().equals("") && adapterIcon.getIconDuocChon()!=-1) {
-                        DanhMuc dm=new DanhMuc(edtTenDM.getText().toString(),adapterIcon.getIconDuocChon());
+                    if(!edtTenDM.getText().equals("") && adapterIcon.getIconDuocChon()!=-1) {  //TODO sửa danh mục
+                        DanhMuc dm=new DanhMuc(2,edtTenDM.getText().toString(),null,adapterIcon.getIconDuocChon());
                         //TODO: Sửa vào csdl
                         Toast.makeText(requireContext(), "OK!", Toast.LENGTH_SHORT).show();
 

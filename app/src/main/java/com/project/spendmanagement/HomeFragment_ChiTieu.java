@@ -1,11 +1,9 @@
 package com.project.spendmanagement;
 
 import android.app.DatePickerDialog;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -245,14 +243,14 @@ AdapterGiaoDich adapterGiaoDich;
       e.printStackTrace();
     }
   }
+  //TODO: đọc từ DB lên
   private void constructListView() {
-    listChiTieu.add(new DanhMuc(111,"Y Tế",R.drawable.baseline_bloodtype_24));
-    listChiTieu.add(new DanhMuc(112,"Mua sắm",R.drawable.baseline_fastfood_25));
-    listChiTieu.add(new DanhMuc(113,"Điện",R.drawable.baseline_battery_charging_full_24));
-    listChiTieu.add(new DanhMuc(114,"Ăn chơi",R.drawable.baseline_fastfood_24));
-    listChiTieu.add(new DanhMuc(115,"Giáo dục",R.drawable.baseline_fastfood_24));
-    listChiTieu.add(new DanhMuc(116,"Tiền Nhà",R.drawable.baseline_fastfood_24));
-    listChiTieu.add(new DanhMuc(117,"Đi xe",R.drawable.baseline_fastfood_24));
+    //listChiTieu.add(new DanhMuc(111,"Y Tế",R.drawable.baseline_bloodtype_24));
+    GiaoDich_Db giaoDichDb=new GiaoDich_Db(requireContext());
+    listChiTieu.addAll(giaoDichDb.LayDanhMucChi());
+
+    //dùng mở giao diện chỉnh sửa, thêm danh mục
+    listChiTieu.add(new DanhMuc(000,"Thêm",null,R.drawable.ic_add));
   }
   private void showCustomDatePickerDialog() {
     final Calendar calendar = Calendar.getInstance();

@@ -77,10 +77,9 @@ public class FragmentDSDanhMuc extends Fragment {
             ivThoat=view.findViewById(R.id.ivThoat);
             btnTienThu=view.findViewById(R.id.btnTienThu);
             ls.clear();
-            //TODO:Đọc dữ liệu từ csdl
-            ls.add(new DanhMuc("Quần áo",R.drawable.ic_money));
-            ls.add(new DanhMuc("Tiền điện",R.drawable.ic_money));
-            ls.add(new DanhMuc("Ăn uống",R.drawable.ic_money));
+            //TODO: Đọc dữ liệu từ csdl
+            //ls.add(new DanhMuc(1,"Quần áo",R.drawable.ic_money));
+
             adapterDSDanhMuc=new AdapterDSDanhMuc(requireContext(),ls);
             rvDSDanhMuc.setAdapter(adapterDSDanhMuc);
 

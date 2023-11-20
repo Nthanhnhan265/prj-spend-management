@@ -50,8 +50,8 @@ public class FragmentChiTietDanhMuc extends Fragment {
                 @Override
                 public void onClick(View v) {
                     //kiểm tra dữ liệu đầu vào
-                    if(!edtTenDM.getText().equals("") && adapterIcon.getIconDuocChon()!=-1) {
-                        DanhMuc dm=new DanhMuc(edtTenDM.getText().toString(),adapterIcon.getIconDuocChon());
+                    if(!edtTenDM.getText().equals("") && adapterIcon.getIconDuocChon()!=-1) { //TODO: sửa thêm danh mục
+                        DanhMuc dm=new DanhMuc(2,edtTenDM.getText().toString(),null,adapterIcon.getIconDuocChon());
                         //TODO: thêm vào csdl
                         Toast.makeText(requireContext(), "OK!", Toast.LENGTH_SHORT).show();
 
@@ -87,13 +87,9 @@ public class FragmentChiTietDanhMuc extends Fragment {
     //Phương thức khởi tạo dữ liệu cho danh sách
     private void Construct() {
         //khởi tạo Icon có sẵn
-        icon.add("ic_demo");
-        icon.add("ic_demo");
-        icon.add("ic_demo");
-
-        //khởi tạo màu sắc
-        //mauSac.add("#ffffff");
-        //mauSac.add("#000000");
-        //mauSac.add("#fff000");
+        icon.add("ic_danhmuc_doan");
+        icon.add("ic_danhmuc_tiente");
+        icon.add("ic_danhmuc_suachua");
+        icon.add("ic_danhmuc_muasam");
     }
 }

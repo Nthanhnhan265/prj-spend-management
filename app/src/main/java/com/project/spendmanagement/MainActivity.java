@@ -30,10 +30,11 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            // RESET DATABASE
+//             RESET DATABASE
 //            GiaoDich_Db giaoDichDb=new GiaoDich_Db(this);
 //            giaoDichDb.deleteDatabase(MainActivity.this); // 'this' is the reference to the current activity
-        // khong xoa
+//        giaoDichDb.ChenDanhMuc();
+         //khong xoa
         GiaoDich_Db giaoDichDb = new GiaoDich_Db(this);
         if (giaoDichDb.checkDatabase()) {
             // Database đã tồn tại, không cần phải xóa nó
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
         } else {
             // Database chưa tồn tại, xóa nó và tạo lại
             giaoDichDb.deleteDatabase(MainActivity.this);
+            giaoDichDb.ChenDanhMuc();
+
             Log.i("Database", "Đã xóa database và tạo lại");
         }
         BottomNavigationView navigationView=findViewById(R.id.bottom_nav);

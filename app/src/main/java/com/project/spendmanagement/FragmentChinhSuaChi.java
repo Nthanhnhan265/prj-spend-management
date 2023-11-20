@@ -211,13 +211,13 @@ public class FragmentChinhSuaChi extends Fragment {
 //        listDanhMuc.add(new DanhMuc("Lãnh lương",R.drawable.baseline_fastfood_25));
 //        listDanhMuc.add(new DanhMuc("Lãnh lương",R.drawable.baseline_fastfood_25));
 
-        listDanhMuc.add(new DanhMuc(123,"Y Tế",R.drawable.baseline_bloodtype_24));
-        listDanhMuc.add(new DanhMuc(123,"Mua sắm",R.drawable.baseline_fastfood_25));
-        listDanhMuc.add(new DanhMuc(124,"Điện",R.drawable.baseline_battery_charging_full_24));
-        listDanhMuc.add(new DanhMuc(125,"Ăn chơi",R.drawable.baseline_fastfood_24));
-        listDanhMuc.add(new DanhMuc(126,"Giáo dục",R.drawable.baseline_fastfood_24));
-        listDanhMuc.add(new DanhMuc(127,"Tiền Nhà",R.drawable.baseline_fastfood_24));
-        listDanhMuc.add(new DanhMuc(128,"Đi xe",R.drawable.baseline_fastfood_24));
+//        listDanhMuc.add(new DanhMuc(123,"Y Tế",R.drawable.baseline_bloodtype_24));
+//        listDanhMuc.add(new DanhMuc(123,"Mua sắm",R.drawable.baseline_fastfood_25));
+//        listDanhMuc.add(new DanhMuc(124,"Điện",R.drawable.baseline_battery_charging_full_24));
+//        listDanhMuc.add(new DanhMuc(125,"Ăn chơi",R.drawable.baseline_fastfood_24));
+//        listDanhMuc.add(new DanhMuc(126,"Giáo dục",R.drawable.baseline_fastfood_24));
+//        listDanhMuc.add(new DanhMuc(127,"Tiền Nhà",R.drawable.baseline_fastfood_24));
+//        listDanhMuc.add(new DanhMuc(128,"Đi xe",R.drawable.baseline_fastfood_24));
 
 
 

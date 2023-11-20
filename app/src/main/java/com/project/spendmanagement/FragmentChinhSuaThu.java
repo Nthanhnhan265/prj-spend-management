@@ -209,13 +209,10 @@ public class FragmentChinhSuaThu extends Fragment {
             e.printStackTrace();
         }
     }
-
+    //TODO: làm cơ sở dữ liệu
     private void constructGridView() {
-        listDanhMuc.add(new DanhMuc(111,"Trợ cấp",R.drawable.ic_money));
-        listDanhMuc.add(new DanhMuc(111,"Đầu tư",R.drawable.baseline_currency_bitcoin_24));
-        listDanhMuc.add(new DanhMuc(111,"Lãnh lương",R.drawable.baseline_fastfood_25));
-        listDanhMuc.add(new DanhMuc(111,"Thu Nhâp Phụ",R.drawable.baseline_bloodtype_24));
-        listDanhMuc.add(new DanhMuc(111,"Tiền Phụ Cấp",R.drawable.baseline_fastfood_25));
+//        listDanhMuc.add(new DanhMuc(111,"Trợ cấp","Thu",R.drawable.ic_money));
+
         
     }
 }

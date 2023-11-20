@@ -3,15 +3,16 @@
     public class DanhMuc {
         //khai bao
         private String tenDanhMuc;
+        private String loaiDanhMuc;
         private int icon;
         // them moi
         private int id;
         public DanhMuc() {
 
         }
-
-        public DanhMuc(int id,String tenDM, int icon) {
+        public DanhMuc(int id,String tenDM,String loaiDanhMuc, int icon) {
             this.id=id;
+            this.loaiDanhMuc=loaiDanhMuc;
             this.tenDanhMuc = tenDM;
             this.icon = icon;
         }

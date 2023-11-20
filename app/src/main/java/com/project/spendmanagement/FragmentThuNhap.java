@@ -198,22 +198,15 @@
                 e.printStackTrace();
             }
         }
-
+        //TODO: đọc từ DB lên
         private void constructGridView() {
-            listThuNhap.add(new DanhMuc(111,"Trợ cấp",R.drawable.ic_money));
-            listThuNhap.add(new DanhMuc(111,"Đầu tư",R.drawable.baseline_fastfood_25));
-            listThuNhap.add(new DanhMuc(111,"Lãnh lương",R.drawable.baseline_fastfood_25));
-
-            listThuNhap.add(new DanhMuc(111,"Y Tế",R.drawable.baseline_bloodtype_24));
-            listThuNhap.add(new DanhMuc(111,"Mua sắm",R.drawable.baseline_fastfood_25));
-            listThuNhap.add(new DanhMuc(111,"Điện",R.drawable.baseline_battery_charging_full_24));
-            listThuNhap.add(new DanhMuc(111,"Ăn chơi",R.drawable.baseline_fastfood_24));
-            listThuNhap.add(new DanhMuc(111,"Giáo dục",R.drawable.baseline_fastfood_24));
-            listThuNhap.add(new DanhMuc(111,"Tiền Nhà",R.drawable.baseline_fastfood_24));
-            listThuNhap.add(new DanhMuc(111,"Đi xe",R.drawable.baseline_fastfood_24));
+            //listThuNhap.add(new DanhMuc(111,"Trợ cấp",R.drawable.ic_money));
+            GiaoDich_Db giaoDichDb=new GiaoDich_Db(requireContext());
+            listThuNhap.addAll(giaoDichDb.LayDanhMucThu());
 
 
-
+            //dùng mở giao diện chỉnh sửa, thêm danh mục
+            listThuNhap.add(new DanhMuc(000,"Thêm",null,R.drawable.ic_add));
 
         }
     }
