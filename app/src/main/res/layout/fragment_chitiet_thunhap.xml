@@ -189,10 +189,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="5sp"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp">
+
         <GridView
             android:id="@+id/gvDanhSachDMThu"
             android:layout_width="match_parent"
@@ -204,7 +206,8 @@
             android:stretchMode="columnWidth"
             android:verticalSpacing="10dp"
             tools:listitem="@layout/custom_item_danhmuc"
-            />
+            >
+        </GridView>
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnChinhSuaThu"
@@ -217,6 +220,5 @@
         android:background="@drawable/custom_editext"
         android:layout_marginBottom="15dp"
         >
-
     </androidx.appcompat.widget.AppCompatButton>
 </LinearLayout>

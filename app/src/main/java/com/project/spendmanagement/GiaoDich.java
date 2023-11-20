@@ -1,4 +1,5 @@
 package com.project.spendmanagement;
+import com.project.spendmanagement.GiaoDich;
 
 import java.util.List;
 
@@ -8,6 +9,16 @@ public abstract class GiaoDich {
     private String ngayGD;
     private String ghiChu;
     private int giaTri;
+    @Override
+    public String toString() {
+        return "GiaoDich{" +
+                "ngayGD='" + ngayGD + '\'' +
+                ", ghiChu='" + ghiChu + '\'' +
+                ", giaTri=" + giaTri +
+                '}';
+    }
+
+
 
     //construct
 
@@ -57,6 +68,9 @@ public abstract class GiaoDich {
             }
 
          return null;
+    }
+    public static void setMaGD(int newMaGD) {
+        maGD = newMaGD;
     }
 
 

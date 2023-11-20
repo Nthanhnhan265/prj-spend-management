@@ -16,9 +16,7 @@ public class ThuNhap extends GiaoDich {
         public ThuNhap(String ngayGD, String ghiChu, int giaTri, DanhMuc danhMuc) {
             super(ngayGD,ghiChu,giaTri);
             this.danhMuc = danhMuc;
-
     }
 
-        //get set
 
 }

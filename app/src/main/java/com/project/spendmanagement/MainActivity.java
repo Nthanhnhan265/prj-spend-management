@@ -1,10 +1,12 @@
 package com.project.spendmanagement;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener;
@@ -19,22 +21,37 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
     PageLich pageLich;
     PageBaoCao pageBaoCao;
     PageKhac pageKhac;
-
      List<GiaoDich> listGiaoDich =new ArrayList<>();
+    // them moi
+
+    private GiaoDich_Db giaoDichDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-           BottomNavigationView navigationView=findViewById(R.id.bottom_nav);
+            // RESET DATABASE
+//            GiaoDich_Db giaoDichDb=new GiaoDich_Db(this);
+//            giaoDichDb.deleteDatabase(MainActivity.this); // 'this' is the reference to the current activity
+        // khong xoa
+        GiaoDich_Db giaoDichDb = new GiaoDich_Db(this);
+        if (giaoDichDb.checkDatabase()) {
+            // Database đã tồn tại, không cần phải xóa nó
+            Log.i("Database", "Database đã tồn tại, không cần phải xóa nó");
+        } else {
+            // Database chưa tồn tại, xóa nó và tạo lại
+            giaoDichDb.deleteDatabase(MainActivity.this);
+            Log.i("Database", "Đã xóa database và tạo lại");
+        }
+        BottomNavigationView navigationView=findViewById(R.id.bottom_nav);
 
         // Khoi Tao Cac Fragment
         homeFragment = new HomeFragment_ChiTieu();
         pageLich = new PageLich();
         pageBaoCao = new PageBaoCao();
         pageKhac = new PageKhac();
-        FragmentDSDanhMuc pageDSDanhMuc=new FragmentDSDanhMuc();
 
+      //  adapterGiaoDich = new AdapterGiaoDich();
         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
         navigationView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -60,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
             }
         });
 
-
     }
     public void chuyenDenNhapThu() {
 
@@ -76,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
                 .addToBackStack(null)
                 .commit();
     }
+    public GiaoDich_Db getGiaoDichDb() {
+        return giaoDichDb;
+    }
+
     public void chuyenDenLich() {
 
         getSupportFragmentManager().beginTransaction()
@@ -88,7 +108,9 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
     public void themGiaoDich(GiaoDich transaction) {
         if (listGiaoDich != null) {
             listGiaoDich.add(transaction);
-
+//            if (adapterGiaoDich != null) {
+//                adapterGiaoDich.notifyDataSetChanged();
+//            }
         }
     }
 

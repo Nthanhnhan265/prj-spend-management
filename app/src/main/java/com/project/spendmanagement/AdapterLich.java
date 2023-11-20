@@ -2,6 +2,7 @@ package com.project.spendmanagement;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterLich extends RecyclerView.Adapter {
-
 
     //fields
     private Context context;
@@ -44,7 +44,13 @@ public class AdapterLich extends RecyclerView.Adapter {
         }
 
     }
+    // them moi
+    public void updateData(List<GiaoDich> newData) {
+        this.listGiaoDich = newData;
+        notifyDataSetChanged();
+        Log.d("Adapter", "Cập nhật dữ liệu mới. Số lượng: " + newData.size());
 
+    }
     public void setOnItemClickListener(AdapterGiaoDich.OnItemClickListener listener) {
         clickListener = listener;
     }
@@ -84,8 +90,13 @@ public class AdapterLich extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
+        int soluong=0;
+        if (listNgayGiaoDich!=null)
+        {
+           soluong=listNgayGiaoDich.size();
+        }
 
-        return listNgayGiaoDich.size();
+        return soluong;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

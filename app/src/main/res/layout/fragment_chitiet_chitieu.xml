@@ -37,7 +37,7 @@
             android:textColor="@color/lighter_blue"
             android:background="@drawable/custom_editext"
             android:layout_marginBottom="5dp"
-            android:id="@+id/btnXoa"
+            android:id="@+id/btnXoaChi"
             android:layout_marginLeft="80dp"
             >
         </androidx.appcompat.widget.AppCompatButton>
@@ -71,7 +71,7 @@
           >
       </ImageView>
         <Button
-            android:id="@+id/btnDatePickerSua"
+            android:id="@+id/btnDatePickerChi"
             android:layout_width="0sp"
             android:layout_weight="6"
             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
             />
 
         <DatePicker
-            android:id="@+id/datePicker"
+            android:id="@+id/datePickerChi"
             android:background="@drawable/custom_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 android:inputType="text"
                 android:layout_weight="8"
                 android:textColorHint="@color/lighter_blue"
-                android:id="@+id/edtNhapGhiChuSua"
+                android:id="@+id/edtNhapGhiChuSuaChi"
                 android:hint="@string/nhapghichu"
                 android:textColor="@color/lighter_blue"
                 android:layout_marginStart="20sp"
@@ -151,7 +151,7 @@
             />
             <EditText
                 android:layout_width="0dp"
-                android:id="@+id/edtTienChiSua"
+                android:id="@+id/edtTienChiSuaChi"
                 android:layout_height="wrap_content"
                 android:hint="@string/khong"
                 android:textColorHint="@color/lighter_blue"
@@ -219,7 +219,7 @@
         android:textColor="@color/lighter_blue"
         android:background="@drawable/custom_editext"
         android:layout_marginBottom="15dp"
-        android:id="@+id/btnChinhSua"
+        android:id="@+id/btnChinhSuaChi"
         >
 
     </androidx.appcompat.widget.AppCompatButton>

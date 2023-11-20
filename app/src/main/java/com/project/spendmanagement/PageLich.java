@@ -6,31 +6,42 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class PageLich extends Fragment  {
     private RecyclerView rcShow;
     private Button datepickerButton;
-    private TextView tvThu, tvChi;
+    private TextView tvThu, tvChi,tvTong;
     public static AdapterLich dateAdapter;
 
 
     MainActivity main;
-
-
+    //them moi
+    List<GiaoDich>data_gd=new ArrayList<>();
+    List<ChiTieu>data_chitieu=new ArrayList<>();
+    ArrayAdapter adapter;
+    GiaoDich_Db giaoDichDb;
+    Button btnDocDl;
+    int tongThu,tongChi;
+    AdapterGiaoDich adapterGiaoDich;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_lich, container, false);
@@ -41,48 +52,81 @@ public class PageLich extends Fragment  {
     }
 
     private void setEvent() {
-        tvThu.setText(tinhTongThu()+"");
+        try {
+            tvThu.setText(tinhTongThu() + "d");
+            tvChi.setText(tinhTongChi() + "d");
+            tinhTong();
+            datepickerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showCustomDatePickerDialog();
+                }
+            });
+            // Sử dụng getActivity() để lấy ngữ cảnh của hoạt động
+            giaoDichDb = new GiaoDich_Db(this.requireContext());
+            dateAdapter = new AdapterLich(requireContext(), main.listGiaoDich);
+            adapterGiaoDich=new AdapterGiaoDich(requireContext(),main.listGiaoDich);
+          // rcShow.setAdapter(dateAdapter);
+//            main.listGiaoDich.addAll(giaoDichDb.DocDl());
+//            Toast.makeText(main, "Đã đọc dữ liệu thành công!", Toast.LENGTH_SHORT).show();
+            btnDocDl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        // Đọc dữ liệu từ cơ sở dữ liệu
+                        main.listGiaoDich.addAll(giaoDichDb.DocDl());
+                        // Cập nhật dữ liệu trong AdapterLich
+                  //      dateAdapter.updateData(main.listGiaoDich);
+                        rcShow.setAdapter(adapterGiaoDich);
+                        // Cập nhật dữ liệu trên RecyclerView
+                        adapterGiaoDich.notifyDataSetChanged();
 
-        rcShow.setAdapter(dateAdapter);
-        datepickerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCustomDatePickerDialog();
-            }
-        });
+                        // Tính lại tổng thu chi và cập nhật TextView
+                        tinhTong();
 
-        datepickerButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                final Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        try {
-                            Date date = sdf.parse(selectedDate);
-                            SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
-                            String dayOfWeek = dayFormat.format(date); // Lấy thứ
-
-                            // Xuất ngày và thứ
-                            datepickerButton.setText(selectedDate + "("+ dayOfWeek+")");
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(main, "Đã đọc dữ liệu thành công!", Toast.LENGTH_SHORT).show();
+                    } catch (Exception ex) {
+                        Toast.makeText(main, "Lỗi: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }, year, month, day);
+                }
+            });
 
-                datePickerDialog.show();
-            }
-        });
+            datepickerButton.setOnClickListener(new View.OnClickListener() {
 
+                @Override
+                public void onClick(View v) {
+                    final Calendar calendar = Calendar.getInstance();
+                    int year = calendar.get(Calendar.YEAR);
+                    int month = calendar.get(Calendar.MONTH);
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            try {
+                                Date date = sdf.parse(selectedDate);
+                                SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+                                String dayOfWeek = dayFormat.format(date); // Lấy thứ
+
+                                // Xuất ngày và thứ
+                                datepickerButton.setText(selectedDate + "(" + dayOfWeek + ")");
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, year, month, day);
+
+                    datePickerDialog.show();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(main, "Loi"+ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setControl(View view) {
@@ -90,12 +134,23 @@ public class PageLich extends Fragment  {
         rcShow=view.findViewById(R.id.rcShow);
         tvThu=view.findViewById(R.id.tvTienThu);
         tvChi=view.findViewById(R.id.tvTienChi);
-
+        tvTong=view.findViewById(R.id.tvTong);
         if(main.listGiaoDich.size()!=0) {
             dateAdapter=new AdapterLich(requireContext(),main.listGiaoDich);
         }
-
         datepickerButton = view.findViewById(R.id.btnDatePicker);
+        btnDocDl=view.findViewById(R.id.btnDocDl);
+    }
+    // Function tinh tổng Thu và Chi
+    private void tinhTong() {
+        tongThu = tinhTongThu();
+        tongChi = tinhTongChi();
+
+        tvThu.setText(tongThu + "");
+        tvChi.setText(tongChi + "");
+
+        int tong = tongThu - tongChi;
+        tvTong.setText(tong + "");
     }
 
     private int tinhTongThu(){
@@ -107,7 +162,15 @@ public class PageLich extends Fragment  {
         }
         return tong;
     }
-
+    private int tinhTongChi(){
+        int tong=0;
+        for(GiaoDich gd: main.listGiaoDich) {
+            if(gd instanceof ChiTieu) {
+                tong+=Integer.parseInt(gd.getGiaTri());
+            }
+        }
+        return tong;
+    }
     private void showCustomDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -123,6 +186,8 @@ public class PageLich extends Fragment  {
     }
 
     public static void capNhatList() {
+
         dateAdapter.notifyDataSetChanged();
     }
+
 }
