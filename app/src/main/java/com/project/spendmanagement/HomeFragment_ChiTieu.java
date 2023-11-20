@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -161,6 +162,25 @@ AdapterGiaoDich adapterGiaoDich;
     btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+
+        /* 
+        MainActivity activity = (MainActivity) getActivity();
+        CapNhatDuLieu listener = (CapNhatDuLieu) activity;
+
+        if (listener != null) {
+          try {
+            // Thêm Giao dich moi
+            listener.themGiaoDich(new ChiTieu(datepickerButton.getText().toString(),
+                    "("+edtNhapGhiChu.getText().toString()+")",
+                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getDanhMucDuocChon()));
+            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
+            edtNhapGhiChu.setText("");
+            edtTienChi.setText("");
+            edtNhapGhiChu.requestFocus();
+            icon_adapter.resetSelectedItem();
+          } catch (Exception ex) {
+            Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
+        */
         try {
           String selectedDate = datepickerButton.getText().toString();
           String ghiChu = edtNhapGhiChu.getText().toString();
@@ -233,7 +253,6 @@ AdapterGiaoDich adapterGiaoDich;
     listChiTieu.add(new DanhMuc(115,"Giáo dục",R.drawable.baseline_fastfood_24));
     listChiTieu.add(new DanhMuc(116,"Tiền Nhà",R.drawable.baseline_fastfood_24));
     listChiTieu.add(new DanhMuc(117,"Đi xe",R.drawable.baseline_fastfood_24));
-
   }
   private void showCustomDatePickerDialog() {
     final Calendar calendar = Calendar.getInstance();
@@ -247,5 +266,6 @@ AdapterGiaoDich adapterGiaoDich;
     datePickerDialog.getDatePicker().setBackgroundResource(R.drawable.custom_background);
     datePickerDialog.show();
   }
+
 
 }

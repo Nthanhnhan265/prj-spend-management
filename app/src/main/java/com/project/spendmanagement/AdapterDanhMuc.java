@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class AdapterDanhMuc extends BaseAdapter {
     }
 
     @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater.inflate(R.layout.custom_item_danhmuc, null);
@@ -69,6 +70,15 @@ public class AdapterDanhMuc extends BaseAdapter {
 
                     // Lấy text của mục được chọn
                      danhMucDuocChon = data.get(viTri);
+
+                     //chỗ này sẽ sửa thành mã sau khi có mã danh mục, dùng tên sẽ gây trùng
+                     if(danhMucDuocChon.getTenDanhMuc()=="Thêm") {
+                         FragmentDSDanhMuc fragmentDSDanhMuc=new FragmentDSDanhMuc();
+                         FragmentTransaction transaction=((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                         transaction.replace(R.id.container, fragmentDSDanhMuc);
+                         transaction.addToBackStack(null);
+                         transaction.commit();
+                     }
                 }
             });
 

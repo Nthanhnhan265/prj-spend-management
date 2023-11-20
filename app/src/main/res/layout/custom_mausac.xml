@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    >
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="35dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="5dp"
+            android:background="#ff0000"
+            android:id="@+id/ivMauSac"
+            android:layout_gravity="center_horizontal"
+            />
+
+</LinearLayout>

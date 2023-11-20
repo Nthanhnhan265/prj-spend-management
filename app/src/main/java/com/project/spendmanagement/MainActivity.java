@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
                 .replace(R.id.container, pageLich)
                 .commit();
     }
+
+
     @Override
     public void themGiaoDich(GiaoDich transaction) {
         if (listGiaoDich != null) {

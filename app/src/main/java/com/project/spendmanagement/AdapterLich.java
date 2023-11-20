@@ -77,7 +77,6 @@ public class AdapterLich extends RecyclerView.Adapter {
             
             if (holder instanceof MyViewHolder) {
                 MyViewHolder myViewHolder = (MyViewHolder) holder; // Ép kiểu ViewHolder của bạn
-
                 // Gắn dữ liệu vào TextView
                 myViewHolder.tvDate.setText(ngayHienTai);
                 //Gắn dữ liệu cho recyclerView của ngày hiện tại

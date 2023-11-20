@@ -19,9 +19,14 @@
     <string name="danhmuc">Danh mục</string>
     <string name="tong">Tổng</string>
     <string name="chinhsua">Chỉnh sửa</string>
-
+    <string name="taomoi">Danh mục</string>
+    <string name="ten">Tên</string>
+    <string name="nhaptendanhmuc">Vui lòng nhập tên danh mục</string>
+    <string name="bieutuong">Biểu tượng</string>
+    <string name="mausac">Màu sắc</string>
     <string name="thuchi">Thu chi</string>
     <string name="xoa">Xóa</string>
+    <string name="luu">Lưu</string>
     <string name="vnd">₫</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
