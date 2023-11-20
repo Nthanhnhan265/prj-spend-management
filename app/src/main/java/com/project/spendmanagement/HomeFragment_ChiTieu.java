@@ -37,7 +37,7 @@ public class HomeFragment_ChiTieu extends Fragment {
   MainActivity main;
   private GridView gvDanhMucChi;
   GiaoDich_Db giaoDich_db;
-
+AdapterGiaoDich adapterGiaoDich;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -133,30 +133,66 @@ public class HomeFragment_ChiTieu extends Fragment {
 //        }
 //      }
 //    });
+//    btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v) {
+//        MainActivity activity = (MainActivity) getActivity();
+//        CapNhatDuLieu listener = (CapNhatDuLieu) activity;
+//
+//        if (listener != null) {
+//          try {
+//            // Thêm Giao dich moi
+//            listener.themGiaoDich(new ChiTieu(datepickerButton.getText().toString(),
+//                    "("+edtNhapGhiChu.getText().toString()+")",
+//                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getDanhMucDuocChon()));
+//
+//            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
+//            edtNhapGhiChu.setText("");
+//            edtTienChi.setText("");
+//            edtNhapGhiChu.requestFocus();
+//            icon_adapter.resetSelectedItem();
+//          } catch (Exception ex) {
+//            Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
+//          }
+//        }
+//      }
+//    });
+    adapterGiaoDich=new AdapterGiaoDich(requireContext(),main.listGiaoDich);
     btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        MainActivity activity = (MainActivity) getActivity();
-        CapNhatDuLieu listener = (CapNhatDuLieu) activity;
+        try {
+          String selectedDate = datepickerButton.getText().toString();
+          String ghiChu = edtNhapGhiChu.getText().toString();
+          int tienThu = Integer.parseInt(edtTienChi.getText().toString());
+          DanhMuc selectedDanhMuc = icon_adapter.getDanhMucDuocChon();
 
-        if (listener != null) {
-          try {
-            // Thêm Giao dich moi
-            listener.themGiaoDich(new ChiTieu(datepickerButton.getText().toString(),
-                    "("+edtNhapGhiChu.getText().toString()+")",
-                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getDanhMucDuocChon()));
+          ChiTieu chiTieu = new ChiTieu(selectedDate, "(" + ghiChu + ")", tienThu, selectedDanhMuc);
 
-            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
-            edtNhapGhiChu.setText("");
-            edtTienChi.setText("");
-            edtNhapGhiChu.requestFocus();
-            icon_adapter.resetSelectedItem();
-          } catch (Exception ex) {
-            Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
+          // Thêm vào cơ sở dữ liệu
+          long newRowId = giaoDich_db.ThemDl(chiTieu);
+
+          if (newRowId != -1) {
+            Toast.makeText(requireContext(), "Đã nhập tiền chi và lưu vào cơ sở dữ liệu!", Toast.LENGTH_SHORT).show();
+            // Cập nhật giao diện hoặc thực hiện các bước khác nếu cần thiết
+            main.listGiaoDich.clear();
+            main.listGiaoDich.addAll(giaoDich_db.DocDl());
+          adapterGiaoDich.notifyDataSetChanged();
+          } else {
+            Toast.makeText(requireContext(), "Lỗi khi thêm vào cơ sở dữ liệu!", Toast.LENGTH_SHORT).show();
           }
+
+          // Cập nhật giao diện hoặc thực hiện các bước khác nếu cần thiết
+          edtNhapGhiChu.setText("");
+          edtTienChi.setText("");
+          edtNhapGhiChu.requestFocus();
+          icon_adapter.resetSelectedItem();
+        } catch (Exception ex) {
+          Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
         }
       }
     });
+
     gvDanhMucChi.setAdapter(icon_adapter);
   }
   private void setControl(View view) {
@@ -171,7 +207,7 @@ public class HomeFragment_ChiTieu extends Fragment {
      btnNhapTienChi=view.findViewById(R.id.btnNhapTienChi);
      edtNhapGhiChu=view.findViewById(R.id.edtNhapGhiChu);
      edtTienChi=view.findViewById(R.id.edtTienChi);
-    giaoDich_db = new GiaoDich_Db(requireContext(), "dbGiaoDich", null, 1);
+    giaoDich_db = new GiaoDich_Db(requireContext());
 
   }
   private void setCurrentDate() {

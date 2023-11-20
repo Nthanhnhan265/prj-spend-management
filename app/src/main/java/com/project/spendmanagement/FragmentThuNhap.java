@@ -99,7 +99,7 @@
                         long newRowId = giaoDich_db.ThemDl(thuNhap);
 
                         if (newRowId != -1) {
-                            Toast.makeText(requireContext(), "Đã nhập tiền thu!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "Đã nhập tiền thu vào database !", Toast.LENGTH_SHORT).show();
                             edtNhapGhiChu.setText("");
                             edtTienThu.setText("");
                             edtNhapGhiChu.requestFocus();
@@ -168,7 +168,7 @@
             ivNgayTruoc =view.findViewById(R.id.ivNgayTruoc);
             ivNgaySau =view.findViewById(R.id.ivNgaySau);
             // them moi khoi tao giaodich_db
-            giaoDich_db = new GiaoDich_Db(requireContext(), "dbGiaoDich", null, 1);
+            giaoDich_db = new GiaoDich_Db(requireContext());
        //     rcShow = view.findViewById(R.id.rcShow);  // Hãy đảm bảo thay thế bằng ID RecyclerView thực tế của bạn
 //            dateAdapter = new AdapterLich(requireContext(), main.listGiaoDich);
         }

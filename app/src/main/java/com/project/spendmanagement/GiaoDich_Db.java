@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 public class GiaoDich_Db extends SQLiteOpenHelper {
 
-    public GiaoDich_Db(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    //, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version
+    public GiaoDich_Db(@Nullable Context context) {
         super(context, "dbGiaoDich", null, 3);
 
     }
@@ -70,6 +71,14 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         } else {
             values.put("MaDanhMuc", (Integer) null);
         }
+        Log.d("Database", "Đã thêm vào bảng  tblGiaoDich: " +
+                "Ngay: " + giaoDich.getNgayGD() +
+                ", GhiChu: " + giaoDich.getGhiChu() +
+                ", NhapTien: " + giaoDich.getGiaTri() +
+                ", LoaiGiaoDich: " + (giaoDich instanceof ThuNhap ? "ThuNhap" : "ChiTieu") +
+                ", MaDanhMuc: " + (giaoDich.getDanhMuc() != null ? giaoDich.getDanhMuc().getId() : 0));
+
+
         long newRowId = db.insert("tblGiaoDich", null, values);
 
         if (newRowId != -1) {
@@ -101,9 +110,9 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
             int rowsAffected = db.update("tblGiaoDich", values, "MaGD=?", new String[]{String.valueOf(giaoDich.getMaGD())});
 
             if (rowsAffected > 0) {
-                Log.d("Database", "Row updated successfully. Rows affected: " + rowsAffected);
+                Log.d("Database", "Cập nhật Thành Cônng . Số dòng cập nhật : " + rowsAffected);
             } else {
-                Log.e("Database", "No rows updated. MaGD not found: " + giaoDich.getMaGD());
+                Log.e("Database", "Cập nhật không thành công . MaGD not found: " + giaoDich.getMaGD());
             }
         } catch (Exception e) {
             Log.e("Database", "Error updating row. MaGD: " + giaoDich.getMaGD(), e);
@@ -116,11 +125,14 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
 //        db.close();
     }
     public List<GiaoDich> DocDl() {
-        List<GiaoDich> data = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        List<GiaoDich> data_gd = new ArrayList<>();
+        List<ThuNhap> data_thunhap = new ArrayList<>();
+        List<ChiTieu> data_chitieu = new ArrayList<>();
 
-        String sql = "SELECT * FROM tblGiaoDich";
-        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        SQLiteDatabase database = getReadableDatabase();
+
+        String query = "SELECT * FROM tblGiaoDich";
+        Cursor cursor = database.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -131,38 +143,52 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
                 int loaiGiaoDichIndex = cursor.getColumnIndex("LoaiGiaoDich");
                 int maDanhMucIndex = cursor.getColumnIndex("MaDanhMuc");
 
-                int maGD = (maGDIndex >= 0) ? cursor.getInt(maGDIndex) : 0;
-                String ngay = cursor.getString(ngayGDIndex);
-                String ghiChu = cursor.getString(ghiChuIndex);
-                int giaTri = cursor.getInt(giaTriIndex);
-                String loaiGiaoDich = cursor.getString(loaiGiaoDichIndex);
-                int maDanhMuc = (maDanhMucIndex >= 0) ? cursor.getInt(maDanhMucIndex) : 0;
+                // Kiểm tra xem các cột có tồn tại trong Cursor không
+                if (maGDIndex != -1 && ngayGDIndex != -1 && ghiChuIndex != -1
+                        && giaTriIndex != -1 && loaiGiaoDichIndex != -1 && maDanhMucIndex != -1) {
+                    int maGD = cursor.getInt(maGDIndex);
+                    String ngayGD = cursor.getString(ngayGDIndex);
+                    String ghiChu = cursor.getString(ghiChuIndex);
+                    int giaTri = cursor.getInt(giaTriIndex);
+                    String loaiGiaoDich = cursor.getString(loaiGiaoDichIndex);
+                    int maDanhMuc = cursor.getInt(maDanhMucIndex);
 
-                Log.d("Database", "MaGD: " + maGD + ", Ngay: " + ngay + ", GhiChu: " + ghiChu + ", GiaTri: " + giaTri + ", LoaiGiaoDich: " + loaiGiaoDich + ", MaDanhMuc: " + maDanhMuc);
-
-                GiaoDich giaoDich;
-                if (maDanhMuc > 0) {
-                    DanhMuc danhMuc = layDanhMucTheoId(maDanhMuc);
+                    GiaoDich giaoDich;
                     if ("ThuNhap".equals(loaiGiaoDich)) {
-                        giaoDich = new ThuNhap(ngay, ghiChu, giaTri, danhMuc);
+                        // Sửa lại cách tạo đối tượng ThuNhap
+                        giaoDich = new ThuNhap(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
+                      //  data_gd.add(giaoDich);
+                      //  data_thunhap.add((ThuNhap) giaoDich);
                     } else {
-                        giaoDich = new ChiTieu(ngay, ghiChu, giaTri, danhMuc);
+                        // Sửa lại cách tạo đối tượng ChiTieu
+                        giaoDich = new ChiTieu(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
+                     //   data_gd.add(giaoDich);
+                     //   data_chitieu.add((ChiTieu) giaoDich);
                     }
+                    data_gd.add(giaoDich);
                 } else {
-                    giaoDich = new GiaoDich(ngay, ghiChu, giaTri) {
-                        @Override
-                        public DanhMuc getDanhMuc() {
-                            return null;
-                        }
-                    };
+                    Log.e("Database", "One or more columns not found in Cursor");
                 }
-
-                data.add(giaoDich);
             } while (cursor.moveToNext());
         }
-       // cursor.close();
-//        sqLiteDatabase.close();
-        return data;
+
+        cursor.close();
+        database.close();
+
+        Log.d("Database", "Đã đọc dữ liệu từ cơ sở dữ liệu! Số lượng giao dịch: " + data_gd.size());
+
+        // Kiểm tra và log dữ liệu của các danh sách
+        Log.d("Database", "Số lượng Thu nhập: " + data_thunhap.size());
+        for (ThuNhap thuNhap : data_thunhap) {
+            Log.d("Database", thuNhap.toString());
+        }
+
+        Log.d("Database", "Số lượng Chi tiêu: " + data_chitieu.size());
+        for (ChiTieu chiTieu : data_chitieu) {
+            Log.d("Database", chiTieu.toString());
+        }
+
+        return data_gd;
     }
 
     private DanhMuc layDanhMucTheoId(int idDanhMuc) {
@@ -178,7 +204,7 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
             if (tenDanhMucIndex != -1 && iconIndex != -1) {
                 String tenDanhMuc = cursor.getString(tenDanhMucIndex);
                 int icon = cursor.getInt(iconIndex);
-                danhMuc = new DanhMuc(idDanhMuc,tenDanhMuc, icon);
+                danhMuc = new DanhMuc(idDanhMuc, tenDanhMuc, icon);
             }
         }
         cursor.close();
@@ -187,6 +213,29 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         return danhMuc;
     }
 
+
+//    private DanhMuc layDanhMucTheoId(int idDanhMuc) {
+//        SQLiteDatabase db = getReadableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT * FROM tblDanhMuc WHERE IdDanhMuc = ?",
+//                new String[]{String.valueOf(idDanhMuc)});
+//
+//        DanhMuc danhMuc = null;
+//        if (cursor.moveToFirst()) {
+//            int tenDanhMucIndex = cursor.getColumnIndex("TenDanhMuc");
+//            int iconIndex = cursor.getColumnIndex("Icon");
+//
+//            if (tenDanhMucIndex != -1 && iconIndex != -1) {
+//                String tenDanhMuc = cursor.getString(tenDanhMucIndex);
+//                int icon = cursor.getInt(iconIndex);
+//                danhMuc = new DanhMuc(123,tenDanhMuc, icon);
+//            }
+//        }
+//        cursor.close();
+//        db.close();
+//
+//        return danhMuc;
+//    }
+//
 
 //    private int layIdDanhMuc(DanhMuc danhMuc) {
 //        SQLiteDatabase db = getReadableDatabase();

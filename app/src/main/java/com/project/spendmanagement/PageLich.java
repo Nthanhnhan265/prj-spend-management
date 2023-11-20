@@ -41,6 +41,7 @@ public class PageLich extends Fragment  {
     GiaoDich_Db giaoDichDb;
     Button btnDocDl;
     int tongThu,tongChi;
+    AdapterGiaoDich adapterGiaoDich;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_lich, container, false);
@@ -62,36 +63,33 @@ public class PageLich extends Fragment  {
                 }
             });
             // Sử dụng getActivity() để lấy ngữ cảnh của hoạt động
-            giaoDichDb = new GiaoDich_Db(requireContext(), "dbGiaoDich", null, 3);
+            giaoDichDb = new GiaoDich_Db(this.requireContext());
             dateAdapter = new AdapterLich(requireContext(), main.listGiaoDich);
+            adapterGiaoDich=new AdapterGiaoDich(requireContext(),main.listGiaoDich);
+          // rcShow.setAdapter(dateAdapter);
+//            main.listGiaoDich.addAll(giaoDichDb.DocDl());
+//            Toast.makeText(main, "Đã đọc dữ liệu thành công!", Toast.LENGTH_SHORT).show();
+            btnDocDl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        // Đọc dữ liệu từ cơ sở dữ liệu
+                        main.listGiaoDich.addAll(giaoDichDb.DocDl());
+                        // Cập nhật dữ liệu trong AdapterLich
+                  //      dateAdapter.updateData(main.listGiaoDich);
+                        rcShow.setAdapter(adapterGiaoDich);
+                        // Cập nhật dữ liệu trên RecyclerView
+                        adapterGiaoDich.notifyDataSetChanged();
 
-           rcShow.setAdapter(dateAdapter);
-            main.listGiaoDich.addAll(giaoDichDb.DocDl());
-            Toast.makeText(main, "Đã đọc dữ liệu thành công!", Toast.LENGTH_SHORT).show();
-//            btnDocDl.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    try {
-//                        // Đọc dữ liệu từ cơ sở dữ liệu
-//                      // main.listGiaoDich.clear();
-//                        main.listGiaoDich.addAll(giaoDichDb.DocDl());
-//
-//                        Toast.makeText(main, "So PT :"+main.listGiaoDich.get(0).getGhiChu(), Toast.LENGTH_SHORT).show();
-//                        dateAdapter.updateData(main.listGiaoDich);
-//                        rcShow.setAdapter(dateAdapter);
-//                        dateAdapter.notifyDataSetChanged();
-//                        // Tính lại tổng thu chi và cập nhật TextView
-//                        tinhTong();
-//                        Log.d("Database", "Đã đọc dữ liệu thành công! Số lượng giao dịch: " + main.listGiaoDich.size());
-//                        Log.d("Adapter", "Đã cập nhật Adapter. Số lượng item: " + dateAdapter.getItemCount());
-//
-//                        Toast.makeText(main, "Đã đọc dữ liệu thành công!", Toast.LENGTH_SHORT).show();
-//                    } catch (Exception ex) {
-//                        Toast.makeText(main, "Lỗi: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
+                        // Tính lại tổng thu chi và cập nhật TextView
+                        tinhTong();
 
+                        Toast.makeText(main, "Đã đọc dữ liệu thành công!", Toast.LENGTH_SHORT).show();
+                    } catch (Exception ex) {
+                        Toast.makeText(main, "Lỗi: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
             datepickerButton.setOnClickListener(new View.OnClickListener() {
 
@@ -140,7 +138,6 @@ public class PageLich extends Fragment  {
         if(main.listGiaoDich.size()!=0) {
             dateAdapter=new AdapterLich(requireContext(),main.listGiaoDich);
         }
-
         datepickerButton = view.findViewById(R.id.btnDatePicker);
         btnDocDl=view.findViewById(R.id.btnDocDl);
     }

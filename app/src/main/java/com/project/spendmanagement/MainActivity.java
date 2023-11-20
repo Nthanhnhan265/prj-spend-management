@@ -23,16 +23,18 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
     PageKhac pageKhac;
      List<GiaoDich> listGiaoDich =new ArrayList<>();
     // them moi
- //   AdapterGiaoDich adapterGiaoDich;
+
+    private GiaoDich_Db giaoDichDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
             // RESET DATABASE
-//            GiaoDich_Db giaoDichDb=new GiaoDich_Db(MainActivity.this,"dbGiaoDich",null,3);
+//            GiaoDich_Db giaoDichDb=new GiaoDich_Db(this);
 //            giaoDichDb.deleteDatabase(MainActivity.this); // 'this' is the reference to the current activity
-        // RESET DATABASE
-        GiaoDich_Db giaoDichDb = new GiaoDich_Db(MainActivity.this, "dbGiaoDich", null, 3);
+        // khong xoa
+        GiaoDich_Db giaoDichDb = new GiaoDich_Db(this);
         if (giaoDichDb.checkDatabase()) {
             // Database đã tồn tại, không cần phải xóa nó
             Log.i("Database", "Database đã tồn tại, không cần phải xóa nó");
@@ -90,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
                 .addToBackStack(null)
                 .commit();
     }
+    public GiaoDich_Db getGiaoDichDb() {
+        return giaoDichDb;
+    }
+
     public void chuyenDenLich() {
 
         getSupportFragmentManager().beginTransaction()

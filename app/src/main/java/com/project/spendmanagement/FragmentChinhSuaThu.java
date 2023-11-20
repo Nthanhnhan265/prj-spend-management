@@ -175,7 +175,7 @@ public class FragmentChinhSuaThu extends Fragment {
         edtTienThu=view.findViewById(R.id.edtTienThu);
         edtNhapGhiChu=view.findViewById(R.id.edtNhapGhiChu);
         tvXoa=view.findViewById(R.id.tvXoa);
-        giaoDich_db = new GiaoDich_Db(requireContext(), "dbGiaoDich", null, 3);
+        giaoDich_db = new GiaoDich_Db(this.requireContext());
     }
     private boolean isValidData() {
         // Kiểm tra và trả về true nếu dữ liệu hợp lệ, ngược lại trả về false

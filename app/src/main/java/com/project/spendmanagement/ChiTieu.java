@@ -8,7 +8,10 @@ public class ChiTieu extends GiaoDich {
         super(ngayGD,ghiChu,giaTri);
         this.danhMuc = danhMuc;
     }
-
+//    public ChiTieu()
+//    {
+//
+//    }
 
     @Override
     public DanhMuc getDanhMuc() {
