@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -51,6 +54,18 @@ public class AdapterDSDanhMuc extends RecyclerView.Adapter {
                 myHolder.tvTenDM.setText(danhMucHienTai.getTenDanhMuc());
                 //gán icon imageView thành Resouce ID (int) của danh mục hiện tại
                 myHolder.icon.setImageResource(danhMucHienTai.getIcon());
+
+                //tạo sự kiện ấn vào 1 danh mục và mở màn hình chỉnh sửa danh sách
+                myHolder.lnDanhMuc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FragmentChinhSuaDanhMuc fragmentChinhSuaDanhMuc=new FragmentChinhSuaDanhMuc();
+                        FragmentTransaction transaction=((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.container,fragmentChinhSuaDanhMuc);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+                });
             }
 
         }catch (Exception ex) {
@@ -67,12 +82,14 @@ public class AdapterDSDanhMuc extends RecyclerView.Adapter {
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView tvTenDM;
         ImageView icon;
+        LinearLayout lnDanhMuc;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             //ánh xạ
             icon=itemView.findViewById(R.id.ivIconDanhMuc);
             tvTenDM=itemView.findViewById(R.id.tvTenDanhMuc);
+            lnDanhMuc=itemView.findViewById(R.id.lnDanhMuc);
         }
     }
 }

@@ -15,49 +15,53 @@
         android:padding="8dp"
         android:background="@color/darker_blue"
         android:orientation="horizontal"
+
         >
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:src="@drawable/ic_before"
             android:layout_gravity="center_vertical"
-            android:id="@+id/btnThoat"
-
+            android:id="@+id/ivThoat"
+            android:layout_marginRight="20dp"
             />
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/tienchi"
             android:id="@+id/btnTienChi"
             android:textSize="16sp"
             android:textColor="@color/lighter_blue"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/custom_btn_non"
+            android:layout_marginRight="2dp"
             />
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/tienthu"
-            android:background="@drawable/custom_btn_non"
+            android:background="@drawable/custom_button"
             android:textColor="@color/lighter_blue"
             android:textSize="16sp"
             android:id="@+id/btnTienThu"
+            android:layout_marginLeft="2dp"
             />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add"
             android:layout_gravity="center_vertical"
-            android:id="@+id/btnThemDanhMuc"
+            android:id="@+id/ivThemDanhMuc"
+            android:layout_marginLeft="20dp"
             />
     </LinearLayout>
 <!--    hiển thị danh sách các danh mục ở đây-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="700dp"
+        android:layout_height="740dp"
         android:orientation="vertical"
+
         >
 
         <androidx.recyclerview.widget.RecyclerView

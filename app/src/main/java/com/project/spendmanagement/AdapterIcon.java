@@ -14,13 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AdapterIcon extends RecyclerView.Adapter {
     //Khai báo
     int viTri=0;
     Context context;
     ArrayList<String> iconSrc=new ArrayList<>();
-
+    String iconDuocChon;
+    boolean flag=true;
     //Khởi tạo:
     public AdapterIcon(Context context, ArrayList<String>icons) {
         try {
@@ -42,16 +44,24 @@ public class AdapterIcon extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         try {
             String iconHienTai = iconSrc.get(position); //
+            //lấy id qua string
             int resId = holder.itemView.getContext().getResources().getIdentifier(iconHienTai, "drawable", holder.itemView.getContext().getPackageName());
 
             if (holder instanceof MyHolder) {
                 MyHolder myHolder = (MyHolder) holder;
                 myHolder.imageView.setImageResource(resId);
+
+                if(flag==true && Objects.equals(iconHienTai, iconDuocChon)) {
+                    myHolder.imageView.setBackground(context.getDrawable(R.drawable.custom_icon_selected));
+                }
+
                 myHolder.imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         viTri=myHolder.getAdapterPosition();
                         notifyDataSetChanged();
+                        iconDuocChon=iconHienTai;
+                        flag=false;
                     }
                 });
 
@@ -91,4 +101,26 @@ public class AdapterIcon extends RecyclerView.Adapter {
             imageView=itemView.findViewById(R.id.ivIconDanhMuc);
         }
     }
+    //phương thức lấy icon được chọn
+    public int getIconDuocChon() {
+        try {
+            if(iconDuocChon!="") {
+                int resId = context.getResources().getIdentifier(iconDuocChon, "drawable", context.getPackageName());
+                return resId;
+            }
+        }catch (Exception ex) {
+            Log.e("err AdapterIcon/getIconDuocChon: ",ex.getMessage());
+        }
+
+        return -1;
+    }
+    //Phương thức set viền icon khi biết chuỗi icon
+    public void setIconDuocChon(String iconDuocChon) {
+        if(!iconDuocChon.equals("")) {
+            this.iconDuocChon=iconDuocChon;
+
+        }
+    }
+
+
 }
