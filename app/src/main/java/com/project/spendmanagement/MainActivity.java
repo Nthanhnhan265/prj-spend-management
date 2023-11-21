@@ -23,18 +23,20 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
     PageKhac pageKhac;
      List<GiaoDich> listGiaoDich =new ArrayList<>();
     // them moi
-
+    public static ArrayList<String>icons=new ArrayList<>();
     private GiaoDich_Db giaoDichDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+            constructIcon();
 //             RESET DATABASE
 //            GiaoDich_Db giaoDichDb=new GiaoDich_Db(this);
 //            giaoDichDb.deleteDatabase(MainActivity.this); // 'this' is the reference to the current activity
 //        giaoDichDb.ChenDanhMuc();
          //khong xoa
+
         GiaoDich_Db giaoDichDb = new GiaoDich_Db(this);
         if (giaoDichDb.checkDatabase()) {
             // Database đã tồn tại, không cần phải xóa nó
@@ -66,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
                 }
                 if (item.getItemId() == R.id.lich) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, pageLich).commit();
+                    listGiaoDich.clear();
+                    // Đọc dữ liệu từ cơ sở dữ liệu
+                    listGiaoDich.addAll(giaoDichDb.DocDl());
+
                     return true;
                 }
                 if (item.getItemId() == R.id.baocao) {
@@ -79,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
                 return false;
             }
         });
+
 
     }
     public void chuyenDenNhapThu() {
@@ -115,6 +122,16 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
 //                adapterGiaoDich.notifyDataSetChanged();
 //            }
         }
+    }
+    //Khởi tạo các icons
+    public void constructIcon() {
+        icons.add("ic_danhmuc_doan");
+        icons.add("ic_danhmuc_tiente");
+        icons.add("ic_danhmuc_suachua");
+        icons.add("ic_danhmuc_muasam");
+        icons.add("ic_danhmuc_tien");
+        icons.add("ic_danhmuc_vitien");
+
     }
 
 }

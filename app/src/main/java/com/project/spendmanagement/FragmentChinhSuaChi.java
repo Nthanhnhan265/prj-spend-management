@@ -204,20 +204,10 @@ public class FragmentChinhSuaChi extends Fragment {
         }
     }
     private void constructGridView() {
-//        listDanhMuc.add(new DanhMuc("Trợ cấp",R.drawable.ic_money));
-//        listDanhMuc.add(new DanhMuc("Đầu tư",R.drawable.baseline_fastfood_25));
-//        listDanhMuc.add(new DanhMuc("Lãnh lương",R.drawable.baseline_fastfood_25));
-//        listDanhMuc.add(new DanhMuc("Lãnh lương",R.drawable.baseline_fastfood_25));
-//        listDanhMuc.add(new DanhMuc("Lãnh lương",R.drawable.baseline_fastfood_25));
-//        listDanhMuc.add(new DanhMuc("Lãnh lương",R.drawable.baseline_fastfood_25));
-
-//        listDanhMuc.add(new DanhMuc(123,"Y Tế",R.drawable.baseline_bloodtype_24));
-//        listDanhMuc.add(new DanhMuc(123,"Mua sắm",R.drawable.baseline_fastfood_25));
-//        listDanhMuc.add(new DanhMuc(124,"Điện",R.drawable.baseline_battery_charging_full_24));
-//        listDanhMuc.add(new DanhMuc(125,"Ăn chơi",R.drawable.baseline_fastfood_24));
-//        listDanhMuc.add(new DanhMuc(126,"Giáo dục",R.drawable.baseline_fastfood_24));
-//        listDanhMuc.add(new DanhMuc(127,"Tiền Nhà",R.drawable.baseline_fastfood_24));
-//        listDanhMuc.add(new DanhMuc(128,"Đi xe",R.drawable.baseline_fastfood_24));
+        GiaoDich_Db giaoDichDb=new GiaoDich_Db(requireContext());
+        listDanhMuc.addAll(giaoDichDb.LayDanhMucChi());
+        //dùng mở giao diện chỉnh sửa, thêm danh mục
+        listDanhMuc.add(new DanhMuc(000,"Thêm",null,R.drawable.ic_add));
 
 
 

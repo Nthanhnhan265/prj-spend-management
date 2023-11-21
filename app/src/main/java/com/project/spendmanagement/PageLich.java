@@ -31,15 +31,13 @@ public class PageLich extends Fragment  {
     private Button datepickerButton;
     private TextView tvThu, tvChi,tvTong;
     public static AdapterLich dateAdapter;
-
-
     MainActivity main;
     //them moi
     List<GiaoDich>data_gd=new ArrayList<>();
     List<ChiTieu>data_chitieu=new ArrayList<>();
     ArrayAdapter adapter;
     GiaoDich_Db giaoDichDb;
-    Button btnDocDl;
+
     int tongThu,tongChi;
     AdapterGiaoDich adapterGiaoDich;
     @Override
@@ -66,31 +64,8 @@ public class PageLich extends Fragment  {
             giaoDichDb = new GiaoDich_Db(this.requireContext());
             dateAdapter = new AdapterLich(requireContext(), main.listGiaoDich);
             adapterGiaoDich=new AdapterGiaoDich(requireContext(),main.listGiaoDich);
-          // rcShow.setAdapter(dateAdapter);
-//            main.listGiaoDich.addAll(giaoDichDb.DocDl());
+            rcShow.setAdapter(dateAdapter);
 //            Toast.makeText(main, "Đã đọc dữ liệu thành công!", Toast.LENGTH_SHORT).show();
-            btnDocDl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        // Đọc dữ liệu từ cơ sở dữ liệu
-                        main.listGiaoDich.addAll(giaoDichDb.DocDl());
-                        // Cập nhật dữ liệu trong AdapterLich
-                  //      dateAdapter.updateData(main.listGiaoDich);
-                        rcShow.setAdapter(adapterGiaoDich);
-                        // Cập nhật dữ liệu trên RecyclerView
-                        adapterGiaoDich.notifyDataSetChanged();
-
-                        // Tính lại tổng thu chi và cập nhật TextView
-                        tinhTong();
-
-                        Toast.makeText(main, "Đã đọc dữ liệu thành công!", Toast.LENGTH_SHORT).show();
-                    } catch (Exception ex) {
-                        Toast.makeText(main, "Lỗi: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
             datepickerButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -139,7 +114,7 @@ public class PageLich extends Fragment  {
             dateAdapter=new AdapterLich(requireContext(),main.listGiaoDich);
         }
         datepickerButton = view.findViewById(R.id.btnDatePicker);
-        btnDocDl=view.findViewById(R.id.btnDocDl);
+
     }
     // Function tinh tổng Thu và Chi
     private void tinhTong() {

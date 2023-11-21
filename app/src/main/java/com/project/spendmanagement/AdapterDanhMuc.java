@@ -2,6 +2,7 @@ package com.project.spendmanagement;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,9 @@ public class AdapterDanhMuc extends BaseAdapter {
             btnDanhMuc = view.findViewById(R.id.btnCategory);
             DanhMuc item = data.get(i);
             Drawable top= btnDanhMuc.getContext().getResources().getDrawable(item.getIcon());
-            btnDanhMuc.setCompoundDrawablesWithIntrinsicBounds(null,top,null,null);
+            if(top!=null) {
+                btnDanhMuc.setCompoundDrawablesWithIntrinsicBounds(null,top,null,null);
+            }
             btnDanhMuc.setText(item.getTenDanhMuc());
 
             if (i == viTri) {
@@ -73,7 +76,7 @@ public class AdapterDanhMuc extends BaseAdapter {
 
                      //chỗ này sẽ sửa thành mã sau khi có mã danh mục, dùng tên sẽ gây trùng
                      if(danhMucDuocChon.getTenDanhMuc()=="Thêm") {
-                         FragmentDSDanhMuc fragmentDSDanhMuc=new FragmentDSDanhMuc();
+                         FragmentDSDanhMucChi fragmentDSDanhMuc=new FragmentDSDanhMucChi();
                          FragmentTransaction transaction=((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
                          transaction.replace(R.id.container, fragmentDSDanhMuc);
                          transaction.addToBackStack(null);

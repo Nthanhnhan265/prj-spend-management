@@ -25,6 +25,8 @@ public class FragmentChiTietDanhMuc extends Fragment {
     AdapterIcon adapterIcon;
     AdapterMauSac adapterMauSac;
     EditText edtTenDM;
+    MainActivity main=(MainActivity) getActivity();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chitietdanhmuc, container, false);
@@ -35,7 +37,6 @@ public class FragmentChiTietDanhMuc extends Fragment {
 
     private void setEvent() {
         try {
-            //recyclerViewMauSac.setAdapter(adapterMauSac);
             recyclerViewIcon.setAdapter(adapterIcon);
             ivThoat.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -44,6 +45,7 @@ public class FragmentChiTietDanhMuc extends Fragment {
                     requireActivity().getSupportFragmentManager().popBackStack();
                 }
             });
+            //Hien thi noi dung chinh sua
 
             //thêm danh mục
             btnLuuDanhMuc.setOnClickListener(new View.OnClickListener() {
@@ -75,9 +77,7 @@ public class FragmentChiTietDanhMuc extends Fragment {
             btnLuuDanhMuc = view.findViewById(R.id.btnLuuDanhMuc);
             ivThoat = view.findViewById(R.id.ivThoat);
             btnLuuDanhMuc = view.findViewById(R.id.btnLuuDanhMuc);
-            Construct();
-            adapterIcon=new AdapterIcon(requireContext(),icon);
-            //adapterMauSac=new AdapterMauSac(requireContext(),mauSac);
+            adapterIcon=new AdapterIcon(requireContext(),MainActivity.icons);
             edtTenDM=view.findViewById(R.id.edtTenDM);
         } catch (Exception ex) {
             Toast.makeText(requireContext(), "Có lỗi xảy ra trong FragmentChiTietDanhMuc/setControl", Toast.LENGTH_SHORT).show();
@@ -86,10 +86,8 @@ public class FragmentChiTietDanhMuc extends Fragment {
 
     //Phương thức khởi tạo dữ liệu cho danh sách
     private void Construct() {
-        //khởi tạo Icon có sẵn
-        icon.add("ic_danhmuc_doan");
-        icon.add("ic_danhmuc_tiente");
-        icon.add("ic_danhmuc_suachua");
-        icon.add("ic_danhmuc_muasam");
+
+
+
     }
 }

@@ -185,7 +185,7 @@ AdapterGiaoDich adapterGiaoDich;
           int tienThu = Integer.parseInt(edtTienChi.getText().toString());
           DanhMuc selectedDanhMuc = icon_adapter.getDanhMucDuocChon();
 
-          ChiTieu chiTieu = new ChiTieu(selectedDate, "(" + ghiChu + ")", tienThu, selectedDanhMuc);
+          ChiTieu chiTieu = new ChiTieu(selectedDate,  ghiChu , tienThu, selectedDanhMuc);
 
           // Thêm vào cơ sở dữ liệu
           long newRowId = giaoDich_db.ThemDl(chiTieu);
@@ -243,12 +243,10 @@ AdapterGiaoDich adapterGiaoDich;
       e.printStackTrace();
     }
   }
-  //TODO: đọc từ DB lên
+  //Đọc từ DB lên
   private void constructListView() {
-    //listChiTieu.add(new DanhMuc(111,"Y Tế",R.drawable.baseline_bloodtype_24));
     GiaoDich_Db giaoDichDb=new GiaoDich_Db(requireContext());
     listChiTieu.addAll(giaoDichDb.LayDanhMucChi());
-
     //dùng mở giao diện chỉnh sửa, thêm danh mục
     listChiTieu.add(new DanhMuc(000,"Thêm",null,R.drawable.ic_add));
   }

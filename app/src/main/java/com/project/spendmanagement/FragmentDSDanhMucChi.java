@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentDSDanhMuc extends Fragment {
+public class FragmentDSDanhMucChi extends Fragment {
     RecyclerView rvDSDanhMuc;
     AdapterDSDanhMuc adapterDSDanhMuc;
     List<DanhMuc>ls=new ArrayList<>();
@@ -59,7 +59,7 @@ public class FragmentDSDanhMuc extends Fragment {
                     FragmentDSDanhMucThu fragmentDSDanhMucThu=new FragmentDSDanhMucThu();
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.container,fragmentDSDanhMucThu)
-                            .addToBackStack(null).commit();
+                            .commit();
                 }
             });
         }catch ( Exception ex) {
@@ -77,9 +77,10 @@ public class FragmentDSDanhMuc extends Fragment {
             ivThoat=view.findViewById(R.id.ivThoat);
             btnTienThu=view.findViewById(R.id.btnTienThu);
             ls.clear();
-            //TODO: Đọc dữ liệu từ csdl
-            //ls.add(new DanhMuc(1,"Quần áo",R.drawable.ic_money));
-
+            //Đọc dữ liệu từ csdl
+            GiaoDich_Db gd=new GiaoDich_Db(requireContext());
+            ls.addAll(gd.LayDanhMucChi());
+            //ls.add();
             adapterDSDanhMuc=new AdapterDSDanhMuc(requireContext(),ls);
             rvDSDanhMuc.setAdapter(adapterDSDanhMuc);
 

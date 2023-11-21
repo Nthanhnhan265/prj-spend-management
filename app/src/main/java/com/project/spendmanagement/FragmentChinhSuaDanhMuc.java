@@ -23,6 +23,7 @@ public class FragmentChinhSuaDanhMuc extends Fragment {
     ArrayList<String>icon=new ArrayList<>();
     AdapterIcon adapterIcon;
     EditText edtTenDM;
+    MainActivity main=(MainActivity) getActivity();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,8 +35,10 @@ public class FragmentChinhSuaDanhMuc extends Fragment {
 
     private void setEvent() {
         try {
-            //recyclerViewMauSac.setAdapter(adapterMauSac);
             recyclerViewIcon.setAdapter(adapterIcon);
+            //Hien thi thong tin danh muc da chon
+            
+
             ivThoat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -75,21 +78,15 @@ public class FragmentChinhSuaDanhMuc extends Fragment {
             adapterIcon=new AdapterIcon(requireContext(),icon);
             edtTenDM=view.findViewById(R.id.edtTenDM);
         } catch (Exception ex) {
-            Toast.makeText(requireContext(), "Có lỗi xảy ra trong FragmentChiTietDanhMuc/setControl", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Có lỗi xảy ra trong FragmentChinhSuaDanhMuc/setControl", Toast.LENGTH_SHORT).show();
         }
     }
 
     //Phương thức khởi tạo dữ liệu cho danh sách
     private void Construct() {
-        //khởi tạo Icon có sẵn
-        icon.add("ic_demo");
-        icon.add("ic_demo");
-        icon.add("ic_demo");
 
-        //khởi tạo màu sắc
-        mauSac.add("#fff");
-        mauSac.add("#000");
-        mauSac.add("#fff000");
+        //khởi tạo Icon có sẵn
+        icon.addAll(main.icons);
     }
 
 }

@@ -22,6 +22,7 @@ public class AdapterDSDanhMuc extends RecyclerView.Adapter {
     //khai báo
     private Context context;
     private List<DanhMuc> dsDanhMuc=new ArrayList<>();
+    public static DanhMuc danhMucDuocChon;
 
     //Truyền vào danh sách danh mục gồm : tên và hình ảnh icon
     public AdapterDSDanhMuc(Context context, List<DanhMuc>dsDanhMuc) {
@@ -59,6 +60,7 @@ public class AdapterDSDanhMuc extends RecyclerView.Adapter {
                 myHolder.lnDanhMuc.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        danhMucDuocChon=danhMucHienTai;
                         FragmentChinhSuaDanhMuc fragmentChinhSuaDanhMuc=new FragmentChinhSuaDanhMuc();
                         FragmentTransaction transaction=((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.container,fragmentChinhSuaDanhMuc);

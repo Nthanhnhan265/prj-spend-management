@@ -93,7 +93,7 @@
 //                        }
 
                         // Tạo đối tượng GiaoDich
-                        ThuNhap thuNhap = new ThuNhap(selectedDate, "(" + ghiChu + ")", tienThu, iconDanhMucAdapter.getDanhMucDuocChon());
+                        ThuNhap thuNhap = new ThuNhap(selectedDate, ghiChu, tienThu, iconDanhMucAdapter.getDanhMucDuocChon());
 
                         // Lưu vào database
                         long newRowId = giaoDich_db.ThemDl(thuNhap);
@@ -167,8 +167,7 @@
             edtNhapGhiChu=view.findViewById(R.id.edtNhapGhiChu);
             ivNgayTruoc =view.findViewById(R.id.ivNgayTruoc);
             ivNgaySau =view.findViewById(R.id.ivNgaySau);
-            // them moi khoi tao giaodich_db
-            giaoDich_db = new GiaoDich_Db(requireContext());
+
        //     rcShow = view.findViewById(R.id.rcShow);  // Hãy đảm bảo thay thế bằng ID RecyclerView thực tế của bạn
 //            dateAdapter = new AdapterLich(requireContext(), main.listGiaoDich);
         }
@@ -198,13 +197,10 @@
                 e.printStackTrace();
             }
         }
-        //TODO: đọc từ DB lên
+        //đọc từ DB lên
         private void constructGridView() {
-            //listThuNhap.add(new DanhMuc(111,"Trợ cấp",R.drawable.ic_money));
             GiaoDich_Db giaoDichDb=new GiaoDich_Db(requireContext());
             listThuNhap.addAll(giaoDichDb.LayDanhMucThu());
-
-
             //dùng mở giao diện chỉnh sửa, thêm danh mục
             listThuNhap.add(new DanhMuc(000,"Thêm",null,R.drawable.ic_add));
 

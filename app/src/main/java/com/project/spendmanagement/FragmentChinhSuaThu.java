@@ -32,8 +32,10 @@ public class FragmentChinhSuaThu extends Fragment {
     private EditText edtNhapGhiChu, edtTienThu;
     private TextView tvXoa;
 
+
     MainActivity main;
     GiaoDich_Db giaoDich_db;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chitiet_thunhap, container, false);
@@ -209,11 +211,14 @@ public class FragmentChinhSuaThu extends Fragment {
             e.printStackTrace();
         }
     }
-    //TODO: làm cơ sở dữ liệu
+    //làm cơ sở dữ liệu
     private void constructGridView() {
-//        listDanhMuc.add(new DanhMuc(111,"Trợ cấp","Thu",R.drawable.ic_money));
+        GiaoDich_Db giaoDichDb=new GiaoDich_Db(requireContext());
+        listDanhMuc.addAll(giaoDichDb.LayDanhMucChi());
+        //dùng mở giao diện chỉnh sửa, thêm danh mục
+        listDanhMuc.add(new DanhMuc(000,"Thêm",null,R.drawable.ic_add));
 
-        
+
     }
 }
 

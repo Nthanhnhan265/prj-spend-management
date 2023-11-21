@@ -35,15 +35,6 @@ public class FragmentDSDanhMucThu extends Fragment {
 
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentDSDanhMucThu.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FragmentDSDanhMucThu newInstance(String param1, String param2) {
         FragmentDSDanhMucThu fragment = new FragmentDSDanhMucThu();
         Bundle args = new Bundle();
@@ -92,10 +83,9 @@ public class FragmentDSDanhMucThu extends Fragment {
             btnTienChi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FragmentDSDanhMuc fragmentChiTietDanhMuc=new FragmentDSDanhMuc();
+                    FragmentDSDanhMucChi fragmentChiTietDanhMuc=new FragmentDSDanhMucChi();
                     FragmentTransaction transaction=(getActivity()).getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.container, fragmentChiTietDanhMuc);
-                    transaction.addToBackStack(null);
                     transaction.commit();
                 }
             });
@@ -115,9 +105,9 @@ public class FragmentDSDanhMucThu extends Fragment {
             ivThoat=view.findViewById(R.id.ivThoat);
             btnTienChi=view.findViewById(R.id.btnTienChi);
             ls.clear();
-            //TODO: Đọc dữ liệu từ csdl
-            //ls.add(new DanhMuc(1,"Quần áo",R.drawable.ic_money));
-
+            //Đọc dữ liệu từ csdl
+            GiaoDich_Db gd=new GiaoDich_Db(requireContext());
+            ls.addAll(gd.LayDanhMucThu());
             adapterDSDanhMuc=new AdapterDSDanhMuc(requireContext(),ls);
             rvDSDanhMuc.setAdapter(adapterDSDanhMuc);
 
