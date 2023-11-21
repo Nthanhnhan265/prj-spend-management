@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
 //             RESET DATABASE
 //            GiaoDich_Db giaoDichDb=new GiaoDich_Db(this);
 //            giaoDichDb.deleteDatabase(MainActivity.this); // 'this' is the reference to the current activity
-//        giaoDichDb.ChenDanhMuc();
+//            giaoDichDb.ChenDanhMuc();
          //khong xoa
 
         GiaoDich_Db giaoDichDb = new GiaoDich_Db(this);

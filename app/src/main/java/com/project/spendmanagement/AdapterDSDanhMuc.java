@@ -72,7 +72,7 @@ public class AdapterDSDanhMuc extends RecyclerView.Adapter {
 
         }catch (Exception ex) {
             Toast.makeText(context, "Có lỗi xảy ra trong AdapterDSDanhMuc/onBindViewHolder", Toast.LENGTH_SHORT).show();
-            Log.e("err: ",ex.getMessage());
+            Log.e("err: "+dsDanhMuc.get(position).getTenDanhMuc(),ex.getMessage());
         }
     }
 
