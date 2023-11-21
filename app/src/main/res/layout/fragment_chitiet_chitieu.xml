@@ -193,16 +193,17 @@
         android:layout_height="300dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal"
-        android:paddingHorizontal="20dp">
+        android:paddingHorizontal="3dp"
+  >
 
 
         <GridView
             android:id="@+id/gvExtenseCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnWidth="100dp"
+            android:columnWidth="91dp"
             android:gravity="center"
-            android:horizontalSpacing="-8dp"
+            android:horizontalSpacing="5dp"
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
             android:verticalSpacing="10dp"

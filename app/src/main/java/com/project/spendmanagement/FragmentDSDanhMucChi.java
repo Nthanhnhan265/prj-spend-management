@@ -33,10 +33,13 @@ public class FragmentDSDanhMucChi extends Fragment {
 
     private void setEvent() {
         try {
+
             //Bat su kien nut them
            btnThemDanhMuc.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
+                   AdapterIcon.iconDuocChon=0;
+                   FragmentChiTietDanhMuc.loaiDM="Chi";
                    FragmentChiTietDanhMuc fragmentChiTietDanhMuc=new FragmentChiTietDanhMuc();
                    FragmentTransaction transaction=(getActivity()).getSupportFragmentManager().beginTransaction();
                    transaction.replace(R.id.container, fragmentChiTietDanhMuc);
@@ -60,6 +63,7 @@ public class FragmentDSDanhMucChi extends Fragment {
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.container,fragmentDSDanhMucThu)
                             .commit();
+
                 }
             });
         }catch ( Exception ex) {

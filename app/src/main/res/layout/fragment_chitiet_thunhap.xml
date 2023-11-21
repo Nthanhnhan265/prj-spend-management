@@ -189,25 +189,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="0dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="5sp"
         android:orientation="horizontal"
-        android:paddingHorizontal="20dp">
+        android:paddingHorizontal="10dp">
 
         <GridView
             android:id="@+id/gvDanhSachDMThu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnWidth="100dp"
+            android:columnWidth="90dp"
             android:gravity="center"
-            android:horizontalSpacing="-8dp"
+            android:horizontalSpacing="2dp"
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
             android:verticalSpacing="10dp"
             tools:listitem="@layout/custom_item_danhmuc"
             >
         </GridView>
+
+
+
+
+        />
+
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnChinhSuaThu"

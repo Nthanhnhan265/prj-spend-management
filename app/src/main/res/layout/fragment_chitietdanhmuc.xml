@@ -35,6 +35,17 @@
             android:layout_marginHorizontal="10dp"
             android:text="@string/taomoi"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_blue"
+            android:text="@string/xoa"
+            android:textSize="22sp"
+            android:layout_marginRight="10dp"
+            android:textAlignment="textEnd"
+            android:id="@+id/tvXoa"
+            android:visibility="gone"
+            />
     </LinearLayout>
     <!-- Nơi nhập tên-->
     <LinearLayout
@@ -59,6 +70,7 @@
             android:textColorHint="@color/light_blue"
             android:hint="@string/nhaptendanhmuc"
             android:paddingHorizontal="15dp"
+            android:textColor="@color/lighter_blue"
             />
 
     </LinearLayout>

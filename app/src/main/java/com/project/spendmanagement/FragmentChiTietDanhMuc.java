@@ -26,6 +26,8 @@ public class FragmentChiTietDanhMuc extends Fragment {
     AdapterMauSac adapterMauSac;
     EditText edtTenDM;
     MainActivity main=(MainActivity) getActivity();
+    public static String loaiDM=null;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,17 +47,22 @@ public class FragmentChiTietDanhMuc extends Fragment {
                     requireActivity().getSupportFragmentManager().popBackStack();
                 }
             });
-            //Hien thi noi dung chinh sua
-
             //thêm danh mục
             btnLuuDanhMuc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //kiểm tra dữ liệu đầu vào
-                    if(!edtTenDM.getText().equals("") && adapterIcon.getIconDuocChon()!=-1) { //TODO: sửa thêm danh mục
-                        DanhMuc dm=new DanhMuc(2,edtTenDM.getText().toString(),null,adapterIcon.getIconDuocChon());
-                        //TODO: thêm vào csdl
-                        Toast.makeText(requireContext(), "OK!", Toast.LENGTH_SHORT).show();
+                    if(!edtTenDM.getText().equals("") && adapterIcon.getIconDuocChon()!=-1) {
+                        DanhMuc dm=new DanhMuc(0,edtTenDM.getText().toString().trim(),loaiDM,adapterIcon.getIconDuocChon());
+
+                        GiaoDich_Db giaoDich=new GiaoDich_Db(requireContext());
+                        if(giaoDich.ThemDanhMuc(dm)>=0) {
+                            Toast.makeText(requireContext(), "Thêm thành công!", Toast.LENGTH_SHORT).show();
+                            requireActivity().getSupportFragmentManager().popBackStack(); //thêm thành công và thoát
+                        }else {
+                            Toast.makeText(requireContext(), "Thêm thất bại!", Toast.LENGTH_SHORT).show();
+
+                        }
 
 
                     } else {

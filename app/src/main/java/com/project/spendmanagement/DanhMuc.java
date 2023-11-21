@@ -7,9 +7,8 @@
         private int icon;
         // them moi
         private int id;
-        public DanhMuc() {
 
-        }
+
         public DanhMuc(int id,String tenDM,String loaiDanhMuc, int icon) {
             this.id=id;
             this.loaiDanhMuc=loaiDanhMuc;
@@ -35,6 +34,9 @@
             this.icon = icon;
 
 
+        }
+        public String getLoaiDM() {
+            return loaiDanhMuc;
         }
 
 

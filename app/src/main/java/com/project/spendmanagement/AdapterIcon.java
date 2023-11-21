@@ -21,7 +21,7 @@ public class AdapterIcon extends RecyclerView.Adapter {
     int viTri=0;
     Context context;
     ArrayList<String> iconSrc=new ArrayList<>();
-    String iconDuocChon;
+    public static int iconDuocChon;
     boolean flag=true;
     //Khởi tạo:
     public AdapterIcon(Context context, ArrayList<String>icons) {
@@ -51,7 +51,7 @@ public class AdapterIcon extends RecyclerView.Adapter {
                 MyHolder myHolder = (MyHolder) holder;
                 myHolder.imageView.setImageResource(resId);
 
-                if(flag==true && Objects.equals(iconHienTai, iconDuocChon)) {
+                if(flag==true && Objects.equals(resId, iconDuocChon)) {
                     myHolder.imageView.setBackground(context.getDrawable(R.drawable.custom_icon_selected));
                 }
 
@@ -60,18 +60,21 @@ public class AdapterIcon extends RecyclerView.Adapter {
                     public void onClick(View v) {
                         viTri=myHolder.getAdapterPosition();
                         notifyDataSetChanged();
-                        iconDuocChon=iconHienTai;
+                        iconDuocChon=holder.itemView.getContext().getResources().getIdentifier(iconHienTai, "drawable", holder.itemView.getContext().getPackageName());;
                         flag=false;
                     }
                 });
+                if(!flag) {
+                    if(viTri==position) {
+                        myHolder.imageView.setBackground(context.getDrawable(R.drawable.custom_icon_selected));
 
-                if(viTri==position) {
-                    myHolder.imageView.setBackground(context.getDrawable(R.drawable.custom_icon_selected));
-
-                } else {
-                    myHolder.imageView.setBackground(context.getDrawable(R.drawable.custom_icon_notselect));
-
+                    }
+                    else
+                    {
+                        myHolder.imageView.setBackground(context.getDrawable(R.drawable.custom_icon_notselect));
+                    }
                 }
+
 
 
             }
@@ -104,8 +107,8 @@ public class AdapterIcon extends RecyclerView.Adapter {
     //phương thức lấy icon được chọn
     public int getIconDuocChon() {
         try {
-            if(iconDuocChon!="") {
-                int resId = context.getResources().getIdentifier(iconDuocChon, "drawable", context.getPackageName());
+            if(iconDuocChon!=0) {
+                int resId =iconDuocChon;
                 return resId;
             }
         }catch (Exception ex) {
@@ -114,13 +117,7 @@ public class AdapterIcon extends RecyclerView.Adapter {
 
         return -1;
     }
-    //Phương thức set viền icon khi biết chuỗi icon
-    public void setIconDuocChon(String iconDuocChon) {
-        if(!iconDuocChon.equals("")) {
-            this.iconDuocChon=iconDuocChon;
 
-        }
-    }
 
 
 }

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -64,12 +65,15 @@ public class FragmentDSDanhMucThu extends Fragment {
             btnThemDanhMuc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AdapterIcon.iconDuocChon=0;
+                    FragmentChiTietDanhMuc.loaiDM="Thu";
                     FragmentChiTietDanhMuc fragmentChiTietDanhMuc=new FragmentChiTietDanhMuc();
                     FragmentTransaction transaction=(getActivity()).getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.container, fragmentChiTietDanhMuc);
                     transaction.addToBackStack(null);
                     transaction.commit();
                 }
+
             });
             //bat su kien nut thoat
             ivThoat.setOnClickListener(new View.OnClickListener() {

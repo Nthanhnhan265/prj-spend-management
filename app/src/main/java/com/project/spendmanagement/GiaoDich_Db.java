@@ -272,6 +272,7 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         database.close();
 
     }
+    //Lấy danh sách danh mục chi trong db
     public List<DanhMuc> LayDanhMucChi() {
         List<DanhMuc> danhMucList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -315,6 +316,7 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         return danhMucList;
 
     }
+    //Lấy danh sách danh mục thu trong db
     public List<DanhMuc> LayDanhMucThu() {
         List<DanhMuc> danhMucList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -358,45 +360,72 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         return danhMucList;
 
     }
-//    private DanhMuc layDanhMucTheoId(int idDanhMuc) {
-//        SQLiteDatabase db = getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT * FROM tblDanhMuc WHERE IdDanhMuc = ?",
-//                new String[]{String.valueOf(idDanhMuc)});
-//
-//        DanhMuc danhMuc = null;
-//        if (cursor.moveToFirst()) {
-//            int tenDanhMucIndex = cursor.getColumnIndex("TenDanhMuc");
-//            int iconIndex = cursor.getColumnIndex("Icon");
-//
-//            if (tenDanhMucIndex != -1 && iconIndex != -1) {
-//                String tenDanhMuc = cursor.getString(tenDanhMucIndex);
-//                int icon = cursor.getInt(iconIndex);
-//                danhMuc = new DanhMuc(123,tenDanhMuc, icon);
-//            }
-//        }
-//        cursor.close();
-//        db.close();
-//
-//        return danhMuc;
-//    }
-//
+    //Thêm danh mục vào db
+    public int ThemDanhMuc(DanhMuc danhMuc) {
+        SQLiteDatabase database = getWritableDatabase();
+        try {
+            ContentValues values1 = new ContentValues();
+            values1.put("TenDanhMuc", danhMuc.getTenDanhMuc());
+            values1.put("LoaiDanhMuc ", danhMuc.getLoaiDM());
+            values1.put("Icon", danhMuc.getIcon());
+            database.insert("tblDanhMuc", null, values1);
+            return 1;
+        }catch (Exception ex ) {
+            database.close();
+            Log.e("ThemDanhMuc: " ,ex.getMessage());
+            return -1;
+        }
 
-//    private int layIdDanhMuc(DanhMuc danhMuc) {
-//        SQLiteDatabase db = getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT IdDanhMuc FROM tblDanhMuc WHERE TenDanhMuc = ?",
-//                new String[]{danhMuc.getTenDanhMuc()});
-//
-//        int idDanhMuc = -1;
-//        int columnIndex = cursor.getColumnIndex("IdDanhMuc");
-//        if (columnIndex != -1 && cursor.moveToFirst()) {
-//            idDanhMuc = cursor.getInt(columnIndex);
-//        }
-//
-//        cursor.close();
-//        db.close();
-//
-//        return idDanhMuc;
-//    }
+    }
+
+// Phương thức sửa danh mục trong db
+    public int SuaDanhMuc(DanhMuc danhMuc) {
+        SQLiteDatabase database = getWritableDatabase();
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put("TenDanhMuc", danhMuc.getTenDanhMuc());
+            values.put("LoaiDanhMuc", danhMuc.getLoaiDM());
+            values.put("Icon", danhMuc.getIcon());
+
+            int dong = database.update("tblDanhMuc", values, "IdDanhMuc=?", new String[]{String.valueOf(danhMuc.getId())});
+
+            if (dong > 0) {
+                Log.d("Database", "Sửa danh mục thành công");
+                return 1; // Sửa thành công
+            } else {
+                Log.e("Database", "Sửa danh mục không thành công. Không thấy mã " + danhMuc.getId());
+                return -1; // Sửa không thành công, IdDanhMuc không tìm thấy
+            }
+        } catch (Exception e) {
+            Log.e("Database", "Lỗi cập nhật, Ma danh mục : " + danhMuc.getId(), e);
+            return -1; // Lỗi khi sửa danh mục
+        } finally {
+            database.close();
+        }
+    }
+
+// Phương thức xóa danh mục trong db
+    public int XoaDanhMuc(int idDanhMuc) {
+        SQLiteDatabase database = getWritableDatabase();
+
+        try {
+            int dong = database.delete("tblDanhMuc", "IdDanhMuc=?", new String[]{String.valueOf(idDanhMuc)});
+
+            if (dong > 0) {
+                Log.d("Database", "Xóa danh mục thành công. Số dòng đã xóa: " + dong);
+                return 1; // Xóa thành công
+            } else {
+                Log.e("Database", "Xóa danh mục không thành công. IdDanhMuc không tìm thấy: " + idDanhMuc);
+                return -1; // Xóa không thành công, IdDanhMuc không tìm thấy
+            }
+        } catch (Exception e) {
+            Log.e("Database", "Lỗi xóa danh mục. IdDanhMuc: " + idDanhMuc, e);
+            return -1; // Lỗi khi xóa danh mục
+        } finally {
+            database.close();
+        }
+    }
 
 
     @Override

@@ -1,11 +1,14 @@
 package com.project.spendmanagement;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -24,6 +27,10 @@ public class FragmentChinhSuaDanhMuc extends Fragment {
     AdapterIcon adapterIcon;
     EditText edtTenDM;
     MainActivity main=(MainActivity) getActivity();
+    DanhMuc danhMuc=AdapterDSDanhMuc.danhMucDuocChon;
+    public static String loaiDM=null;
+    TextView tvXoa;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,10 +42,10 @@ public class FragmentChinhSuaDanhMuc extends Fragment {
 
     private void setEvent() {
         try {
-            recyclerViewIcon.setAdapter(adapterIcon);
-            //Hien thi thong tin danh muc da chon
-            
 
+            //Hien thi thong tin danh muc da chon
+            edtTenDM.setText(danhMuc.getTenDanhMuc());
+            AdapterIcon.iconDuocChon= danhMuc.getIcon();
             ivThoat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -46,21 +53,54 @@ public class FragmentChinhSuaDanhMuc extends Fragment {
                     requireActivity().getSupportFragmentManager().popBackStack();
                 }
             });
+            tvXoa.setVisibility(View.VISIBLE);
+            tvXoa.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(requireContext())
+                            .setTitle("Xác nhận xóa")
+                            .setMessage("Bạn có chắc chắn muốn xóa?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        GiaoDich_Db giaoDichDb=new GiaoDich_Db(requireContext());
+                                        giaoDichDb.XoaDanhMuc(danhMuc.getId());
+                                        Toast.makeText(requireContext(), "Xóa Thành Công!", Toast.LENGTH_SHORT).show();
+                                        requireActivity().getSupportFragmentManager().popBackStack();
+                                    } catch (Exception ex) {
+                                        Toast.makeText(requireContext(), "Có lỗi xảy ra khi xóa dữ liệu!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(requireContext(), "Hủy", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .show();
+                }
+            });
             btnLuuDanhMuc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!edtTenDM.getText().equals("") && adapterIcon.getIconDuocChon()!=-1) {  //TODO sửa danh mục
-                        DanhMuc dm=new DanhMuc(2,edtTenDM.getText().toString(),null,adapterIcon.getIconDuocChon());
-                        //TODO: Sửa vào csdl
-                        Toast.makeText(requireContext(), "OK!", Toast.LENGTH_SHORT).show();
-
-
+                    if(!edtTenDM.getText().equals("") && adapterIcon.getIconDuocChon()!=-1) {
+                        //tạo đối tượng danh mục với Mã cũ và thông tin mới
+                        DanhMuc dm=new DanhMuc(danhMuc.getId(),edtTenDM.getText().toString().trim(), danhMuc.getLoaiDM(), adapterIcon.getIconDuocChon());
+                        GiaoDich_Db giaoDichDb=new GiaoDich_Db(requireContext());
+                        //kiểm tra có thêm thành công hay không
+                        if(giaoDichDb.SuaDanhMuc(dm)>=0) {
+                            Toast.makeText(requireContext(), "Sửa thành công!", Toast.LENGTH_SHORT).show();
+                            requireActivity().getSupportFragmentManager().popBackStack();
+                        } else {
+                            Toast.makeText(requireContext(), "Sửa thất bại!", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(requireContext(), "Vui lòng chọn thông tin!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
 
+            recyclerViewIcon.setAdapter(adapterIcon);
         } catch (Exception ex) {
             Toast.makeText(requireContext(), "Có lỗi xảy ra trong FragmentChiTietDanhMuc/setControl", Toast.LENGTH_SHORT).show();
         }
@@ -77,6 +117,7 @@ public class FragmentChinhSuaDanhMuc extends Fragment {
             Construct();
             adapterIcon=new AdapterIcon(requireContext(),icon);
             edtTenDM=view.findViewById(R.id.edtTenDM);
+            tvXoa=view.findViewById(R.id.tvXoa);
         } catch (Exception ex) {
             Toast.makeText(requireContext(), "Có lỗi xảy ra trong FragmentChinhSuaDanhMuc/setControl", Toast.LENGTH_SHORT).show();
         }
