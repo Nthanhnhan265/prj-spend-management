@@ -45,7 +45,7 @@ public class FragmentChinhSuaChi extends Fragment {
         try {
             main = (MainActivity) getActivity();
             setCurrentDate();
-            GiaoDich gdDuocChon=GiaoDich.LayGiaoDichQuaMa(main.listGiaoDich,AdapterGiaoDich.maDuocChon);
+            GiaoDich gdDuocChon=AdapterGiaoDich.giaoDichDuocChon;
             edtNhapGhiChu.setText(gdDuocChon.getGhiChu());
             edtTienThu.setText(gdDuocChon.getGiaTri());
             btnDatePicker.setText(gdDuocChon.getNgayGD());
@@ -74,11 +74,6 @@ public class FragmentChinhSuaChi extends Fragment {
                                         gd.setGiaTri(Integer.parseInt(edtTienThu.getText().toString()));
                                         flag=true;
                                     }
-//                                    if(gd.getDanhMuc().getTenDanhMuc()!=iconDanhMucAdapter.getDanhMucDuocChon().getTenDanhMuc()) {
-//                                        gd.getDanhMuc().setTenDanhMuc(iconDanhMucAdapter.getDanhMucDuocChon().getTenDanhMuc());
-//                                        gd.getDanhMuc().setIcon(iconDanhMucAdapter.getDanhMucDuocChon().getIcon());
-//                                        flag=true;
-//                                    }
                                     DanhMuc danhMucDuocChon = iconDanhMucAdapter.getDanhMucDuocChon();
                                     if (!gdDuocChon.getDanhMuc().getTenDanhMuc().equals(danhMucDuocChon.getTenDanhMuc())) {
                                         gdDuocChon.getDanhMuc().setTenDanhMuc(danhMucDuocChon.getTenDanhMuc());
@@ -86,8 +81,6 @@ public class FragmentChinhSuaChi extends Fragment {
                                     }
                                     // Gọi phương thức SuaDl của GiaoDich_Db để cập nhật vào cơ sở dữ liệu
                                     giaoDich_db.SuaDl(gdDuocChon);
-
-                                    //   giaoDich_db.SuaDl(gd);
                                 }
                             }
 
@@ -138,10 +131,8 @@ public class FragmentChinhSuaChi extends Fragment {
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     try {
-                                        GiaoDich gdDuocChon = GiaoDich.LayGiaoDichQuaMa(main.listGiaoDich, AdapterGiaoDich.maDuocChon);
-
                                         // Gọi phương thức XoaDL của GiaoDich_Db để xóa khỏi cơ sở dữ liệu
-                                        giaoDich_db.XoaDL(gdDuocChon);
+                                        giaoDich_db.XoaDL(gdDuocChon.getMaGD());
 
                                         main.listGiaoDich.remove(gdDuocChon);
                                         Toast.makeText(requireContext(), "Xóa Thành Công!", Toast.LENGTH_SHORT).show();

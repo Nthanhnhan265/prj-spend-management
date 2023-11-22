@@ -21,6 +21,7 @@ public class AdapterDanhMuc extends BaseAdapter {
     private int viTri = -1;
     AppCompatButton btnDanhMuc;
     DanhMuc danhMucDuocChon;
+    public static int themDanhMuc;
     public AdapterDanhMuc(Context context, List<DanhMuc> data) {
         this.context=context;
         this.data=data;

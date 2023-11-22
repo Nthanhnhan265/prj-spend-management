@@ -99,11 +99,23 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    public void XoaDL(GiaoDich giaoDich) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.delete("tblGiaoDich", "MaGD=?", new String[]{String.valueOf(giaoDich.getMaGD())});
-        db.close();
+    public void XoaDL(int maGD) {
+        SQLiteDatabase database = getWritableDatabase();
+        try {
+            int dong = database.delete("tblGiaoDich", "MaGD=?", new String[]{String.valueOf(maGD)});
 
+            if (dong > 0) {
+                Log.d("Database", "Xóa giao dịch thành công. Số dòng đã xóa: " + dong);
+
+            } else {
+                Log.e("Database", "Xóa giao dịch không thành công. MaGD " + maGD);
+
+            }
+        } catch (Exception e) {
+            Log.e("Database", "Lỗi xóa danh mục. MaGD: ");
+        } finally {
+            database.close();
+        }
     }
     public void SuaDl(GiaoDich giaoDich) {
         SQLiteDatabase db = getWritableDatabase();
@@ -123,7 +135,7 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
                 Log.e("Database", "Cập nhật không thành công . MaGD not found: " + giaoDich.getMaGD());
             }
         } catch (Exception e) {
-            Log.e("Database", "Error updating row. MaGD: " + giaoDich.getMaGD(), e);
+            Log.e("Database", "Error updating row. MaGD: " + giaoDich.getMaGD());
         } finally {
             db.close();
         }
@@ -165,17 +177,15 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
                     if ("ThuNhap".equals(loaiGiaoDich)) {
                         // Sửa lại cách tạo đối tượng ThuNhap
                         giaoDich = new ThuNhap(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
-                      //  data_gd.add(giaoDich);
-                      //  data_thunhap.add((ThuNhap) giaoDich);
+                        giaoDich.setMaGD(maGD);
                     } else {
                         // Sửa lại cách tạo đối tượng ChiTieu
                         giaoDich = new ChiTieu(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
-                     //   data_gd.add(giaoDich);
-                     //   data_chitieu.add((ChiTieu) giaoDich);
+                        giaoDich.setMaGD(maGD);
                     }
                     data_gd.add(giaoDich);
                 } else {
-                    Log.e("Database", "One or more columns not found in Cursor");
+                    Log.e("Database", "");
                 }
             } while (cursor.moveToNext());
         }
@@ -381,7 +391,6 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
 // Phương thức sửa danh mục trong db
     public int SuaDanhMuc(DanhMuc danhMuc) {
         SQLiteDatabase database = getWritableDatabase();
-
         try {
             ContentValues values = new ContentValues();
             values.put("TenDanhMuc", danhMuc.getTenDanhMuc());

@@ -7,6 +7,7 @@
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
+    import android.widget.Adapter;
     import android.widget.Button;
     import android.widget.DatePicker;
     import android.widget.EditText;
@@ -33,9 +34,8 @@
         private ImageView ivNgayTruoc, ivNgaySau;
         MainActivity main;
         // them moi
-        GiaoDich_Db giaoDich_db;
-//        private AdapterLich dateAdapter;
-//        private RecyclerView rcShow;
+
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +47,7 @@
             return view;
         }
         private void setEvent() {
-
+            AdapterDanhMuc.themDanhMuc=1;
             ivNgayTruoc.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -68,10 +68,9 @@
                 @Override
                 public void onClick(View v) {
                     try {
-                        // Get the selected date from the button
+                        // Lấy ngày trong lịch
                         String selectedDate = btnDatePicker.getText().toString();
-
-                        // Get other input values
+                        // Lấy ghi chú và số tiền
                         String ghiChu = edtNhapGhiChu.getText().toString();
                         String tienThuStr = edtTienThu.getText().toString();
 
@@ -83,18 +82,10 @@
 
                         int tienThu = Integer.parseInt(tienThuStr);
 
-                        // Kiểm tra xem đã chọn danh mục chưa
-//                        DanhMuc selectedDanhMuc = iconDanhMucAdapter.getDanhMucDuocChon();
-//                        Log.d("ButtonThu", "Selected DanhMuc: " + selectedDanhMuc);
-//                        if (selectedDanhMuc == null) {
-//                            Log.e("ThêmDl", "Danh muc null");
-//                            Toast.makeText(requireContext(), "Hãy chọn danh mục!", Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
 
                         // Tạo đối tượng GiaoDich
                         ThuNhap thuNhap = new ThuNhap(selectedDate, ghiChu, tienThu, iconDanhMucAdapter.getDanhMucDuocChon());
-
+                        GiaoDich_Db giaoDich_db=new GiaoDich_Db(requireContext());
                         // Lưu vào database
                         long newRowId = giaoDich_db.ThemDl(thuNhap);
 
@@ -111,6 +102,7 @@
                         Toast.makeText(requireContext(), "Hãy nhập số tiền hợp lệ!", Toast.LENGTH_SHORT).show();
                     } catch (Exception ex) {
                         Toast.makeText(requireContext(), "Đã xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+                        Log.e("Err", "onClick: "+ex.getMessage() );
                         ex.printStackTrace();
                     }
                 }

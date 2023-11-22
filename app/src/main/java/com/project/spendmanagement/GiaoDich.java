@@ -12,6 +12,7 @@ public abstract class GiaoDich {
     @Override
     public String toString() {
         return "GiaoDich{" +
+                "maGD="+maGD+
                 "ngayGD='" + ngayGD + '\'' +
                 ", ghiChu='" + ghiChu + '\'' +
                 ", giaTri=" + giaTri +
@@ -54,22 +55,14 @@ public abstract class GiaoDich {
     }
 
     public abstract DanhMuc getDanhMuc();
+    public abstract void setDanhMuc(DanhMuc danhMuc);
 
 
     public int getMaGD() {
         return maGD;
     }
-    public static GiaoDich LayGiaoDichQuaMa(List<GiaoDich>data,int id){
 
-            for (GiaoDich gd:data) {
-                if(gd.getMaGD()==id) {
-                    return gd;
-                }
-            }
-
-         return null;
-    }
-    public static void setMaGD(int newMaGD) {
+    public void setMaGD(int newMaGD) {
         maGD = newMaGD;
     }
 

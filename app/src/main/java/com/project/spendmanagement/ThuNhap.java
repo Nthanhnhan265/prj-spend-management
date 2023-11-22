@@ -8,6 +8,7 @@ public class ThuNhap extends GiaoDich {
         return danhMuc;
     }
 
+    @Override
     public void setDanhMuc(DanhMuc danhMuc) {
         this.danhMuc = danhMuc;
     }

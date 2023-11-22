@@ -1,6 +1,7 @@
 package com.project.spendmanagement;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
 public class AdapterGiaoDich extends RecyclerView.Adapter {
     //fields
     public static int maDuocChon;
+    public static GiaoDich giaoDichDuocChon;
     private List<GiaoDich> data;
     private Context context; 
     private OnItemClickListener clickListener; // Thêm trường này
@@ -48,16 +50,28 @@ public class AdapterGiaoDich extends RecyclerView.Adapter {
                     @Override
                     public void onClick(View v) {
                         maDuocChon = giaoDichHienTai.getMaGD();
-                        FragmentChinhSuaThu newFragment = new FragmentChinhSuaThu();
-                        FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.container, newFragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+                        giaoDichDuocChon=giaoDichHienTai;
+                        String loaiDanhMuc=giaoDichDuocChon.getDanhMuc().getLoaiDM();
+                        if(loaiDanhMuc.equals("Thu")) {
+                            Log.d("Loai ", "Thu ok:"+ loaiDanhMuc);
+                            FragmentChinhSuaThu newFragment = new FragmentChinhSuaThu();
+                            FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        } else {
+                            FragmentChinhSuaChi newFragment = new FragmentChinhSuaChi();
+                            FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, newFragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        }
+
                     }
                 });
             } else {
                 // Xử lý trường hợp danhMuc là null nếu cần
-                Toast.makeText(context, "Danh mục là null", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Danh mục là null", Toast.LENGTH_SHORT).show();
             }
         }
     }
