@@ -8,6 +8,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.data.PieEntry;
+
 import java.util.ArrayList;
 import java.util.List;
 public class GiaoDich_Db extends SQLiteOpenHelper {
@@ -331,7 +333,6 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         List<DanhMuc> danhMucList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM tblDanhMuc WHERE LoaiDanhMuc='Thu'", null);
-
         try {
 
             if (cursor.moveToFirst()) {
@@ -435,6 +436,54 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
             database.close();
         }
     }
+
+//Phương thức trả về phần trăm của từng danh mục chi trong tháng
+    public ArrayList<PieEntry> LayPhanTramDanhMucChi(int thang) {
+        ArrayList<PieEntry>phamTramDanhMuc=new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                //TODO: câu truy vấn còn chưa tính được tháng
+                "SELECT G.MaDanhMuc,D.TenDanhMuc," +
+                "(SUM(G.NhapTien ) * 100.0) / (SELECT SUM(NhapTien) FROM tblGiaoDich WHERE LoaiGiaoDich= 'ChiTieu'  ) AS PhanTramChiTieu\n" +
+                "FROM tblGiaoDich G JOIN tblDanhMuc D " +
+                 "ON G.MaDanhMuc = D.IdDanhMuc\n" +
+                "WHERE G.LoaiGiaoDich = 'ChiTieu'" +
+                " GROUP BY G.MaDanhMuc, D.TenDanhMuc", null);
+        try {
+
+            if (cursor.moveToFirst()) {
+                do {
+                    //lấy chỉ mục của cột được truyền vào
+                    int iTenDM = cursor.getColumnIndex("TenDanhMuc");
+                    int iPhanTramChiTieu = cursor.getColumnIndex("PhanTramChiTieu");
+                    Log.d("LayPhanTramDanhMucChi: ",iTenDM+iPhanTramChiTieu+"");
+                    if (iTenDM >= 0 && iPhanTramChiTieu>=0) {
+                        //khi có chỉ mục thì có thể lấy nội dung của cột
+                        phamTramDanhMuc.add(new PieEntry(cursor.getInt(iPhanTramChiTieu),cursor.getString(iTenDM)));
+                    } else {
+                        Log.e("GiaoDich_Db/LayPhanTramDanhMucChi", "Không tìm thấy cột! " + iTenDM + iPhanTramChiTieu);
+                    }
+
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception ex) {
+            Log.e("GiaoDich_Db/LayBangDanhMuc", "Có lỗi xảy ra: " + ex.getMessage());
+        }
+        finally {
+            // Đóng cursor và database trong finally block
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
+
+        return phamTramDanhMuc;
+    }
+
+
 
 
     @Override

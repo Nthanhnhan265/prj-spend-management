@@ -6,7 +6,6 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener;
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
 
     HomeFragment_ChiTieu homeFragment;
     PageLich pageLich;
-    PageBaoCao pageBaoCao;
+    PageBaoCaoChi pageBaoCao;
     PageKhac pageKhac;
      List<GiaoDich> listGiaoDich =new ArrayList<>();
     // them moi
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
         // Khoi Tao Cac Fragment
         homeFragment = new HomeFragment_ChiTieu();
         pageLich = new PageLich();
-        pageBaoCao = new PageBaoCao();
+        pageBaoCao = new PageBaoCaoChi();
         pageKhac = new PageKhac();
 
       //  adapterGiaoDich = new AdapterGiaoDich();
