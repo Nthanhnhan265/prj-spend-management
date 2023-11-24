@@ -223,6 +223,6 @@
         android:textColor="@color/lighter_blue"
         android:background="@drawable/custom_editext"
         android:id="@+id/btnNhapTienChi"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="25dp"
         />
 </LinearLayout>

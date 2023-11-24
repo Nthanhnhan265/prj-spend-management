@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +32,13 @@ public class FragmentChinhSuaChi extends Fragment {
     private EditText edtNhapGhiChu, edtTienThu;
     private TextView tvXoa;
 
+
     MainActivity main;
     GiaoDich_Db giaoDich_db;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chitiet_chitieu, container, false);
+        View view = inflater.inflate(R.layout.fragment_chitiet_giaodich, container, false);
         setControl(view);
         setEvent();
 
@@ -45,51 +49,58 @@ public class FragmentChinhSuaChi extends Fragment {
         try {
             main = (MainActivity) getActivity();
             setCurrentDate();
-            GiaoDich gdDuocChon=AdapterGiaoDich.giaoDichDuocChon;
+            GiaoDich gdDuocChon = AdapterGiaoDich.giaoDichDuocChon;
+            Log.d("info chinh sua: ", gdDuocChon.toString());
+            //hiển thị dữ liệu
             edtNhapGhiChu.setText(gdDuocChon.getGhiChu());
-            edtTienThu.setText(gdDuocChon.getGiaTri());
+            edtTienThu.setText(String.valueOf(gdDuocChon.getGiaTri()));
             btnDatePicker.setText(gdDuocChon.getNgayGD());
             gvDanhMucThu.setSelection(listDanhMuc.indexOf(gdDuocChon.getDanhMuc()));
             gvDanhMucThu.getSelectedItem();
             btnChinhSuaThu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity activity = (MainActivity) getActivity();
-                    CapNhatDuLieu listener = (CapNhatDuLieu) activity;
-                    boolean flag = false;
-                    if (listener != null) {
-                        try {
-                            for (GiaoDich gd : main.listGiaoDich) {
-                                if (gd.getMaGD() == AdapterGiaoDich.maDuocChon) {
-                                    // Kiểm tra và cập nhật thông tin giao dịch
-                                    if (!gd.getNgayGD().equals(btnDatePicker.getText().toString())) {
-                                        gd.setNgayGD(btnDatePicker.getText().toString());
-                                        flag = true;
-                                    }
-                                    if (!gd.getGhiChu().equals(edtNhapGhiChu.getText().toString())) {
-                                        gd.setGhiChu(edtNhapGhiChu.getText().toString());
-                                        flag = true;
-                                    }
-                                    if(gd.getGiaTri()!=edtTienThu.getText().toString()) {
-                                        gd.setGiaTri(Integer.parseInt(edtTienThu.getText().toString()));
-                                        flag=true;
-                                    }
-                                    DanhMuc danhMucDuocChon = iconDanhMucAdapter.getDanhMucDuocChon();
-                                    if (!gdDuocChon.getDanhMuc().getTenDanhMuc().equals(danhMucDuocChon.getTenDanhMuc())) {
-                                        gdDuocChon.getDanhMuc().setTenDanhMuc(danhMucDuocChon.getTenDanhMuc());
-                                        gdDuocChon.getDanhMuc().setIcon(danhMucDuocChon.getIcon());
-                                    }
-                                    // Gọi phương thức SuaDl của GiaoDich_Db để cập nhật vào cơ sở dữ liệu
-                                    giaoDich_db.SuaDl(gdDuocChon);
-                                }
-                            }
-
-                            if (flag) {
-                                Toast.makeText(requireContext(), "Sửa Thành Công", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (Exception ex) {
-                            Toast.makeText(requireContext(), "Vui lòng nhập thông tin!", Toast.LENGTH_SHORT).show();
+                    try {
+//                        Log.d("FragmentChinhSuaThu", "btnChinhSuaThu Clicked");
+//
+//                        // Kiểm tra và cập nhật thông tin giao dịch
+//                        GiaoDich gd = AdapterGiaoDich.giaoDichDuocChon;
+//
+//                        Log.d("FragmentChinhSuaThu", "Found matching GiaoDich");
+//
+//                        Log.d("FragmentChinhSuaThu", "Before - Ngay: " + gd.getNgayGD() + ", GhiChu: " + gd.getGhiChu() + ", GiaTri: " + gd.getGiaTri() + ", DanhMuc: " + (gd.getDanhMuc() != null ? gd.getDanhMuc().getTenDanhMuc() : "null"));
+//
+//                        // Kiểm tra và cập nhật thông tin giao dịch
+//                        if (!gd.getNgayGD().equals(btnDatePicker.getText().toString())) {
+//                            gd.setNgayGD(btnDatePicker.getText().toString());
+//                        }
+//                        if (!gd.getGhiChu().equals(edtNhapGhiChu.getText().toString())) {
+//                            gd.setGhiChu(edtNhapGhiChu.getText().toString());
+//                        }
+//                        if (gd.getGiaTri() != (edtTienThu.getText().toString())) {
+//                            gd.setGiaTri(Integer.parseInt(edtTienThu.getText().toString()));
+//                        }
+//
+//                        DanhMuc danhMucDuocChon = iconDanhMucAdapter.getDanhMucDuocChon();
+//                        if (gd.getDanhMuc() != null && !gd.getDanhMuc().getTenDanhMuc().equals(danhMucDuocChon.getTenDanhMuc())) {
+//                            gd.getDanhMuc().setTenDanhMuc(danhMucDuocChon.getTenDanhMuc());
+//                            gd.getDanhMuc().setIcon(danhMucDuocChon.getIcon());
+//                        }
+                        // Gọi phương thức SuaDl của GiaoDich_Db để cập nhật vào cơ sở dữ liệu
+                        gdDuocChon.setNgayGD(btnDatePicker.getText().toString());
+                        gdDuocChon.setGhiChu(edtNhapGhiChu.getText().toString());
+                        gdDuocChon.setGiaTri(Integer.parseInt(edtTienThu.getText().toString()));
+                        if(iconDanhMucAdapter.getDanhMucDuocChon()!=null) {
+                            gdDuocChon.setDanhMuc(iconDanhMucAdapter.danhMucDuocChon);
+                            Toast.makeText(requireContext(), "Vui lòng chọn danh mục!", Toast.LENGTH_SHORT).show();
                         }
+                        giaoDich_db.SuaDl(gdDuocChon);
+                        Log.d("FragmentChinhSuaThu", "After - Ngay: " + gdDuocChon.getNgayGD() + ", GhiChu: " + gdDuocChon.getGhiChu() + ", GiaTri: " + gdDuocChon.getGiaTri() + ", DanhMuc: " + (gdDuocChon.getDanhMuc() != null ? gdDuocChon.getDanhMuc().getTenDanhMuc() : "null"));
+                        Toast.makeText(requireContext(), "Sửa Thành Công", Toast.LENGTH_SHORT).show();
+                        requireActivity().getSupportFragmentManager().popBackStack();
+
+                    } catch (Exception ex) {
+                        Toast.makeText(requireContext(), "Vui lòng nhập thông tin!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -132,9 +143,8 @@ public class FragmentChinhSuaChi extends Fragment {
                                 public void onClick(DialogInterface dialog, int which) {
                                     try {
                                         // Gọi phương thức XoaDL của GiaoDich_Db để xóa khỏi cơ sở dữ liệu
-                                        giaoDich_db.XoaDL(gdDuocChon.getMaGD());
-
-                                        main.listGiaoDich.remove(gdDuocChon);
+                                        giaoDich_db.XoaDL(AdapterGiaoDich.giaoDichDuocChon.getMaGD());
+                                        main.listGiaoDich.remove(AdapterGiaoDich.giaoDichDuocChon);
                                         Toast.makeText(requireContext(), "Xóa Thành Công!", Toast.LENGTH_SHORT).show();
                                         main.chuyenDenLich();
                                     } catch (Exception ex) {
@@ -150,23 +160,30 @@ public class FragmentChinhSuaChi extends Fragment {
                             .show();
                 }
             });
-        }
-        catch (Exception ex) {
-            Toast.makeText(requireContext(),"Có lỗi xảy ra",Toast.LENGTH_SHORT).show();
+        } catch (Exception ex) {
+            Toast.makeText(requireContext(), "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
             throw (ex);
         }
     }
 
     private void setControl(View view) {
-        btnChinhSuaThu =view.findViewById(R.id.btnChinhSuaChi);
-        btnDatePicker = view.findViewById(R.id.btnDatePickerChi);
-        gvDanhMucThu =view.findViewById(R.id.gvExtenseCategory);
-        listDanhMuc =new ArrayList<>();
+        btnChinhSuaThu = view.findViewById(R.id.btnChinhSuaThu);
+        btnDatePicker = view.findViewById(R.id.btnDatePicker);
+        gvDanhMucThu = view.findViewById(R.id.gvDanhSachDMThu);
+        listDanhMuc = new ArrayList<>();
         constructGridView();
-        iconDanhMucAdapter =new AdapterDanhMuc(requireContext(), listDanhMuc);
-        edtTienThu=view.findViewById(R.id.edtTienChiSuaChi);
-        edtNhapGhiChu=view.findViewById(R.id.edtNhapGhiChuSuaChi);
-        tvXoa=view.findViewById(R.id.btnXoaChi);
+        iconDanhMucAdapter = new AdapterDanhMuc(requireContext(), listDanhMuc);
+        edtTienThu = view.findViewById(R.id.edtTienThu);
+        edtNhapGhiChu = view.findViewById(R.id.edtNhapGhiChu);
+        tvXoa = view.findViewById(R.id.tvXoa);
+        giaoDich_db = new GiaoDich_Db(this.requireContext());
+    }
+
+    private boolean isValidData() {
+        // Kiểm tra và trả về true nếu dữ liệu hợp lệ, ngược lại trả về false
+        return !TextUtils.isEmpty(btnDatePicker.getText().toString()) &&
+                !TextUtils.isEmpty(edtNhapGhiChu.getText().toString()) &&
+                !TextUtils.isEmpty(edtTienThu.getText().toString());
     }
 
     private void showCustomDatePickerDialog() {
@@ -189,17 +206,18 @@ public class FragmentChinhSuaChi extends Fragment {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         try {
             String selectedDate = day + "/" + (month + 1) + "/" + year;
-            btnDatePicker.setText(selectedDate );
+            btnDatePicker.setText(selectedDate);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    //làm cơ sở dữ liệu
     private void constructGridView() {
-        GiaoDich_Db giaoDichDb=new GiaoDich_Db(requireContext());
+        GiaoDich_Db giaoDichDb = new GiaoDich_Db(requireContext());
         listDanhMuc.addAll(giaoDichDb.LayDanhMucChi());
         //dùng mở giao diện chỉnh sửa, thêm danh mục
-        listDanhMuc.add(new DanhMuc(000,"Thêm",null,R.drawable.ic_add));
-
+        listDanhMuc.add(new DanhMuc(000, "Thêm", null, R.drawable.ic_add));
 
 
     }

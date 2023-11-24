@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+
 }
 
 android {
@@ -19,6 +20,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -38,4 +40,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     //Add library
     implementation ("com.google.android.material:material:1.2.0")
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.github.User:Repo:Tag")
+
 }

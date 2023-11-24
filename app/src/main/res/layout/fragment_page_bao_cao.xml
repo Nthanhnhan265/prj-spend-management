@@ -194,5 +194,27 @@
         android:textColor="@color/lighter_blue"
         />
 </LinearLayout>
+
+<!--    Nút chuyển biểu đồ-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+</LinearLayout>
+<!--Hiển thị biểu đồ -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+<com.github.mikephil.charting.charts.PieChart
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/pcChiTieu"
+/>
+
+
+
+</LinearLayout>
 <!--   Close main layout-->
 </LinearLayout>
