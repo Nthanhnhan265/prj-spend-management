@@ -178,10 +178,12 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
                     GiaoDich giaoDich;
                     if ("ThuNhap".equals(loaiGiaoDich)) {
                         // Sửa lại cách tạo đối tượng ThuNhap
+                        Log.d("Ngay ",ngayGD);
                         giaoDich = new ThuNhap(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
                         giaoDich.setMaGD(maGD);
                     } else {
                         // Sửa lại cách tạo đối tượng ChiTieu
+                        Log.d("Ngay ",ngayGD);
                         giaoDich = new ChiTieu(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
                         giaoDich.setMaGD(maGD);
                     }
@@ -438,29 +440,35 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
     }
 
 //Phương thức trả về phần trăm của từng danh mục chi trong tháng
-    public ArrayList<PieEntry> LayPhanTramDanhMucChi(int thang) {
+    public ArrayList<PieEntry> LayPhanTramDanhMucChi(int thang, int nam) {
         ArrayList<PieEntry>phamTramDanhMuc=new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(
-                //TODO: câu truy vấn còn chưa tính được tháng
-                "SELECT G.MaDanhMuc,D.TenDanhMuc," +
-                "(SUM(G.NhapTien ) * 100.0) / (SELECT SUM(NhapTien) FROM tblGiaoDich WHERE LoaiGiaoDich= 'ChiTieu'  ) AS PhanTramChiTieu\n" +
-                "FROM tblGiaoDich G JOIN tblDanhMuc D " +
-                 "ON G.MaDanhMuc = D.IdDanhMuc\n" +
-                "WHERE G.LoaiGiaoDich = 'ChiTieu'" +
-                " GROUP BY G.MaDanhMuc, D.TenDanhMuc", null);
-        try {
+        String thangNam = thang+"/"+nam;
+        String query = "SELECT " +
+                "G.MaDanhMuc, " +
+                "D.TenDanhMuc, " +
+                "STRFTIME('%m/%Y', G.Ngay) AS ThangNam, " +
+                "SUM(G.NhapTien) AS TongTienTrongThang, " +
+                "(SUM(G.NhapTien) * 100.0) / " +
+                "(SELECT SUM(NhapTien) FROM tblGiaoDich WHERE LoaiGiaoDich = 'ChiTieu' AND Ngay LIKE ?) AS PhanTramChiTieu " +
+                "FROM tblGiaoDich G " +
+                "JOIN tblDanhMuc D ON G.MaDanhMuc = D.IdDanhMuc " +
+                "WHERE G.LoaiGiaoDich = 'ChiTieu' AND G.Ngay LIKE ? " +
+                "GROUP BY G.MaDanhMuc, D.TenDanhMuc, ThangNam";
+        Cursor cursor= db.rawQuery(query,new String[]{"%" + thangNam + "%", "%" + thangNam + "%"});
 
+        try {
             if (cursor.moveToFirst()) {
                 do {
                     //lấy chỉ mục của cột được truyền vào
                     int iTenDM = cursor.getColumnIndex("TenDanhMuc");
+                    int iMaDM = cursor.getColumnIndex("MaDanhMuc");
                     int iPhanTramChiTieu = cursor.getColumnIndex("PhanTramChiTieu");
                     Log.d("LayPhanTramDanhMucChi: ",iTenDM+iPhanTramChiTieu+"");
                     if (iTenDM >= 0 && iPhanTramChiTieu>=0) {
                         //khi có chỉ mục thì có thể lấy nội dung của cột
-                        phamTramDanhMuc.add(new PieEntry(cursor.getInt(iPhanTramChiTieu),cursor.getString(iTenDM)));
-                    } else {
+                        phamTramDanhMuc.add(new PieEntry(cursor.getInt(iPhanTramChiTieu),cursor.getString(iTenDM),cursor.getString(iMaDM)));
+                   } else {
                         Log.e("GiaoDich_Db/LayPhanTramDanhMucChi", "Không tìm thấy cột! " + iTenDM + iPhanTramChiTieu);
                     }
 
@@ -483,6 +491,124 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         return phamTramDanhMuc;
     }
 
+
+//Phương thức trả về phần trăm của từng danh mục thu trong tháng
+    public ArrayList<PieEntry> LayPhanTramDanhMucThu(int thang, int nam) {
+        ArrayList<PieEntry>phamTramDanhMuc=new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String thangNam = thang+"/"+nam;
+        String query = "SELECT " +
+                "G.MaDanhMuc, " +
+                "D.TenDanhMuc, " +
+                "STRFTIME('%m/%Y', G.Ngay) AS ThangNam, " +
+                "SUM(G.NhapTien) AS TongTienTrongThang, " +
+                "(SUM(G.NhapTien) * 100.0) / " +
+                "(SELECT SUM(NhapTien) FROM tblGiaoDich WHERE LoaiGiaoDich = 'ThuNhap' AND Ngay LIKE ?) AS PhanTramThuNhap " +
+                "FROM tblGiaoDich G " +
+                "JOIN tblDanhMuc D ON G.MaDanhMuc = D.IdDanhMuc " +
+                "WHERE G.LoaiGiaoDich = 'ThuNhap' AND G.Ngay LIKE ? " +
+                "GROUP BY G.MaDanhMuc, D.TenDanhMuc, ThangNam";
+        Cursor cursor= db.rawQuery(query,new String[]{"%" + thangNam + "%", "%" + thangNam + "%"});
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    //lấy chỉ mục của cột được truyền vào
+                    int iMaDM = cursor.getColumnIndex("MaDanhMuc");
+                    int iTenDM = cursor.getColumnIndex("TenDanhMuc");
+                    int iPhanTramThuNhap = cursor.getColumnIndex("PhanTramThuNhap");
+                    if (iTenDM >= 0 && iPhanTramThuNhap>=0) {
+                        //khi có chỉ mục thì có thể lấy nội dung của cột
+                        phamTramDanhMuc.add(new PieEntry(cursor.getInt(iPhanTramThuNhap),cursor.getString(iTenDM),cursor.getString(iMaDM)));
+                    } else {
+                        Log.e("GiaoDich_Db/LayPhanTramDanhMucChi", "Không tìm thấy cột! " + iTenDM + iPhanTramThuNhap);
+                    }
+
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception ex) {
+            Log.e("GiaoDich_Db/LayBangDanhMuc", "Có lỗi xảy ra: " + ex.getMessage());
+        }
+        finally {
+            // Đóng cursor và database trong finally block
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
+
+        return phamTramDanhMuc;
+    }
+//ToDo: phương thức trả về giao dịch khi biết mã và tháng
+    public List<GiaoDich> LayGiaoDichTheoDanhMuc(int thang, int nam, int maDanhMucDaChon) {
+        List<GiaoDich> data_gd = new ArrayList<>();
+        List<ThuNhap> data_thunhap = new ArrayList<>();
+        List<ChiTieu> data_chitieu = new ArrayList<>();
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        String query = "SELECT * FROM tblGiaoDich WHERE Ngay like ? And MaDanhMuc=?";
+        Cursor cursor = database.rawQuery(query, new String[]{"%"+thang+"/"+nam+"%",maDanhMucDaChon+""});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int maGDIndex = cursor.getColumnIndex("MaGD");
+                int ngayGDIndex = cursor.getColumnIndex("Ngay");
+                int ghiChuIndex = cursor.getColumnIndex("GhiChu");
+                int giaTriIndex = cursor.getColumnIndex("NhapTien");
+                int loaiGiaoDichIndex = cursor.getColumnIndex("LoaiGiaoDich");
+                int maDanhMucIndex = cursor.getColumnIndex("MaDanhMuc");
+
+                // Kiểm tra xem các cột có tồn tại trong Cursor không
+                if (maGDIndex != -1 && ngayGDIndex != -1 && ghiChuIndex != -1
+                        && giaTriIndex != -1 && loaiGiaoDichIndex != -1 && maDanhMucIndex != -1) {
+                    int maGD = cursor.getInt(maGDIndex);
+                    String ngayGD = cursor.getString(ngayGDIndex);
+                    String ghiChu = cursor.getString(ghiChuIndex);
+                    int giaTri = cursor.getInt(giaTriIndex);
+                    String loaiGiaoDich = cursor.getString(loaiGiaoDichIndex);
+                    int maDanhMuc = cursor.getInt(maDanhMucIndex);
+
+                    GiaoDich giaoDich;
+                    if ("ThuNhap".equals(loaiGiaoDich)) {
+                        // Sửa lại cách tạo đối tượng ThuNhap
+                        Log.d("Ngay ",ngayGD);
+                        giaoDich = new ThuNhap(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
+                        giaoDich.setMaGD(maGD);
+                    } else {
+                        // Sửa lại cách tạo đối tượng ChiTieu
+                        Log.d("Ngay ",ngayGD);
+                        giaoDich = new ChiTieu(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
+                        giaoDich.setMaGD(maGD);
+                    }
+                    data_gd.add(giaoDich);
+                } else {
+                    Log.e("Database", "");
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+
+        Log.d("Database", "Đã đọc dữ liệu từ cơ sở dữ liệu! Số lượng giao dịch: " + data_gd.size());
+
+        // Kiểm tra và log dữ liệu của các danh sách
+        Log.d("Database", "Số lượng Thu nhập: " + data_thunhap.size());
+        for (ThuNhap thuNhap : data_thunhap) {
+            Log.d("Database", thuNhap.toString());
+        }
+
+        Log.d("Database", "Số lượng Chi tiêu: " + data_chitieu.size());
+        for (ChiTieu chiTieu : data_chitieu) {
+            Log.d("Database", chiTieu.toString());
+        }
+
+        return data_gd;
+    }
 
 
 

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
 
     HomeFragment_ChiTieu homeFragment;
     PageLich pageLich;
-    PageBaoCaoChi pageBaoCao;
+    FragmentBaoCaoChi pageBaoCao;
     PageKhac pageKhac;
      List<GiaoDich> listGiaoDich =new ArrayList<>();
     // them moi
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
         // Khoi Tao Cac Fragment
         homeFragment = new HomeFragment_ChiTieu();
         pageLich = new PageLich();
-        pageBaoCao = new PageBaoCaoChi();
+        pageBaoCao = new FragmentBaoCaoChi();
         pageKhac = new PageKhac();
 
       //  adapterGiaoDich = new AdapterGiaoDich();

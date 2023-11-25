@@ -2,13 +2,15 @@ package com.project.spendmanagement;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -22,56 +24,59 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import java.util.ArrayList;
 
 
-public class PageBaoCaoChi extends Fragment {
+public class FragmentBaoCaoThu extends Fragment {
     //khai báo
-    PieChart pcChiTieu;
-    ArrayList<PieEntry>phanTramDanhMucChi;
+    PieChart pcThu;
+    ArrayList<PieEntry> phanTramDanhMucThu;
     PieData pieData;
     GiaoDich_Db giaoDichDb;
+    AppCompatButton btnTienChi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_page_bao_cao, container, false);
+        View view= inflater.inflate(R.layout.fragment_page_bao_cao_thu, container, false);
         setControl(view);
         setEvent();
         return view;
     }
     //Phương thức lấy các phần tử
     private void setControl(View view) {
+        int thang=11;
+        int nam=2023;
+
         giaoDichDb=new GiaoDich_Db(requireContext());
-        pcChiTieu=view.findViewById(R.id.pcChiTieu);
+        pcThu =view.findViewById(R.id.pcThu);
         //tạo dữ liệu cho biểu đồ
-        phanTramDanhMucChi= giaoDichDb.LayPhanTramDanhMucChi(11);
-        PieDataSet dataSet = new PieDataSet(phanTramDanhMucChi, "Danh mục chi");
+        phanTramDanhMucThu = giaoDichDb.LayPhanTramDanhMucThu(thang,nam);
+        PieDataSet dataSet = new PieDataSet(phanTramDanhMucThu, "DANH MỤC THU");
         dataSet.setColors(new int[]{Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED});
 
         pieData = new PieData(dataSet);
-        pieData.setValueTextSize(15f);
-
+        pieData.setValueTextSize(16f);
+        btnTienChi=view.findViewById(R.id.btnTienChi);
 
     }
     //Phương thức thực hiện các event
     private void setEvent() {
-        pcChiTieu.setData(pieData);
+        pcThu.setData(pieData);
 
         // Tùy chỉnh biểu đồ PieChart
-        pcChiTieu.getDescription().setEnabled(false);
-        pcChiTieu.setDrawHoleEnabled(true);
-        pcChiTieu.setHoleColor(Color.TRANSPARENT);
-        pcChiTieu.setTransparentCircleColor(Color.LTGRAY);
-        pcChiTieu.setTransparentCircleAlpha(50);
-        pcChiTieu.setHoleRadius(40f);
-        pcChiTieu.setTransparentCircleRadius(40f);
-        pcChiTieu.setTouchEnabled(true);
-        pcChiTieu.setDrawEntryLabels(false);
+        pcThu.getDescription().setEnabled(false);
+        pcThu.setDrawHoleEnabled(true);
+        pcThu.setHoleColor(Color.TRANSPARENT);
+        pcThu.setTransparentCircleColor(Color.LTGRAY);
+        pcThu.setTransparentCircleAlpha(50);
+        pcThu.setHoleRadius(40f);
+        pcThu.setTransparentCircleRadius(40f);
+        pcThu.setTouchEnabled(true);
+        pcThu.setDrawEntryLabels(false);
 
         // Tắt hiển thị giá trị trên biểu đồ
-        pcChiTieu.getData().setDrawValues(true);
-
-        pcChiTieu.getLegend().setEnabled(true);
-        pcChiTieu.getLegend().setTextSize(15f);
+        pcThu.getData().setDrawValues(true);
+        pcThu.getLegend().setEnabled(true);
+        pcThu.getLegend().setTextSize(15f);
         // Tạo đối tượng Legend
-        Legend legend = pcChiTieu.getLegend();
+        Legend legend = pcThu.getLegend();
         // Thiết lập chiều dọc cho chú thích
         legend.setOrientation(Legend.LegendOrientation.VERTICAL);
         // Đặt vị trí của chú thích (có thể là LEFT, RIGHT, TOP, BOTTOM, LEFT_OF_CHART, RIGHT_OF_CHART, ABOVE_CHART, BELOW_CHART)
@@ -83,18 +88,22 @@ public class PageBaoCaoChi extends Fragment {
 
 
         //ấn để xem chi tiết biểu đồ
-        pcChiTieu.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+        pcThu.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                // Được gọi khi người dùng chọn một phần của biểu đồ
-                if (e == null) return;
+                if (e instanceof PieEntry) {
+                    PieEntry entry = (PieEntry) e;
+                    String tenDanhMuc = entry.getLabel();
+                    String maDanhMuc = entry.getData().toString();
 
-                float value = e.getY();
-                Object data = e.getData();
-                String label = (data != null) ? data.toString() : "";
+                    // Hiển thị chi tiết giao dịch với danh mục
+                    FragmentBaoCaoChiTiet fragmentBaoCaoChiTiet =new FragmentBaoCaoChiTiet(maDanhMuc,tenDanhMuc);
+                    FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container,fragmentBaoCaoChiTiet);
+                    transaction.addToBackStack(null).commit();
 
-                // Hiển thị thông tin trong một cửa sổ hoặc AlertDialog
-                showValueAndLabelDialog(value, label);
+
+                }
             }
 
             @Override
@@ -103,7 +112,17 @@ public class PageBaoCaoChi extends Fragment {
             }
         });
 
+        //đặt sự kiện nút mở biểu đồ chi
+        btnTienChi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentBaoCaoChi fragmentBaoCaoThu=new FragmentBaoCaoChi() ;
+                FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.container,fragmentBaoCaoThu);
+                transaction.commit();
 
+            }
+        });
 
     }
     // Phương thức hiển thị thông tin khi click vào một phần của biểu đồ

@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:paddingHorizontal="5dp"
         >
 
@@ -90,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/shape"
         android:padding="8dp"
         android:layout_marginEnd="5dp"
@@ -106,7 +106,7 @@
      <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10,000,000"
+        android:text="@string/khong"
         android:textSize="16sp"
         android:textColor="@android:color/holo_red_dark"
          android:textStyle="bold"
@@ -125,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/shape"
         android:padding="8dp"
 
@@ -164,6 +164,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
+    android:layout_marginBottom="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:background="@drawable/shape"
@@ -199,19 +200,45 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="10dp"
     >
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/tienchi"
+        android:textSize="15sp"
+        android:textColor="@color/lighter_blue"
+        android:textStyle="bold"
+        android:id="@+id/btnTienChi"
+        android:background="@drawable/custom_btn_non"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTienThu"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_btn_selected"
+        android:text="@string/tienthu"
+        android:textColor="@color/lighter_blue"
+        android:textSize="15sp"
+        android:textStyle="bold">
+    </androidx.appcompat.widget.AppCompatButton>
 
 </LinearLayout>
 <!--Hiển thị biểu đồ -->
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="500dp"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="10dp"
 >
+<!--    Biểu đồ-->
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:id="@+id/pcChiTieu"
+        android:id="@+id/pcThu"
      />
 
 
