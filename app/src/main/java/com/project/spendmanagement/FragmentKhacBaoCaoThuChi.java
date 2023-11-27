@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -29,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class FragmentBaoCaoThu extends Fragment {
+public class FragmentKhacBaoCaoThuChi extends Fragment {
     //khai báo
     PieChart pcThu;
     ArrayList<PieEntry> phanTramDanhMucThu;
@@ -42,7 +40,7 @@ public class FragmentBaoCaoThu extends Fragment {
     PieDataSet dataSet;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_page_bao_cao_thu, container, false);
+        View view= inflater.inflate(R.layout.fragment_page_khac_baocaothuchi, container, false);
         setControl(view);
         setEvent();
         return view;

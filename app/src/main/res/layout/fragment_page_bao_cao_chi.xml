@@ -25,15 +25,6 @@
             android:padding="20dp"
             android:textStyle="bold"
             />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_search"
-
-            />
-
 
     </LinearLayout>
     <LinearLayout
@@ -41,18 +32,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
-        android:paddingHorizontal="5dp"
+        android:paddingHorizontal="45dp"
         >
 
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_before"
-
-            />
         <TextView
             android:layout_weight="8"
             android:layout_width="wrap_content"
@@ -63,18 +46,11 @@
             android:background="@color/darker_blue"
             android:padding="10dp"
             android:textAlignment="center"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-
-            android:src="@drawable/ic_next"
-
+            android:id="@+id/tvChonThang"
             />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

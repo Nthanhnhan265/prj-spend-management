@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class AdapterGiaoDich extends RecyclerView.Adapter {
@@ -42,9 +43,11 @@ public class AdapterGiaoDich extends RecyclerView.Adapter {
             MyHolder myHolder = (MyHolder) holder;
             DanhMuc danhMuc = giaoDichHienTai.getDanhMuc();
             if (danhMuc != null) {
+                NumberFormat num=NumberFormat.getInstance();
+                num.setGroupingUsed(true);
                 myHolder.tvCategory.setText(danhMuc.getTenDanhMuc());
                 myHolder.tvDesc.setText("(" + giaoDichHienTai.getGhiChu() + ")");
-                myHolder.tvValue.setText(giaoDichHienTai.getGiaTri());
+                myHolder.tvValue.setText(num.format(giaoDichHienTai.getGiaTri()));
                 myHolder.ivCategory.setImageResource(danhMuc.getIcon());
                 myHolder.lnItemThuChi.setOnClickListener(new View.OnClickListener() {
                     @Override

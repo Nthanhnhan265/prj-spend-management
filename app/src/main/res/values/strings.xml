@@ -3,6 +3,8 @@
     <string name="nhap">Home</string>
     <string name="lich">Lịch</string>
     <string name="baocao">Báo Cáo</string>
+    <string name="baocaodanhmuctrongnam">Báo cáo danh mục trong năm</string>
+    <string name="baocaothuchitrongnam">Báo cáo thu chi trong năm</string>
     <string name="khac">Khác</string>
     <string name="thunhap">Thu nhập</string>
     <string name="chitieu">Chi tiêu</string>
@@ -28,5 +30,6 @@
     <string name="xoa">Xóa</string>
     <string name="luu">Lưu</string>
     <string name="vnd">₫</string>
+    <string name="sodu">Số dư</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
     HomeFragment_ChiTieu homeFragment;
     PageLich pageLich;
     FragmentBaoCaoChi pageBaoCao;
-    PageKhac pageKhac;
+    FragmentPageKhac pageKhac;
      List<GiaoDich> listGiaoDich =new ArrayList<>();
     // them moi
     public static ArrayList<String>icons=new ArrayList<>();
@@ -30,10 +30,6 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
             constructIcon();
-//             RESET DATABASE
-//            GiaoDich_Db giaoDichDb=new GiaoDich_Db(this);
-//            giaoDichDb.deleteDatabase(MainActivity.this); // 'this' is the reference to the current activity
-//            giaoDichDb.ChenDanhMuc();
          //khong xoa
 
         GiaoDich_Db giaoDichDb = new GiaoDich_Db(this);
@@ -53,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
         homeFragment = new HomeFragment_ChiTieu();
         pageLich = new PageLich();
         pageBaoCao = new FragmentBaoCaoChi();
-        pageKhac = new PageKhac();
+        pageKhac = new FragmentPageKhac();
 
       //  adapterGiaoDich = new AdapterGiaoDich();
         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
@@ -117,9 +113,6 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
     public void themGiaoDich(GiaoDich transaction) {
         if (listGiaoDich != null) {
             listGiaoDich.add(transaction);
-//            if (adapterGiaoDich != null) {
-//                adapterGiaoDich.notifyDataSetChanged();
-//            }
         }
     }
     //Khởi tạo các icons

@@ -19,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/baocao"
+        android:text="@string/baocaodanhmuctrongnam"
         android:textSize="22sp"
         android:textColor="@color/lighter_blue"
         android:padding="20dp"
@@ -215,7 +215,7 @@
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:id="@+id/pcThu"
+        android:id="@+id/pcChiTieu"
      />
 
 

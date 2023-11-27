@@ -46,8 +46,8 @@ public abstract class GiaoDich {
         this.ghiChu = ghiChu;
     }
 
-    public String getGiaTri() {
-        return giaTri +"";
+    public int getGiaTri() {
+        return giaTri ;
     }
 
     public void setGiaTri(int giaTri) {

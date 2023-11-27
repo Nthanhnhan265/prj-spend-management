@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -120,19 +121,20 @@ public class PageLich extends Fragment  {
     private void tinhTong() {
         tongThu = tinhTongThu();
         tongChi = tinhTongChi();
-
-        tvThu.setText(tongThu + "");
-        tvChi.setText(tongChi + "");
+        NumberFormat num=NumberFormat.getInstance();
+        num.setGroupingUsed(true);
+        tvThu.setText(num.format(tongThu));
+        tvChi.setText(num.format(tongChi));
 
         int tong = tongThu - tongChi;
-        tvTong.setText(tong + "");
+        tvTong.setText(num.format(tong));
     }
 
     private int tinhTongThu(){
         int tong=0;
         for(GiaoDich gd: main.listGiaoDich) {
             if(gd instanceof ThuNhap) {
-                tong+=Integer.parseInt(gd.getGiaTri());
+                tong+=gd.getGiaTri();
             }
         }
         return tong;
@@ -141,7 +143,7 @@ public class PageLich extends Fragment  {
         int tong=0;
         for(GiaoDich gd: main.listGiaoDich) {
             if(gd instanceof ChiTieu) {
-                tong+=Integer.parseInt(gd.getGiaTri());
+                tong+=gd.getGiaTri();
             }
         }
         return tong;

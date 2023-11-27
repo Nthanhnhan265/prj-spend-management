@@ -542,7 +542,113 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
 
         return phamTramDanhMuc;
     }
-//ToDo: phương thức trả về giao dịch khi biết mã và tháng
+
+    //Phương thức trả về phần trăm của từng danh mục chi trong năm
+    public ArrayList<PieEntry> LayPhanTramDanhMucChiNam(int nam) {
+        ArrayList<PieEntry>phamTramDanhMuc=new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String thangNam = ""+nam;
+        String query = "SELECT " +
+                "G.MaDanhMuc, " +
+                "D.TenDanhMuc, " +
+                "STRFTIME('%m/%Y', G.Ngay) AS ThangNam, " +
+                "SUM(G.NhapTien) AS TongTienTrongThang, " +
+                "(SUM(G.NhapTien) * 100.0) / " +
+                "(SELECT SUM(NhapTien) FROM tblGiaoDich WHERE LoaiGiaoDich = 'ChiTieu' AND Ngay LIKE ?) AS PhanTramChiTieu " +
+                "FROM tblGiaoDich G " +
+                "JOIN tblDanhMuc D ON G.MaDanhMuc = D.IdDanhMuc " +
+                "WHERE G.LoaiGiaoDich = 'ChiTieu' AND G.Ngay LIKE ? " +
+                "GROUP BY G.MaDanhMuc, D.TenDanhMuc, ThangNam";
+        Cursor cursor= db.rawQuery(query,new String[]{"%" + thangNam + "%", "%" + thangNam + "%"});
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    //lấy chỉ mục của cột được truyền vào
+                    int iTenDM = cursor.getColumnIndex("TenDanhMuc");
+                    int iMaDM = cursor.getColumnIndex("MaDanhMuc");
+                    int iPhanTramChiTieu = cursor.getColumnIndex("PhanTramChiTieu");
+                    Log.d("LayPhanTramDanhMucChi: ",iTenDM+iPhanTramChiTieu+"");
+                    if (iTenDM >= 0 && iPhanTramChiTieu>=0) {
+                        //khi có chỉ mục thì có thể lấy nội dung của cột
+                        phamTramDanhMuc.add(new PieEntry(cursor.getInt(iPhanTramChiTieu),cursor.getString(iTenDM),cursor.getString(iMaDM)));
+                    } else {
+                        Log.e("GiaoDich_Db/LayPhanTramDanhMucChi", "Không tìm thấy cột! " + iTenDM + iPhanTramChiTieu);
+                    }
+
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception ex) {
+            Log.e("GiaoDich_Db/LayBangDanhMuc", "Có lỗi xảy ra: " + ex.getMessage());
+        }
+        finally {
+            // Đóng cursor và database trong finally block
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
+
+        return phamTramDanhMuc;
+    }
+
+
+    //Phương thức trả về phần trăm của từng danh mục thu trong năm
+    public ArrayList<PieEntry> LayPhanTramDanhMucThuNam(int nam) {
+        ArrayList<PieEntry>phamTramDanhMuc=new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String thangNam =""+nam;
+        String query = "SELECT " +
+                "G.MaDanhMuc, " +
+                "D.TenDanhMuc, " +
+                "STRFTIME('%m/%Y', G.Ngay) AS ThangNam, " +
+                "SUM(G.NhapTien) AS TongTienTrongThang, " +
+                "(SUM(G.NhapTien) * 100.0) / " +
+                "(SELECT SUM(NhapTien) FROM tblGiaoDich WHERE LoaiGiaoDich = 'ThuNhap' AND Ngay LIKE ?) AS PhanTramThuNhap " +
+                "FROM tblGiaoDich G " +
+                "JOIN tblDanhMuc D ON G.MaDanhMuc = D.IdDanhMuc " +
+                "WHERE G.LoaiGiaoDich = 'ThuNhap' AND G.Ngay LIKE ? " +
+                "GROUP BY G.MaDanhMuc, D.TenDanhMuc, ThangNam";
+        Cursor cursor= db.rawQuery(query,new String[]{"%" + thangNam + "%", "%" + thangNam + "%"});
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    //lấy chỉ mục của cột được truyền vào
+                    int iMaDM = cursor.getColumnIndex("MaDanhMuc");
+                    int iTenDM = cursor.getColumnIndex("TenDanhMuc");
+                    int iPhanTramThuNhap = cursor.getColumnIndex("PhanTramThuNhap");
+                    if (iTenDM >= 0 && iPhanTramThuNhap>=0) {
+                        //khi có chỉ mục thì có thể lấy nội dung của cột
+                        phamTramDanhMuc.add(new PieEntry(cursor.getInt(iPhanTramThuNhap),cursor.getString(iTenDM),cursor.getString(iMaDM)));
+                    } else {
+                        Log.e("GiaoDich_Db/LayPhanTramDanhMucChi", "Không tìm thấy cột! " + iTenDM + iPhanTramThuNhap);
+                    }
+
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception ex) {
+            Log.e("GiaoDich_Db/LayBangDanhMuc", "Có lỗi xảy ra: " + ex.getMessage());
+        }
+        finally {
+            // Đóng cursor và database trong finally block
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
+
+        return phamTramDanhMuc;
+    }
+
+
+    //phương thức trả về giao dịch khi biết mã và tháng
     public List<GiaoDich> LayGiaoDichTheoDanhMuc(int thang, int nam, int maDanhMucDaChon) {
         List<GiaoDich> data_gd = new ArrayList<>();
         List<ThuNhap> data_thunhap = new ArrayList<>();
@@ -610,6 +716,61 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         return data_gd;
     }
 
+
+
+    //Phương thức trả về số dư của thu nhập và giao dịch
+    public double LaySoDu() {
+        double soDu=0;
+        double tongThu=0;
+        double tongChi=0 ;
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT\n" +
+                "    LoaiGiaoDich,\n" +
+                "    SUM(NhapTien) AS TongSoTien\n" +
+                "FROM tblGiaoDich\n" +
+                "GROUP BY LoaiGiaoDich";
+        Cursor cursor= db.rawQuery(query,null);
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    //lấy chỉ mục của cột được truyền vào
+                    int iLoai=cursor.getColumnIndex("LoaiGiaoDich");
+                    int iTong= cursor.getColumnIndex("TongSoTien");
+                    if (iTong >= 0 && iLoai>=0) {
+                        //khi có chỉ mục thì có thể lấy nội dung của cột
+                        int tong= cursor.getInt(iTong);
+                        String loai =cursor.getString(iLoai);
+
+                        //kiểm tra loại
+                        if(loai.equals("ChiTieu")) {
+                          tongChi=tong;
+                        } else {
+                           tongThu=tong;
+                        }
+
+                    } else {
+                        Log.e("GiaoDich_Db/LayPhanTramDanhMucChi", "Không tìm thấy cột! ");
+                    }
+
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception ex) {
+            Log.e("GiaoDich_Db/LayBangDanhMuc", "Có lỗi xảy ra: " + ex.getMessage());
+        }
+        finally {
+            // Đóng cursor và database trong finally block
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
+        soDu=tongThu-tongChi;
+        return soDu;
+    }
 
 
     @Override

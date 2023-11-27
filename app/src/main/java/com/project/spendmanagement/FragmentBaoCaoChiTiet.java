@@ -56,8 +56,8 @@ public class FragmentBaoCaoChiTiet extends Fragment  {
     }
     private void setEvent() {
         try {
-            int thang=11;
-            int nam=2023;
+            int thang=FragmentBaoCaoChi.thang;
+            int nam=FragmentBaoCaoChi.nam;
             tvTieuDe.setText(tenDanhMuc);
             giaoDichDb = new GiaoDich_Db(this.requireContext());
             data_gd=giaoDichDb.LayGiaoDichTheoDanhMuc(thang,nam,Integer.parseInt(maDanhMuc));

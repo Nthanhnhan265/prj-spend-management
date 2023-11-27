@@ -19,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/baocao"
+        android:text="@string/baocaodanhmuctrongnam"
         android:textSize="22sp"
         android:textColor="@color/lighter_blue"
         android:padding="20dp"
@@ -189,7 +189,7 @@
         android:textColor="@color/lighter_blue"
         android:textStyle="bold"
         android:id="@+id/btnTienChi"
-        android:background="@drawable/custom_btn_non"
+        android:background="@drawable/custom_btn_selected"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -197,7 +197,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_btn_selected"
+        android:background="@drawable/custom_btn_non"
         android:text="@string/tienthu"
         android:textColor="@color/lighter_blue"
         android:textSize="15sp"
@@ -215,7 +215,7 @@
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:id="@+id/pcThu"
+        android:id="@+id/pcChiTieu"
      />
 
 

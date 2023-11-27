@@ -1,17 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment_ChiTieu">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeFragment_ChiTieu"
+    android:background="@color/dark_blue"
+    android:orientation="vertical">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/darker_blue"
+
+    >
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Page Khac"
-        android:textSize="25sp"
-        android:layout_centerInParent="true">
+        android:layout_weight="1"
+        android:text="@string/khac"
+        android:textSize="22sp"
+        android:textColor="@color/lighter_blue"
+        android:padding="20dp"
+        android:textStyle="bold"
+        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="@string/sodu"
+            android:textColor="@color/lighter_blue"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            android:textStyle="italic|bold"
+            />
+        <TextView
+            android:id="@+id/tvSoDu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@string/khong"
+            android:textColor="@color/lighter_blue"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            android:textStyle="italic"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/vnd"
+            android:textColor="@color/lighter_blue"
+            android:textSize="17sp"
+            android:textAlignment="textEnd"
+            android:textStyle="italic"
+            />
 
-    </TextView>
+    </LinearLayout>
+</LinearLayout>
 
-</RelativeLayout>
+<!--    Danh sach chuc nang\-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:id="@+id/rcChucNang"
+        android:layout_marginTop="4dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+</LinearLayout>

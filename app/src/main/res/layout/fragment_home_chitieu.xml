@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="730dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment_ChiTieu"
     android:orientation="vertical"
@@ -70,7 +70,8 @@
           android:contentDescription="@string/ngayTruoc"
           android:src="@drawable/ic_before"
           android:id="@+id/ivNgayTruoc"
-          >
+            android:visibility="gone"
+            >
       </ImageView>
         <Button
             android:id="@+id/btnDatePicker"
@@ -81,6 +82,7 @@
             android:textSize="14sp"
             android:backgroundTint="@color/darker_blue"
             android:onClick="showDatePicker"
+            android:layout_marginLeft="28dp"
             />
 
         <DatePicker
@@ -98,6 +100,7 @@
             android:layout_marginEnd="40sp"
             android:src="@drawable/ic_next"
             android:id="@+id/ivNgaySau"
+            android:visibility="gone"
             >
         </ImageView>
     </LinearLayout>
@@ -192,7 +195,9 @@
         android:layout_height="210dp"
         android:layout_marginTop="5sp"
         android:orientation="horizontal"
-        android:paddingHorizontal="10dp">
+        android:paddingHorizontal="10dp"
+        android:layout_gravity="center"
+        >
 
         <GridView
             android:id="@+id/gvExtenseCategory"

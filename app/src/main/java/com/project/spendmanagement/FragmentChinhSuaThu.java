@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -47,13 +48,15 @@ public class FragmentChinhSuaThu extends Fragment {
 
     private void setEvent() {
         try {
+            NumberFormat num=NumberFormat.getInstance();
+            num.setGroupingUsed(true);
             main = (MainActivity) getActivity();
             setCurrentDate();
             GiaoDich gdDuocChon = AdapterGiaoDich.giaoDichDuocChon;
             Log.d("info chinh sua: ", gdDuocChon.toString());
             //hiển thị dữ liệu
             edtNhapGhiChu.setText(gdDuocChon.getGhiChu());
-            edtTienThu.setText(String.valueOf(gdDuocChon.getGiaTri()));
+            edtTienThu.setText(num.format(gdDuocChon.getGiaTri()));
             btnDatePicker.setText(gdDuocChon.getNgayGD());
             gvDanhMucThu.setSelection(listDanhMuc.indexOf(gdDuocChon.getDanhMuc()));
             gvDanhMucThu.getSelectedItem();
@@ -86,6 +89,8 @@ public class FragmentChinhSuaThu extends Fragment {
 //                            gd.getDanhMuc().setTenDanhMuc(danhMucDuocChon.getTenDanhMuc());
 //                            gd.getDanhMuc().setIcon(danhMucDuocChon.getIcon());
 //                        }
+                        //TODO: chưa xác thực dữ liệu truyền vào
+
                         // Gọi phương thức SuaDl của GiaoDich_Db để cập nhật vào cơ sở dữ liệu
                         gdDuocChon.setNgayGD(btnDatePicker.getText().toString());
                         gdDuocChon.setGhiChu(edtNhapGhiChu.getText().toString());

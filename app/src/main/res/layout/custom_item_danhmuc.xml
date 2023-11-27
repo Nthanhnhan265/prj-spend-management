@@ -11,7 +11,7 @@
             android:textColor="@color/lighter_blue"
             android:text="@string/danhmuc"
             android:textSize="12sp"
-            android:padding="13dp"
+            android:padding="8dp"
             android:background="@drawable/custom_ic_danhmuc"
             android:drawableTop="@drawable/baseline_fastfood_24"
             />
