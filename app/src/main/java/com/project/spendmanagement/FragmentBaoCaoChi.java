@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -43,6 +44,9 @@ public class FragmentBaoCaoChi extends Fragment {
     static int thang=Calendar.getInstance().get(Calendar.MONTH)+1;
     static int nam=Calendar.getInstance().get(Calendar.YEAR);
     PieDataSet dataSet;
+    TextView tvChiTieu;
+    TextView tvThuNhap;
+    TextView tvThuChi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -66,6 +70,9 @@ public class FragmentBaoCaoChi extends Fragment {
         tvChonThang=view.findViewById(R.id.tvChonThang);
         monthPicker=view.findViewById(R.id.monthPicker);
         yearPicker=view.findViewById(R.id.yearPicker);
+        tvChiTieu=view.findViewById(R.id.tvChiTieu);
+        tvThuNhap=view.findViewById(R.id.tvThuNhap);
+        tvThuChi=view.findViewById(R.id.tvThuChi);
 
     }
     //Phương thức thực hiện các event
@@ -139,6 +146,13 @@ public class FragmentBaoCaoChi extends Fragment {
 
             }
         });
+        //hiển thị thu, chi và thu chi
+        double[]thuChi= giaoDichDb.LayThuChiTrongThang(thang,nam);
+        NumberFormat num=NumberFormat.getInstance();
+        num.setGroupingUsed(true);
+        tvThuNhap.setText(num.format(thuChi[0]));
+        tvChiTieu.setText(num.format(thuChi[1]));
+        tvThuChi.setText(num.format(thuChi[0]-thuChi[1]));
     }
     //Hiện họp thoại để chọn tháng/năm
     private void showDatePickerDialog() {
@@ -179,6 +193,14 @@ public class FragmentBaoCaoChi extends Fragment {
                 //load lại biểu đồ
                 pcChiTieu.notifyDataSetChanged();
                 pcChiTieu.invalidate();
+
+                //hiển thị thu, chi và thu chi
+                double[]thuChi= giaoDichDb.LayThuChiTrongThang(thang,nam);
+                NumberFormat num=NumberFormat.getInstance();
+                num.setGroupingUsed(true);
+                tvThuNhap.setText(num.format(thuChi[0]));
+                tvChiTieu.setText(num.format(thuChi[1]));
+                tvThuChi.setText(num.format(thuChi[0]-thuChi[1]));
             }
         });
 

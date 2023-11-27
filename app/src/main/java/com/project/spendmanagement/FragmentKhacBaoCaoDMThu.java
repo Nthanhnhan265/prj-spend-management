@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -36,8 +37,12 @@ public class FragmentKhacBaoCaoDMThu extends Fragment {
     AppCompatButton btnTienChi;
     TextView tvChonThang;
     NumberPicker yearPicker ;
-    static int nam=FragmentKhacBaoCaoDMChi.nam;
+
     PieDataSet dataSet;
+
+    TextView tvChiTieu;
+    TextView tvThuNhap;
+    TextView tvThuChi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -51,7 +56,7 @@ public class FragmentKhacBaoCaoDMThu extends Fragment {
         giaoDichDb=new GiaoDich_Db(requireContext());
         pcChiTieu=view.findViewById(R.id.pcChiTieu);
         //tạo dữ liệu cho biểu đồ
-        phanTramDanhMuc= giaoDichDb.LayPhanTramDanhMucThuNam(nam);
+        phanTramDanhMuc= giaoDichDb.LayPhanTramDanhMucThuNam(FragmentKhacBaoCaoDMChi.nam);
         dataSet = new PieDataSet(phanTramDanhMuc, "Danh mục thu");
         dataSet.setColors(new int[]{Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED});
 
@@ -60,12 +65,15 @@ public class FragmentKhacBaoCaoDMThu extends Fragment {
         btnTienChi =view.findViewById(R.id.btnTienChi);
         tvChonThang=view.findViewById(R.id.tvChonThang);
         yearPicker=view.findViewById(R.id.yearPicker);
+        tvChiTieu=view.findViewById(R.id.tvChiTieu);
+        tvThuNhap=view.findViewById(R.id.tvThuNhap);
+        tvThuChi=view.findViewById(R.id.tvThuChi);
 
     }
     //Phương thức thực hiện các event
     private void setEvent() {
         pcChiTieu.setData(pieData);
-        tvChonThang.setText(""+nam);
+        tvChonThang.setText(""+FragmentKhacBaoCaoDMChi.nam);
         // Tùy chỉnh biểu đồ PieChart
         pcChiTieu.getDescription().setEnabled(false);
         pcChiTieu.setDrawHoleEnabled(true);
@@ -99,7 +107,7 @@ public class FragmentKhacBaoCaoDMThu extends Fragment {
                     String tenDanhMuc=((PieEntry) e).getLabel();
                     String maDanhMuc=e.getData().toString();
                    // Hiển thị chi tiết giao dịch với danh mục
-                   FragmentBaoCaoChiTiet fragmentBaoCaoChiTiet =new FragmentBaoCaoChiTiet(maDanhMuc,tenDanhMuc);
+                   FragmentKhacBaoCaoChiTiet fragmentBaoCaoChiTiet =new FragmentKhacBaoCaoChiTiet(maDanhMuc,tenDanhMuc);
                    FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
                    transaction.replace(R.id.container,fragmentBaoCaoChiTiet);
                    transaction.addToBackStack(null).commit();
@@ -133,6 +141,14 @@ public class FragmentKhacBaoCaoDMThu extends Fragment {
 
             }
         });
+
+        //hiển thị thu, chi và thu chi
+        double[]thuChi= giaoDichDb.LayThuChiTrongNam(FragmentKhacBaoCaoDMChi.nam);
+        NumberFormat num=NumberFormat.getInstance();
+        num.setGroupingUsed(true);
+        tvThuNhap.setText(num.format(thuChi[0]));
+        tvChiTieu.setText(num.format(thuChi[1]));
+        tvThuChi.setText(num.format(thuChi[0]-thuChi[1]));
     }
     //Hiện họp thoại để chọn tháng/năm
     private void showDatePickerDialog() {
@@ -161,14 +177,21 @@ public class FragmentKhacBaoCaoDMThu extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Xử lý khi người dùng nhấn nút OK
-                nam = yearPicker.getValue();
-                tvChonThang.setText(""+nam);
+                FragmentKhacBaoCaoDMChi.nam = yearPicker.getValue();
+                tvChonThang.setText(""+FragmentKhacBaoCaoDMChi.nam);
                 //Sau khi chọn tháng thì truy vấn danh sách mới để hiện lên sơ đồ
-                ArrayList<PieEntry> phanTramDanhMuc=giaoDichDb.LayPhanTramDanhMucThuNam(nam);
+                ArrayList<PieEntry> phanTramDanhMuc=giaoDichDb.LayPhanTramDanhMucThuNam(FragmentKhacBaoCaoDMChi.nam);
                 dataSet.setValues(phanTramDanhMuc);
                 //load lại biểu đồ
                 pcChiTieu.notifyDataSetChanged();
                 pcChiTieu.invalidate();
+                //hiển thị thu, chi và thu chi
+                double[]thuChi= giaoDichDb.LayThuChiTrongNam(FragmentKhacBaoCaoDMChi.nam);
+                NumberFormat num=NumberFormat.getInstance();
+                num.setGroupingUsed(true);
+                tvThuNhap.setText(num.format(thuChi[0]));
+                tvChiTieu.setText(num.format(thuChi[1]));
+                tvThuChi.setText(num.format(thuChi[0]-thuChi[1]));
             }
         });
 

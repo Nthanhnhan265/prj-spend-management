@@ -716,7 +716,73 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         return data_gd;
     }
 
+    //phương thức trả về giao dịch khi biết mã và nam
+    public List<GiaoDich> LayGiaoDichTheoDanhMucNam (int nam, int maDanhMucDaChon) {
+        List<GiaoDich> data_gd = new ArrayList<>();
+        List<ThuNhap> data_thunhap = new ArrayList<>();
+        List<ChiTieu> data_chitieu = new ArrayList<>();
 
+        SQLiteDatabase database = getReadableDatabase();
+
+        String query = "SELECT * FROM tblGiaoDich WHERE Ngay like ? And MaDanhMuc=?";
+        Cursor cursor = database.rawQuery(query, new String[]{"%"+nam+"%",maDanhMucDaChon+""});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int maGDIndex = cursor.getColumnIndex("MaGD");
+                int ngayGDIndex = cursor.getColumnIndex("Ngay");
+                int ghiChuIndex = cursor.getColumnIndex("GhiChu");
+                int giaTriIndex = cursor.getColumnIndex("NhapTien");
+                int loaiGiaoDichIndex = cursor.getColumnIndex("LoaiGiaoDich");
+                int maDanhMucIndex = cursor.getColumnIndex("MaDanhMuc");
+
+                // Kiểm tra xem các cột có tồn tại trong Cursor không
+                if (maGDIndex != -1 && ngayGDIndex != -1 && ghiChuIndex != -1
+                        && giaTriIndex != -1 && loaiGiaoDichIndex != -1 && maDanhMucIndex != -1) {
+                    int maGD = cursor.getInt(maGDIndex);
+                    String ngayGD = cursor.getString(ngayGDIndex);
+                    String ghiChu = cursor.getString(ghiChuIndex);
+                    int giaTri = cursor.getInt(giaTriIndex);
+                    String loaiGiaoDich = cursor.getString(loaiGiaoDichIndex);
+                    int maDanhMuc = cursor.getInt(maDanhMucIndex);
+
+                    GiaoDich giaoDich;
+                    if ("ThuNhap".equals(loaiGiaoDich)) {
+                        // Sửa lại cách tạo đối tượng ThuNhap
+                        Log.d("Ngay ",ngayGD);
+                        giaoDich = new ThuNhap(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
+                        giaoDich.setMaGD(maGD);
+                    } else {
+                        // Sửa lại cách tạo đối tượng ChiTieu
+                        Log.d("Ngay ",ngayGD);
+                        giaoDich = new ChiTieu(ngayGD, ghiChu, giaTri, layDanhMucTheoId(maDanhMuc));
+                        giaoDich.setMaGD(maGD);
+                    }
+                    data_gd.add(giaoDich);
+                } else {
+                    Log.e("Database", "");
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+
+        Log.d("Database", "Đã đọc dữ liệu từ cơ sở dữ liệu! Số lượng giao dịch: " + data_gd.size());
+
+        // Kiểm tra và log dữ liệu của các danh sách
+        Log.d("Database", "Số lượng Thu nhập: " + data_thunhap.size());
+        for (ThuNhap thuNhap : data_thunhap) {
+            Log.d("Database", thuNhap.toString());
+        }
+
+        Log.d("Database", "Số lượng Chi tiêu: " + data_chitieu.size());
+        for (ChiTieu chiTieu : data_chitieu) {
+            Log.d("Database", chiTieu.toString());
+        }
+
+        return data_gd;
+    }
 
     //Phương thức trả về số dư của thu nhập và giao dịch
     public double LaySoDu() {
@@ -771,6 +837,76 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         soDu=tongThu-tongChi;
         return soDu;
     }
+
+    //Phương thức trả về số dư của thu nhập và giao dịch trong tháng và năm
+    public double[] LayThuChiTrongThang(int thang, int nam) {
+    //Phương thức trả về số dư của thu nhập và giao dịch trong năm
+        double tongThu=0;
+        double tongChi=0;
+        SQLiteDatabase database = getReadableDatabase();
+        String query = "SELECT * FROM tblGiaoDich WHERE Ngay like ?";
+        Cursor cursor = database.rawQuery(query, new String[]{"%"+thang+"/"+nam+"%"});
+        if (cursor.moveToFirst()) {
+            do {
+                int ngayGDIndex = cursor.getColumnIndex("Ngay");
+                int giaTriIndex = cursor.getColumnIndex("NhapTien");
+                int loaiGiaoDichIndex = cursor.getColumnIndex("LoaiGiaoDich");
+                // Kiểm tra xem các cột có tồn tại trong Cursor không
+                if ( ngayGDIndex != -1 && giaTriIndex != -1 && loaiGiaoDichIndex != -1) {
+                    String ngayGD = cursor.getString(ngayGDIndex);
+                    int giaTri = cursor.getInt(giaTriIndex);
+                    String loaiGiaoDich = cursor.getString(loaiGiaoDichIndex);
+                    //kiểm tra loại giao dịch và tính tổng
+                    if ("ThuNhap".equals(loaiGiaoDich)) {
+                        //Tổng thu nhập
+                        tongThu+=cursor.getInt(giaTriIndex);
+                    } else {
+                        // Tổng chi tiêu
+                        tongChi+=cursor.getInt(giaTriIndex);
+                    }
+                } else {
+                    Log.e("Database", "");
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        database.close();
+        return new double[]{tongThu,tongChi};
+    }
+    public double[] LayThuChiTrongNam(int nam) {
+        double tongThu=0;
+        double tongChi=0;
+        SQLiteDatabase database = getReadableDatabase();
+        String query = "SELECT * FROM tblGiaoDich WHERE Ngay like ?";
+        Cursor cursor = database.rawQuery(query, new String[]{"%"+nam+"%"});
+        if (cursor.moveToFirst()) {
+            do {
+                int ngayGDIndex = cursor.getColumnIndex("Ngay");
+                int giaTriIndex = cursor.getColumnIndex("NhapTien");
+                int loaiGiaoDichIndex = cursor.getColumnIndex("LoaiGiaoDich");
+                // Kiểm tra xem các cột có tồn tại trong Cursor không
+                if ( ngayGDIndex != -1 && giaTriIndex != -1 && loaiGiaoDichIndex != -1) {
+                    String ngayGD = cursor.getString(ngayGDIndex);
+                    int giaTri = cursor.getInt(giaTriIndex);
+                    String loaiGiaoDich = cursor.getString(loaiGiaoDichIndex);
+                    //kiểm tra loại giao dịch và tính tổng
+                    if ("ThuNhap".equals(loaiGiaoDich)) {
+                        //Tổng thu nhập
+                        tongThu+=cursor.getInt(giaTriIndex);
+                    } else {
+                        // Tổng chi tiêu
+                        tongChi+=cursor.getInt(giaTriIndex);
+                    }
+                } else {
+                    Log.e("Database", "");
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        database.close();
+        return new double[]{tongThu,tongChi};
+    }
+
 
 
     @Override

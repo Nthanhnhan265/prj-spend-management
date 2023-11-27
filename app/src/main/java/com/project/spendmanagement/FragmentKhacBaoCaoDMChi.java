@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -39,6 +40,9 @@ public class FragmentKhacBaoCaoDMChi extends Fragment {
     NumberPicker monthPicker;
     static int nam=Calendar.getInstance().get(Calendar.YEAR);
     PieDataSet dataSet;
+    TextView tvChiTieu;
+    TextView tvThuNhap;
+    TextView tvThuChi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -62,6 +66,9 @@ public class FragmentKhacBaoCaoDMChi extends Fragment {
         tvChonThang=view.findViewById(R.id.tvChonThang);
         monthPicker=view.findViewById(R.id.monthPicker);
         yearPicker=view.findViewById(R.id.yearPicker);
+        tvChiTieu=view.findViewById(R.id.tvChiTieu);
+        tvThuNhap=view.findViewById(R.id.tvThuNhap);
+        tvThuChi=view.findViewById(R.id.tvThuChi);
 
     }
     //Phương thức thực hiện các event
@@ -101,7 +108,7 @@ public class FragmentKhacBaoCaoDMChi extends Fragment {
                     String tenDanhMuc=((PieEntry) e).getLabel();
                     String maDanhMuc=e.getData().toString();
                    // Hiển thị chi tiết giao dịch với danh mục
-                   FragmentBaoCaoChiTiet fragmentBaoCaoChiTiet =new FragmentBaoCaoChiTiet(maDanhMuc,tenDanhMuc);
+                   FragmentKhacBaoCaoChiTiet fragmentBaoCaoChiTiet =new FragmentKhacBaoCaoChiTiet(maDanhMuc,tenDanhMuc);
                    FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
                    transaction.replace(R.id.container,fragmentBaoCaoChiTiet);
                    transaction.addToBackStack(null).commit();
@@ -135,6 +142,14 @@ public class FragmentKhacBaoCaoDMChi extends Fragment {
 
             }
         });
+
+        //hiển thị thu, chi và thu chi
+        double[]thuChi= giaoDichDb.LayThuChiTrongNam(nam);
+        NumberFormat num=NumberFormat.getInstance();
+        num.setGroupingUsed(true);
+        tvThuNhap.setText(num.format(thuChi[0]));
+        tvChiTieu.setText(num.format(thuChi[1]));
+        tvThuChi.setText(num.format(thuChi[0]-thuChi[1]));
     }
     //Hiện họp thoại để chọn tháng/năm
     private void showDatePickerDialog() {
@@ -170,6 +185,14 @@ public class FragmentKhacBaoCaoDMChi extends Fragment {
                 //load lại biểu đồ
                 pcChiTieu.notifyDataSetChanged();
                 pcChiTieu.invalidate();
+
+                //load lại thu và chi
+                double[]thuChi= giaoDichDb.LayThuChiTrongNam(nam);
+                NumberFormat num=NumberFormat.getInstance();
+                num.setGroupingUsed(true);
+                tvThuNhap.setText(num.format(thuChi[0]));
+                tvChiTieu.setText(num.format(thuChi[1]));
+                tvThuChi.setText(num.format(thuChi[0]-thuChi[1]));
             }
         });
 

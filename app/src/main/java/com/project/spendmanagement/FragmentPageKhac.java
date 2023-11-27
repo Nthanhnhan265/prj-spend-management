@@ -21,7 +21,7 @@ public class FragmentPageKhac extends Fragment {
     RecyclerView rcChucNang;
     List<String> chucNang=new ArrayList<>();
     AdapterDSChucNang apdapterChucNang;
-    TextView tvSoDu;
+    static TextView tvSoDu;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -80,6 +80,7 @@ public class AdapterDSChucNang extends RecyclerView.Adapter {
                                                 GiaoDich_Db giaoDichDb = new GiaoDich_Db(context);
                                                 giaoDichDb.deleteDatabase(context);
                                                 giaoDichDb.ChenDanhMuc();
+                                                FragmentPageKhac.tvSoDu.setText("0");
                                             } catch (Exception ex) {
                                                 Toast.makeText(context, "Có lỗi xảy ra khi xóa dữ liệu!", Toast.LENGTH_SHORT).show();
                                             }

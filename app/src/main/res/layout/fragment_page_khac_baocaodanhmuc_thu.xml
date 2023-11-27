@@ -81,6 +81,7 @@
         android:textColor="@color/lighter_blue"
         />
      <TextView
+         android:id="@+id/tvChiTieu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/khong"
@@ -118,6 +119,7 @@
             android:layout_gravity="center"
             />
         <TextView
+            android:id="@+id/tvThuNhap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
@@ -157,6 +159,7 @@
         android:layout_weight="1"
         />
     <TextView
+        android:id="@+id/tvThuChi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
