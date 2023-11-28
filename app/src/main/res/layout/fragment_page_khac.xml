@@ -42,6 +42,15 @@
             android:textAlignment="textEnd"
             android:textStyle="italic|bold"
             />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/hien_so_du"
+            android:id="@+id/hienSoDu"
+            android:layout_marginLeft="10dp"
+            >
+
+        </ImageView>
         <TextView
             android:id="@+id/tvSoDu"
             android:layout_width="0dp"

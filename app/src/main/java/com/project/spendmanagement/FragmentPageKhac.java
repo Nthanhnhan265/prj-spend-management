@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -22,6 +23,8 @@ public class FragmentPageKhac extends Fragment {
     List<String> chucNang=new ArrayList<>();
     AdapterDSChucNang apdapterChucNang;
     static TextView tvSoDu;
+    ImageView hienSoDu;
+    boolean anNoiDung = true;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +43,8 @@ public class FragmentPageKhac extends Fragment {
         chucNang.add("Báo cáo danh mục trong năm");
         chucNang.add("Xóa tất cả dữ liệu");
         apdapterChucNang=new AdapterDSChucNang(requireContext(),chucNang);
-
+        hienSoDu=view.findViewById(R.id.hienSoDu);
+        tvSoDu.setText("****");
     }
     private void setEvent() {
         GiaoDich_Db giaoDich=new GiaoDich_Db(requireContext());
@@ -48,8 +52,23 @@ public class FragmentPageKhac extends Fragment {
         NumberFormat num=NumberFormat.getInstance();
         double soDu=giaoDich.LaySoDu();
         num.setGroupingUsed(true);
-        tvSoDu.setText(num.format(soDu));
-
+        //tvSoDu.setText(num.format(soDu));
+        hienSoDu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (anNoiDung) {
+                    // Đặt giá trị thực tế
+                    NumberFormat num = NumberFormat.getInstance();
+                    double soDu = giaoDich.LaySoDu();
+                    num.setGroupingUsed(true);
+                    tvSoDu.setText(num.format(soDu));
+                } else {
+                    // cap nhat lai ****
+                    tvSoDu.setText("****");
+                }
+                anNoiDung = !anNoiDung;
+            }
+        });
 
     }
 }

@@ -27,7 +27,12 @@ public abstract class GiaoDich {
         this.maGD++;
         this.ngayGD = ngayGD;
         this.ghiChu = ghiChu;
+        if (giaTri<0)
+        {
+            throw new IllegalArgumentException("Số tiền không được âm ");
+        }
         this.giaTri = giaTri;
+
     }
 
     public String getNgayGD() {

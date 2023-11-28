@@ -36,7 +36,7 @@ public class HomeFragment_ChiTieu extends Fragment {
   MainActivity main;
   private GridView gvDanhMucChi;
   GiaoDich_Db giaoDich_db;
-AdapterGiaoDich adapterGiaoDich;
+   AdapterGiaoDich adapterGiaoDich;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,90 +95,10 @@ AdapterGiaoDich adapterGiaoDich;
         datePickerDialog.show();
       }
     });
-    // Thêm sự kiện nhập tiền chi
-//    btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        try {
-//          // Get the selected date from the button
-//          String selectedDate = datepickerButton.getText().toString();
-//
-//          // Get other input values
-//          String ghiChu = edtNhapGhiChu.getText().toString();
-//          int tienThu = Integer.parseInt(edtTienChi.getText().toString());
-//          DanhMuc selectedDanhMuc = icon_adapter.getDanhMucDuocChon();
-//
-//          // Create a new GiaoDich object based on the input values
-//          ChiTieu chiTieu = new ChiTieu(selectedDate, "(" + ghiChu + ")", tienThu, selectedDanhMuc);
-//
-//          // Get the database instance
-//          SQLiteDatabase db = giaoDich_db.getWritableDatabase();
-//
-//          // Insert the data into the database
-//          long newRowId = giaoDich_db.ThemDl(chiTieu);
-//
-//          // Check if the insertion was successful
-//          if (newRowId != -1) {
-//            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
-//            edtNhapGhiChu.setText("");
-//            edtTienChi.setText("");
-//            edtNhapGhiChu.requestFocus();
-//            icon_adapter.resetSelectedItem();
-//          } else {
-//            Toast.makeText(requireContext(), "Lỗi khi thêm vào database!", Toast.LENGTH_SHORT).show();
-//          }
-//        } catch (Exception ex) {
-//          Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
-//        }
-//      }
-//    });
-//    btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        MainActivity activity = (MainActivity) getActivity();
-//        CapNhatDuLieu listener = (CapNhatDuLieu) activity;
-//
-//        if (listener != null) {
-//          try {
-//            // Thêm Giao dich moi
-//            listener.themGiaoDich(new ChiTieu(datepickerButton.getText().toString(),
-//                    "("+edtNhapGhiChu.getText().toString()+")",
-//                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getDanhMucDuocChon()));
-//
-//            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
-//            edtNhapGhiChu.setText("");
-//            edtTienChi.setText("");
-//            edtNhapGhiChu.requestFocus();
-//            icon_adapter.resetSelectedItem();
-//          } catch (Exception ex) {
-//            Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
-//          }
-//        }
-//      }
-//    });
     adapterGiaoDich=new AdapterGiaoDich(requireContext(),main.listGiaoDich);
     btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-
-        /* 
-        MainActivity activity = (MainActivity) getActivity();
-        CapNhatDuLieu listener = (CapNhatDuLieu) activity;
-
-        if (listener != null) {
-          try {
-            // Thêm Giao dich moi
-            listener.themGiaoDich(new ChiTieu(datepickerButton.getText().toString(),
-                    "("+edtNhapGhiChu.getText().toString()+")",
-                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getDanhMucDuocChon()));
-            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
-            edtNhapGhiChu.setText("");
-            edtTienChi.setText("");
-            edtNhapGhiChu.requestFocus();
-            icon_adapter.resetSelectedItem();
-          } catch (Exception ex) {
-            Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
-        */
         try {
           String selectedDate = datepickerButton.getText().toString();
           String ghiChu = edtNhapGhiChu.getText().toString();
@@ -263,5 +183,22 @@ AdapterGiaoDich adapterGiaoDich;
     datePickerDialog.show();
   }
 
+ /*
+        MainActivity activity = (MainActivity) getActivity();
+        CapNhatDuLieu listener = (CapNhatDuLieu) activity;
 
+        if (listener != null) {
+          try {
+            // Thêm Giao dich moi
+            listener.themGiaoDich(new ChiTieu(datepickerButton.getText().toString(),
+                    "("+edtNhapGhiChu.getText().toString()+")",
+                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getDanhMucDuocChon()));
+            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
+            edtNhapGhiChu.setText("");
+            edtTienChi.setText("");
+            edtNhapGhiChu.requestFocus();
+            icon_adapter.resetSelectedItem();
+          } catch (Exception ex) {
+            Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
+        */
 }

@@ -77,7 +77,7 @@
     <!--    hiển thị danh sách icon ở đây-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:orientation="vertical"
         android:paddingHorizontal="15dp"
         android:layout_marginVertical="5dp"
@@ -127,7 +127,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/luu"
+        android:text="@string/them"
         android:textColor="@color/lighter_blue"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/custom_editext"
