@@ -46,7 +46,6 @@ public class AdapterIcon extends RecyclerView.Adapter {
             String iconHienTai = iconSrc.get(position); //
             //lấy id qua string
             int resId = holder.itemView.getContext().getResources().getIdentifier(iconHienTai, "drawable", holder.itemView.getContext().getPackageName());
-
             if (holder instanceof MyHolder) {
                 MyHolder myHolder = (MyHolder) holder;
                 myHolder.imageView.setImageResource(resId);
@@ -67,16 +66,12 @@ public class AdapterIcon extends RecyclerView.Adapter {
                 if(!flag) {
                     if(viTri==position) {
                         myHolder.imageView.setBackground(context.getDrawable(R.drawable.custom_icon_selected));
-
                     }
                     else
                     {
                         myHolder.imageView.setBackground(context.getDrawable(R.drawable.custom_icon_notselect));
                     }
                 }
-
-
-
             }
 
         }catch (Exception ex) {

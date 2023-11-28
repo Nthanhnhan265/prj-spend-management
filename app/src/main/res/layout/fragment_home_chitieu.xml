@@ -165,7 +165,8 @@
                 android:inputType="number"
                 android:layout_marginStart="20sp"
                 android:layout_weight="8"
-                android:autofillHints="">
+                android:autofillHints=""
+                android:textColor="@color/lighter_blue">
             </EditText>
         <TextView
             android:layout_width="0dp"
@@ -203,7 +204,7 @@
             android:id="@+id/gvExtenseCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnWidth="90dp"
+            android:columnWidth="70dp"
             android:gravity="center"
             android:horizontalSpacing="2dp"
             android:numColumns="auto_fit"

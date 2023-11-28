@@ -55,8 +55,8 @@ public class AdapterGiaoDich extends RecyclerView.Adapter {
                         maDuocChon = giaoDichHienTai.getMaGD();
                         giaoDichDuocChon=giaoDichHienTai;
                         String loaiDanhMuc=giaoDichDuocChon.getDanhMuc().getLoaiDM();
+                        //Kiểm tra và mở màn hình
                         if(loaiDanhMuc.equals("Thu")) {
-                            Log.d("Loai ", "Thu ok:"+ loaiDanhMuc);
                             FragmentChinhSuaThu newFragment = new FragmentChinhSuaThu();
                             FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
                             transaction.replace(R.id.container, newFragment);

@@ -20,13 +20,13 @@ public class AdapterDanhMuc extends BaseAdapter {
     private List<DanhMuc> data;
     private int viTri = -1;
     AppCompatButton btnDanhMuc;
-    DanhMuc danhMucDuocChon;
+    static DanhMuc danhMucDuocChon=null;
     public static int themDanhMuc;
+    boolean flag=true;
     public AdapterDanhMuc(Context context, List<DanhMuc> data) {
         this.context=context;
         this.data=data;
     }
-
     @Override
     public int getCount() {
         return data.size();
@@ -48,33 +48,23 @@ public class AdapterDanhMuc extends BaseAdapter {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater.inflate(R.layout.custom_item_danhmuc, null);
             }
-
             btnDanhMuc = view.findViewById(R.id.btnCategory);
             DanhMuc item = data.get(i);
             Drawable top= btnDanhMuc.getContext().getResources().getDrawable(item.getIcon());
-            if(top!=null) {
-                btnDanhMuc.setCompoundDrawablesWithIntrinsicBounds(null,top,null,null);
-            }
+            btnDanhMuc.setCompoundDrawablesWithIntrinsicBounds(null,top,null,null);
+
             btnDanhMuc.setText(item.getTenDanhMuc());
 
-            if (i == viTri) {
-                btnDanhMuc.setBackground(context.getDrawable(R.drawable.custom_ic_danhmuc));
-            } else {
-                btnDanhMuc.setBackground(context.getDrawable(R.drawable.custom_ic_category_clicked));
-            }
-
-                btnDanhMuc.setOnClickListener(new View.OnClickListener() {
+            btnDanhMuc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    flag=false;
                     // Cập nhật vị trí mục được chọn
                     viTri = i;
-
                     // Cập nhật lại giao diện
                     notifyDataSetChanged();
-
                     // Lấy text của mục được chọn
                      danhMucDuocChon = data.get(viTri);
-
                      //chỗ này sẽ sửa thành mã sau khi có mã danh mục, dùng tên sẽ gây trùng
                      if(danhMucDuocChon.getTenDanhMuc()=="Thêm") {
                          FragmentDSDanhMucChi fragmentDSDanhMuc=new FragmentDSDanhMucChi();
@@ -85,6 +75,16 @@ public class AdapterDanhMuc extends BaseAdapter {
                      }
                 }
             });
+            if(flag==true &&danhMucDuocChon!=null && danhMucDuocChon.getId()==item.getId()) {
+                btnDanhMuc.setBackground(context.getDrawable(R.drawable.custom_ic_danhmuc));
+            }
+            if(!flag) {
+                if (i == viTri) {
+                    btnDanhMuc.setBackground(context.getDrawable(R.drawable.custom_ic_danhmuc));
+                } else {
+                    btnDanhMuc.setBackground(context.getDrawable(R.drawable.custom_ic_category_clicked));
+                }
+            }
 
             return view;
         }
@@ -95,10 +95,6 @@ public class AdapterDanhMuc extends BaseAdapter {
             return danhMucDuocChon;
         }
 
-        public void resetSelectedItem() {
-            btnDanhMuc.setBackground(context.getDrawable(R.drawable.custom_ic_danhmuc));
-            notifyDataSetChanged();
-        }
         public void setViTri(int i) {
             viTri=i;
         }

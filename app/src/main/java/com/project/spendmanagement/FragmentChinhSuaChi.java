@@ -58,8 +58,7 @@ public class FragmentChinhSuaChi extends Fragment {
             edtNhapGhiChu.setText(gdDuocChon.getGhiChu());
             edtTienThu.setText(num.format(gdDuocChon.getGiaTri()));
             btnDatePicker.setText(gdDuocChon.getNgayGD());
-            gvDanhMucThu.setSelection(listDanhMuc.indexOf(gdDuocChon.getDanhMuc()));
-            gvDanhMucThu.getSelectedItem();
+            AdapterDanhMuc.danhMucDuocChon=AdapterGiaoDich.giaoDichDuocChon.getDanhMuc();
             btnChinhSuaThu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

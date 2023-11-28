@@ -31,7 +31,6 @@
         private Button btnTienChi;
         private Button btnThu ;
         private EditText edtNhapGhiChu, edtTienThu;
-        private ImageView ivNgayTruoc, ivNgaySau;
         MainActivity main;
         // them moi
 
@@ -40,28 +39,12 @@
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_home_thunhap, container, false);
-            Toast.makeText(requireContext(), "Page Thu", Toast.LENGTH_SHORT).show();
             setControl(view);
             setEvent();
 
             return view;
         }
         private void setEvent() {
-            AdapterDanhMuc.themDanhMuc=1;
-            ivNgayTruoc.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    String dateString = btnDatePicker.getText().toString();
-                    dateString=dateString.substring(0,dateString.indexOf(' '));
-                    Date inputDate = new Date(dateString);
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(inputDate);
-                    calendar.add(Calendar.DAY_OF_MONTH, -1);
-                    inputDate=calendar.getTime();
-                    btnDatePicker.setText(inputDate.toString());
-                }
-            });
             main=(MainActivity) getActivity();
             setCurrentDate();
             btnThu.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +77,6 @@
                             edtNhapGhiChu.setText("");
                             edtTienThu.setText("");
                             edtNhapGhiChu.requestFocus();
-                            iconDanhMucAdapter.resetSelectedItem();
                         } else {
                             Toast.makeText(requireContext(), "Lỗi khi thêm vào database!", Toast.LENGTH_SHORT).show();
                         }
@@ -157,8 +139,6 @@
             iconDanhMucAdapter =new AdapterDanhMuc(requireContext(),listThuNhap);
             edtTienThu=view.findViewById(R.id.edtTienThu);
             edtNhapGhiChu=view.findViewById(R.id.edtNhapGhiChu);
-            ivNgayTruoc =view.findViewById(R.id.ivNgayTruoc);
-            ivNgaySau =view.findViewById(R.id.ivNgaySau);
 
        //     rcShow = view.findViewById(R.id.rcShow);  // Hãy đảm bảo thay thế bằng ID RecyclerView thực tế của bạn
 //            dateAdapter = new AdapterLich(requireContext(), main.listGiaoDich);

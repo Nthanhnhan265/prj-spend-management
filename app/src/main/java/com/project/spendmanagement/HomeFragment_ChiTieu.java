@@ -204,7 +204,6 @@ AdapterGiaoDich adapterGiaoDich;
           edtNhapGhiChu.setText("");
           edtTienChi.setText("");
           edtNhapGhiChu.requestFocus();
-          icon_adapter.resetSelectedItem();
         } catch (Exception ex) {
           Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
         }

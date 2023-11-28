@@ -205,7 +205,7 @@
             android:id="@+id/gvDanhSachDMThu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnWidth="90dp"
+            android:columnWidth="70dp"
             android:gravity="center"
             android:horizontalSpacing="2dp"
             android:numColumns="auto_fit"

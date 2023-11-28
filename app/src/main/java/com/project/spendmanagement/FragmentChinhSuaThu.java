@@ -46,6 +46,19 @@ public class FragmentChinhSuaThu extends Fragment {
         return view;
     }
 
+    private void setControl(View view) {
+        btnChinhSuaThu = view.findViewById(R.id.btnChinhSuaThu);
+        btnDatePicker = view.findViewById(R.id.btnDatePicker);
+        gvDanhMucThu = view.findViewById(R.id.gvDanhSachDMThu);
+        listDanhMuc = new ArrayList<>();
+        constructGridView();
+        iconDanhMucAdapter = new AdapterDanhMuc(requireContext(), listDanhMuc);
+        edtTienThu = view.findViewById(R.id.edtTienThu);
+        edtNhapGhiChu = view.findViewById(R.id.edtNhapGhiChu);
+        tvXoa = view.findViewById(R.id.tvXoa);
+        giaoDich_db = new GiaoDich_Db(this.requireContext());
+    }
+
     private void setEvent() {
         try {
             NumberFormat num=NumberFormat.getInstance();
@@ -53,13 +66,11 @@ public class FragmentChinhSuaThu extends Fragment {
             main = (MainActivity) getActivity();
             setCurrentDate();
             GiaoDich gdDuocChon = AdapterGiaoDich.giaoDichDuocChon;
-            Log.d("info chinh sua: ", gdDuocChon.toString());
             //hiển thị dữ liệu
             edtNhapGhiChu.setText(gdDuocChon.getGhiChu());
             edtTienThu.setText(num.format(gdDuocChon.getGiaTri()));
             btnDatePicker.setText(gdDuocChon.getNgayGD());
-            gvDanhMucThu.setSelection(listDanhMuc.indexOf(gdDuocChon.getDanhMuc()));
-            gvDanhMucThu.getSelectedItem();
+            AdapterDanhMuc.danhMucDuocChon=AdapterGiaoDich.giaoDichDuocChon.getDanhMuc(); //chọn danh mục cho gridview
             btnChinhSuaThu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,10 +120,7 @@ public class FragmentChinhSuaThu extends Fragment {
                     }
                 }
             });
-
-
             gvDanhMucThu.setAdapter(iconDanhMucAdapter);
-
             btnDatePicker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -170,20 +178,6 @@ public class FragmentChinhSuaThu extends Fragment {
             throw (ex);
         }
     }
-
-    private void setControl(View view) {
-        btnChinhSuaThu = view.findViewById(R.id.btnChinhSuaThu);
-        btnDatePicker = view.findViewById(R.id.btnDatePicker);
-        gvDanhMucThu = view.findViewById(R.id.gvDanhSachDMThu);
-        listDanhMuc = new ArrayList<>();
-        constructGridView();
-        iconDanhMucAdapter = new AdapterDanhMuc(requireContext(), listDanhMuc);
-        edtTienThu = view.findViewById(R.id.edtTienThu);
-        edtNhapGhiChu = view.findViewById(R.id.edtNhapGhiChu);
-        tvXoa = view.findViewById(R.id.tvXoa);
-        giaoDich_db = new GiaoDich_Db(this.requireContext());
-    }
-
     private boolean isValidData() {
         // Kiểm tra và trả về true nếu dữ liệu hợp lệ, ngược lại trả về false
         return !TextUtils.isEmpty(btnDatePicker.getText().toString()) &&
