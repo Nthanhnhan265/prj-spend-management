@@ -43,13 +43,17 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
                 "MaDanhMuc INTEGER," +
                 "FOREIGN KEY (MaDanhMuc) REFERENCES tblDanhMuc(IdDanhMuc))";
         db.execSQL(taoBangGiaoDich);
+        // Tạo bảng Nhắc Nhở
+        String taoBangNhacNho = "CREATE TABLE tblNhacNho (" +
+                "MaNhacNho INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ThoiGian TEXT," +
+                "NoiDung TEXT)";
+        db.execSQL(taoBangNhacNho);
 
         if (!isChenDanhMucExecuted) {
             //ChenDanhMuc();
             isChenDanhMucExecuted = true; // Đánh dấu là đã thực hiện
         }
-
-
     }
     public void deleteDatabase(Context context) {
         context.deleteDatabase("dbGiaoDich");
@@ -906,7 +910,99 @@ public class GiaoDich_Db extends SQLiteOpenHelper {
         database.close();
         return new double[]{tongThu,tongChi};
     }
+    // Phương thức của bảng Nhắc Nhở
+    // Thêm nhắc nhở
+    public long ThemNhacNho(NhacNho nhacNho) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("ThoiGian", nhacNho.getThoiGian());
+        values.put("NoiDung", nhacNho.getNoiDung());
 
+        long newRowId = db.insert("tblNhacNho", null, values);
+
+        if (newRowId != -1) {
+            Log.d("Database", "Thêm Nhắc nhở thành công. Row ID: " + newRowId);
+        } else {
+            Log.e("Database", "Thêm Nhắc nhở thất bại.");
+        }
+
+        db.close();
+        return newRowId;
+    }
+    // Xóa nhắc nhở
+    public void XoaNhacNho(int maNhacNho) {
+        SQLiteDatabase database = getWritableDatabase();
+        try {
+            int rowsAffected = database.delete("tblNhacNho", "MaNhacNho=?", new String[]{String.valueOf(maNhacNho)});
+
+            if (rowsAffected > 0) {
+                Log.d("Database", "Xóa Nhắc nhở thành công. Số dòng đã xóa: " + rowsAffected);
+            } else {
+                Log.e("Database", "Xóa Nhắc nhở không thành công. MaNhacNho " + maNhacNho);
+            }
+        } catch (Exception e) {
+            Log.e("Database", "Lỗi xóa Nhắc nhở. MaNhacNho: " + maNhacNho);
+        } finally {
+            database.close();
+        }
+    }
+    // Sửa nhắc nhở
+    public void SuaNhacNho(NhacNho nhacNho) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("ThoiGian", nhacNho.getThoiGian());
+        values.put("NoiDung", nhacNho.getNoiDung());
+
+        try {
+            int rowsAffected = db.update("tblNhacNho", values, "MaNhacNho=?", new String[]{String.valueOf(nhacNho.getMaNhacNho())});
+
+            if (rowsAffected > 0) {
+                Log.d("Database", "Cập nhật Nhắc nhở thành công. Số dòng cập nhật: " + rowsAffected);
+            } else {
+                Log.e("Database", "Cập nhật Nhắc nhở không thành công. MaNhacNho not found: " + nhacNho.getMaNhacNho());
+            }
+        } catch (Exception e) {
+            Log.e("Database", "Error updating Nhắc nhở. MaNhacNho: " + nhacNho.getMaNhacNho());
+        } finally {
+            db.close();
+        }
+    }
+    // Đọc dữ liệu nhắc nhở
+    public List<NhacNho> DocDlNhacNho() {
+        List<NhacNho> danhSachNhacNho = new ArrayList<>();
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        String query = "SELECT * FROM tblNhacNho";
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int maNhacNhoIndex = cursor.getColumnIndex("MaNhacNho");
+                int thoiGianIndex = cursor.getColumnIndex("ThoiGian");
+                int noiDungIndex = cursor.getColumnIndex("NoiDung");
+
+                // Kiểm tra xem các cột có tồn tại trong Cursor không
+                if (maNhacNhoIndex != -1 && thoiGianIndex != -1 && noiDungIndex != -1) {
+                    int maNhacNho = cursor.getInt(maNhacNhoIndex);
+                    String thoiGian = cursor.getString(thoiGianIndex);
+                    String noiDung = cursor.getString(noiDungIndex);
+
+                    NhacNho nhacNho = new NhacNho(maNhacNho, thoiGian, noiDung);
+                    danhSachNhacNho.add(nhacNho);
+                } else {
+                    Log.e("Database", "Cột không tồn tại trong Cursor.");
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+
+        Log.d("Database", "Đã đọc dữ liệu từ cơ sở dữ liệu! Số lượng Nhắc nhở: " + danhSachNhacNho.size());
+
+        return danhSachNhacNho;
+    }
 
 
     @Override
