@@ -1,5 +1,8 @@
 package com.project.spendmanagement;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class NhacNho {
     public NhacNho(int maNhacNho, String thoiGian, String noiDung) {
         this.maNhacNho = maNhacNho;
@@ -36,5 +39,10 @@ public class NhacNho {
 
     private String thoiGian;
     private String noiDung;
+    // Hàm lấy thời gian theo format h,m,s
+    public String getFormattedThoiGian() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+        return dateFormat.format(thoiGian);
+    }
 
 }

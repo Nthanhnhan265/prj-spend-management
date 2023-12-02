@@ -1,6 +1,8 @@
 package com.project.spendmanagement;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +14,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -24,19 +28,22 @@ import java.util.Date;
 import java.util.List;
 
 public class HomeFragment_ChiTieu extends Fragment {
-    private AdapterDanhMuc icon_adapter;
+  private AdapterDanhMuc icon_adapter;
   private List<DanhMuc> listChiTieu;
   private Button datepickerButton;
- // private GridView gvExtenseCategory;
+  // private GridView gvExtenseCategory;
 
-  private Button btnTienThu,btnNhapTienChi;
+  private Button btnTienThu, btnNhapTienChi;
   // them moi
   private ListView lvDanhSachTienChi;
-  private EditText edtNhapGhiChu,edtTienChi;
+  private EditText edtNhapGhiChu, edtTienChi;
   MainActivity main;
   private GridView gvDanhMucChi;
   GiaoDich_Db giaoDich_db;
-AdapterGiaoDich adapterGiaoDich;
+  AdapterGiaoDich adapterGiaoDich;
+  int countThongBao=5;
+  TextView tvthongbao;
+  ImageView iconthongbao;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,18 +52,28 @@ AdapterGiaoDich adapterGiaoDich;
     setEvent();
     return view;
   }
+
   private void setEvent() {
+    iconthongbao.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        // Hiển thị hộp thoại thông báo khi click vào iconthongbao
+        hienThiHoiThoaiXemThongBao();
+      }
+    });
+    tvthongbao.setText(String.valueOf(countThongBao));
+    tvthongbao.setVisibility(View.VISIBLE);
     //lien ket man hinh nhap thu ở đây
     btnTienThu.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         MainActivity main = (MainActivity) getActivity();
-        if(main!=null) {
+        if (main != null) {
           main.chuyenDenNhapThu();
         }
       }
     });
-    main=(MainActivity) getActivity();
+    main = (MainActivity) getActivity();
     setCurrentDate();
     datepickerButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -82,10 +99,10 @@ AdapterGiaoDich adapterGiaoDich;
             try {
               Date date = sdf.parse(selectedDate);
               SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
-           //   String dayOfWeek = dayFormat.format(date); // Lấy thứ
+              //   String dayOfWeek = dayFormat.format(date); // Lấy thứ
 
               // Xuất ngày và thứ
-              datepickerButton.setText(selectedDate+"");
+              datepickerButton.setText(selectedDate + "");
             } catch (ParseException e) {
               e.printStackTrace();
             }
@@ -95,67 +112,7 @@ AdapterGiaoDich adapterGiaoDich;
         datePickerDialog.show();
       }
     });
-    // Thêm sự kiện nhập tiền chi
-//    btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        try {
-//          // Get the selected date from the button
-//          String selectedDate = datepickerButton.getText().toString();
-//
-//          // Get other input values
-//          String ghiChu = edtNhapGhiChu.getText().toString();
-//          int tienThu = Integer.parseInt(edtTienChi.getText().toString());
-//          DanhMuc selectedDanhMuc = icon_adapter.getDanhMucDuocChon();
-//
-//          // Create a new GiaoDich object based on the input values
-//          ChiTieu chiTieu = new ChiTieu(selectedDate, "(" + ghiChu + ")", tienThu, selectedDanhMuc);
-//
-//          // Get the database instance
-//          SQLiteDatabase db = giaoDich_db.getWritableDatabase();
-//
-//          // Insert the data into the database
-//          long newRowId = giaoDich_db.ThemDl(chiTieu);
-//
-//          // Check if the insertion was successful
-//          if (newRowId != -1) {
-//            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
-//            edtNhapGhiChu.setText("");
-//            edtTienChi.setText("");
-//            edtNhapGhiChu.requestFocus();
-//            icon_adapter.resetSelectedItem();
-//          } else {
-//            Toast.makeText(requireContext(), "Lỗi khi thêm vào database!", Toast.LENGTH_SHORT).show();
-//          }
-//        } catch (Exception ex) {
-//          Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
-//        }
-//      }
-//    });
-//    btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        MainActivity activity = (MainActivity) getActivity();
-//        CapNhatDuLieu listener = (CapNhatDuLieu) activity;
-//
-//        if (listener != null) {
-//          try {
-//            // Thêm Giao dich moi
-//            listener.themGiaoDich(new ChiTieu(datepickerButton.getText().toString(),
-//                    "("+edtNhapGhiChu.getText().toString()+")",
-//                    Integer.parseInt(edtTienChi.getText().toString()),icon_adapter.getDanhMucDuocChon()));
-//
-//            Toast.makeText(requireContext(), "Đã nhập tiền chi!", Toast.LENGTH_SHORT).show();
-//            edtNhapGhiChu.setText("");
-//            edtTienChi.setText("");
-//            edtNhapGhiChu.requestFocus();
-//            icon_adapter.resetSelectedItem();
-//          } catch (Exception ex) {
-//            Toast.makeText(requireContext(), "Hãy nhập thông tin!", Toast.LENGTH_SHORT).show();
-//          }
-//        }
-//      }
-//    });
+
     adapterGiaoDich=new AdapterGiaoDich(requireContext(),main.listGiaoDich);
     btnNhapTienChi.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -211,6 +168,7 @@ AdapterGiaoDich adapterGiaoDich;
       }
     });
 
+
     gvDanhMucChi.setAdapter(icon_adapter);
   }
   private void setControl(View view) {
@@ -226,6 +184,8 @@ AdapterGiaoDich adapterGiaoDich;
      edtNhapGhiChu=view.findViewById(R.id.edtNhapGhiChu);
      edtTienChi=view.findViewById(R.id.edtTienChi);
     giaoDich_db = new GiaoDich_Db(requireContext());
+    tvthongbao=view.findViewById(R.id.tvNotificationCount);
+    iconthongbao=view.findViewById(R.id.ivIconNhacNho);
 
   }
   private void setCurrentDate() {
@@ -261,6 +221,30 @@ AdapterGiaoDich adapterGiaoDich;
     // Đặt background cho DatePickerDialog từ drawable custom_background.xml
     datePickerDialog.getDatePicker().setBackgroundResource(R.drawable.custom_background);
     datePickerDialog.show();
+  }
+  public void capNhatSoLanThongBao() {
+    // Số lần thông báo tăng lên
+    countThongBao++;
+
+    // Cập nhật TextView
+    tvthongbao.setText(String.valueOf(countThongBao));
+    tvthongbao.setVisibility(View.VISIBLE);
+  }
+  private void hienThiHoiThoaiXemThongBao() {
+    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+    builder.setTitle("Xem Thông Báo");
+    builder.setMessage("Nội dung thông báo");
+
+    // Nút đóng hộp thoại
+    builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+        dialog.dismiss();
+      }
+    });
+
+    AlertDialog alertDialog = builder.create();
+    alertDialog.show();
   }
 
 
