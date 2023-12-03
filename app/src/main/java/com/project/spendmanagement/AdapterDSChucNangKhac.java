@@ -19,13 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterDSChucNang extends RecyclerView.Adapter {
+public class AdapterDSChucNangKhac extends RecyclerView.Adapter {
     //khai báo
     private Context context;
     private List<String> dsChucNang = new ArrayList<>();
 
     //Truyền vào danh sách gồm Context và danh sách danh mục
-    public AdapterDSChucNang(Context context, List<String> ds) {
+    public AdapterDSChucNangKhac(Context context, List<String> ds) {
         try {
             this.dsChucNang = ds;
             this.context = context;
@@ -56,6 +56,7 @@ public class AdapterDSChucNang extends RecyclerView.Adapter {
                     @Override
                     public void onClick(View v) {
                         //Chuyển qua màn hình xem báo cáo thu chi trong năm
+                        //TODO: sửa thành equal
                         if (chucNang == "Báo cáo thu chi trong năm") {
                             FragmentKhacBaoCaoThuChi fragmentKhacBaoCaoTC = new FragmentKhacBaoCaoThuChi();
                             FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
@@ -78,7 +79,7 @@ public class AdapterDSChucNang extends RecyclerView.Adapter {
                                         public void onClick(DialogInterface dialog, int which) {
                                             try {
                                                 GiaoDich_Db giaoDichDb = new GiaoDich_Db(context);
-                                                giaoDichDb.deleteDatabase(context);
+                                                giaoDichDb.deleteTable(context);
                                                 giaoDichDb.ChenDanhMuc();
                                                 FragmentPageKhac.tvSoDu.setText("0");
                                             } catch (Exception ex) {
@@ -94,6 +95,12 @@ public class AdapterDSChucNang extends RecyclerView.Adapter {
 
                                         }
                                     }).show();
+                        }
+                        else if(chucNang=="Tìm kiếm") {
+                            FragmentKhacTimKiem fragmentKhacTimKiem = new FragmentKhacTimKiem();
+                            FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.container, fragmentKhacTimKiem).addToBackStack(null).commit();
+
                         }
 
                     }

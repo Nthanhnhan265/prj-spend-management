@@ -24,7 +24,7 @@ public abstract class GiaoDich {
     //construct
 
     public GiaoDich(String ngayGD, String ghiChu, int giaTri) {
-        this.maGD++;
+        this.maGD=0;
         this.ngayGD = ngayGD;
         this.ghiChu = ghiChu;
         this.giaTri = giaTri;

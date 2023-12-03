@@ -62,7 +62,7 @@ public class FragmentBaoCaoChi extends Fragment {
         //tạo dữ liệu cho biểu đồ
         phanTramDanhMucChi= giaoDichDb.LayPhanTramDanhMucChi(thang,nam);
         dataSet = new PieDataSet(phanTramDanhMucChi, "Danh mục chi");
-        dataSet.setColors(new int[]{Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED});
+        dataSet.setColors(new int[]{Color.parseColor("#feb80a"),Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED });
 
         pieData = new PieData(dataSet);
         pieData.setValueTextSize(15f);

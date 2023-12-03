@@ -17,7 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
 
     HomeFragment_ChiTieu homeFragment;
-    PageLich pageLich;
+    FragmentPageLich pageLich;
     FragmentBaoCaoChi pageBaoCao;
     FragmentPageKhac pageKhac;
      List<GiaoDich> listGiaoDich =new ArrayList<>();
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements CapNhatDuLieu {
 
         // Khoi Tao Cac Fragment
         homeFragment = new HomeFragment_ChiTieu();
-        pageLich = new PageLich();
+        pageLich = new FragmentPageLich();
         pageBaoCao = new FragmentBaoCaoChi();
         pageKhac = new FragmentPageKhac();
 

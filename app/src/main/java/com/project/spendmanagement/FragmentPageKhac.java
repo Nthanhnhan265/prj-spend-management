@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -20,7 +19,7 @@ public class FragmentPageKhac extends Fragment {
     //Khai báo
     RecyclerView rcChucNang;
     List<String> chucNang=new ArrayList<>();
-    AdapterDSChucNang apdapterChucNang;
+    AdapterDSChucNangKhac apdapterChucNang;
     static TextView tvSoDu;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,10 +35,11 @@ public class FragmentPageKhac extends Fragment {
         tvSoDu = view.findViewById(R.id.tvSoDu);
         rcChucNang=view.findViewById(R.id.rcChucNang);
         chucNang.clear();
-        chucNang.add("Báo cáo thu chi trong năm");
+//        chucNang.add("Báo cáo thu chi trong năm");
+        chucNang.add("Tìm kiếm");
         chucNang.add("Báo cáo danh mục trong năm");
         chucNang.add("Xóa tất cả dữ liệu");
-        apdapterChucNang=new AdapterDSChucNang(requireContext(),chucNang);
+        apdapterChucNang=new AdapterDSChucNangKhac(requireContext(),chucNang);
 
     }
     private void setEvent() {

@@ -61,14 +61,12 @@ public class FragmentChinhSuaThu extends Fragment {
 
     private void setEvent() {
         try {
-            NumberFormat num=NumberFormat.getInstance();
-            num.setGroupingUsed(true);
             main = (MainActivity) getActivity();
             setCurrentDate();
             GiaoDich gdDuocChon = AdapterGiaoDich.giaoDichDuocChon;
             //hiển thị dữ liệu
             edtNhapGhiChu.setText(gdDuocChon.getGhiChu());
-            edtTienThu.setText(num.format(gdDuocChon.getGiaTri()));
+            edtTienThu.setText(gdDuocChon.getGiaTri()+"");
             btnDatePicker.setText(gdDuocChon.getNgayGD());
             AdapterDanhMuc.danhMucDuocChon=AdapterGiaoDich.giaoDichDuocChon.getDanhMuc(); //chọn danh mục cho gridview
             btnChinhSuaThu.setOnClickListener(new View.OnClickListener() {
@@ -106,8 +104,10 @@ public class FragmentChinhSuaThu extends Fragment {
                         gdDuocChon.setNgayGD(btnDatePicker.getText().toString());
                         gdDuocChon.setGhiChu(edtNhapGhiChu.getText().toString());
                         gdDuocChon.setGiaTri(Integer.parseInt(edtTienThu.getText().toString()));
-                        if(iconDanhMucAdapter.getDanhMucDuocChon()!=null) {
+                        if(AdapterDanhMuc.danhMucDuocChon!=null) {
                             gdDuocChon.setDanhMuc(iconDanhMucAdapter.danhMucDuocChon);
+                        }else {
+
                             Toast.makeText(requireContext(), "Vui lòng chọn danh mục!", Toast.LENGTH_SHORT).show();
                         }
                         giaoDich_db.SuaDl(gdDuocChon);

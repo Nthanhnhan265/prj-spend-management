@@ -48,15 +48,16 @@ public class FragmentChinhSuaChi extends Fragment {
 
     private void setEvent() {
         try {
-            NumberFormat num=NumberFormat.getInstance();
-            num.setGroupingUsed(true);
+            //TODO: sửa không đúng vị trí
             main = (MainActivity) getActivity();
             setCurrentDate();
             GiaoDich gdDuocChon = AdapterGiaoDich.giaoDichDuocChon;
+            Log.d("Gddcchon: ",gdDuocChon.getMaGD()+"");
+            Log.d("apdapter : ",AdapterGiaoDich.giaoDichDuocChon.getMaGD()+"");
             Log.d("info chinh sua: ", gdDuocChon.toString());
             //hiển thị dữ liệu
             edtNhapGhiChu.setText(gdDuocChon.getGhiChu());
-            edtTienThu.setText(num.format(gdDuocChon.getGiaTri()));
+            edtTienThu.setText(gdDuocChon.getGiaTri()+"");
             btnDatePicker.setText(gdDuocChon.getNgayGD());
             AdapterDanhMuc.danhMucDuocChon=AdapterGiaoDich.giaoDichDuocChon.getDanhMuc();
             btnChinhSuaThu.setOnClickListener(new View.OnClickListener() {
@@ -91,19 +92,26 @@ public class FragmentChinhSuaChi extends Fragment {
                         //TODO: chưa xác thực dữ liệu truyền vào
 
                         // Gọi phương thức SuaDl của GiaoDich_Db để cập nhật vào cơ sở dữ liệu
+
+                        gdDuocChon.setMaGD(AdapterGiaoDich.maDuocChon);
                         gdDuocChon.setNgayGD(btnDatePicker.getText().toString());
                         gdDuocChon.setGhiChu(edtNhapGhiChu.getText().toString());
+                        //xóa dấu phẩy, cắt dấu cách
                         gdDuocChon.setGiaTri(Integer.parseInt(edtTienThu.getText().toString()));
-                        if(iconDanhMucAdapter.getDanhMucDuocChon()!=null) {
-                            gdDuocChon.setDanhMuc(iconDanhMucAdapter.danhMucDuocChon);
-                            Toast.makeText(requireContext(), "Vui lòng chọn danh mục!", Toast.LENGTH_SHORT).show();
-                        }
+//                        if(AdapterDanhMuc.danhMucDuocChon!=null) {
+                        gdDuocChon.setDanhMuc(AdapterDanhMuc.danhMucDuocChon);
+//                        }else {
+//                            Toast.makeText(requireContext(), "Vui lòng chọn danh mục!", Toast.LENGTH_SHORT).show();
+//                        }
                         giaoDich_db.SuaDl(gdDuocChon);
                         Log.d("FragmentChinhSuaThu", "After - Ngay: " + gdDuocChon.getNgayGD() + ", GhiChu: " + gdDuocChon.getGhiChu() + ", GiaTri: " + gdDuocChon.getGiaTri() + ", DanhMuc: " + (gdDuocChon.getDanhMuc() != null ? gdDuocChon.getDanhMuc().getTenDanhMuc() : "null"));
                         Toast.makeText(requireContext(), "Sửa Thành Công", Toast.LENGTH_SHORT).show();
+                        AdapterGiaoDich.giaoDichDuocChon=null;
+                        AdapterGiaoDich.maDuocChon=-1;
                         requireActivity().getSupportFragmentManager().popBackStack();
 
                     } catch (Exception ex) {
+                        Log.e("onClick: ",ex.getMessage() );
                         Toast.makeText(requireContext(), "Vui lòng nhập thông tin!", Toast.LENGTH_SHORT).show();
                     }
                 }
