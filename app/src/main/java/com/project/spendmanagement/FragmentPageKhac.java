@@ -37,6 +37,8 @@ public class FragmentPageKhac extends Fragment {
         chucNang.clear();
 //        chucNang.add("Báo cáo thu chi trong năm");
         chucNang.add("Tìm kiếm");
+        chucNang.add("Nhắc nhở & thông báo");
+        chucNang.add("Báo cáo thu chi trong năm");
         chucNang.add("Báo cáo danh mục trong năm");
         chucNang.add("Xóa tất cả dữ liệu");
         apdapterChucNang=new AdapterDSChucNangKhac(requireContext(),chucNang);

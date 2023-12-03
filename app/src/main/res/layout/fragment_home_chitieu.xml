@@ -103,7 +103,34 @@
             android:visibility="gone"
             >
         </ImageView>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/ivIconNhacNho"
+                android:src="@drawable/icon_thongbao"/>
+
+            <TextView
+                android:id="@+id/tvNotificationCount"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top|end"
+                android:gravity="center"
+                android:textColor="#CC180B"
+                android:text="0"
+                android:textSize="18sp"
+                android:visibility="gone">
+
+            </TextView>
+
+        </FrameLayout>
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
