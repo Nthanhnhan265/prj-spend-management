@@ -151,6 +151,7 @@ public class FragmentKhacBaoCaoDMChi extends Fragment {
         tvChiTieu.setText(num.format(thuChi[1]));
         tvThuChi.setText(num.format(thuChi[0]-thuChi[1]));
     }
+
     //Hiện họp thoại để chọn tháng/năm
     private void showDatePickerDialog() {
         // Tạo đối tượng AlertDialog.Builder

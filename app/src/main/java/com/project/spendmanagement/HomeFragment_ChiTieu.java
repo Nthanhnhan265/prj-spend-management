@@ -42,8 +42,6 @@ public class HomeFragment_ChiTieu extends Fragment {
   GiaoDich_Db giaoDich_db;
   AdapterGiaoDich adapterGiaoDich;
   int countThongBao=5;
-  TextView tvthongbao;
-  ImageView iconthongbao;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,15 +52,6 @@ public class HomeFragment_ChiTieu extends Fragment {
   }
 
   private void setEvent() {
-    iconthongbao.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        // Hiển thị hộp thoại thông báo khi click vào iconthongbao
-        hienThiHoiThoaiXemThongBao();
-      }
-    });
-    tvthongbao.setText(String.valueOf(countThongBao));
-    tvthongbao.setVisibility(View.VISIBLE);
     //lien ket man hinh nhap thu ở đây
     btnTienThu.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -183,8 +172,6 @@ public class HomeFragment_ChiTieu extends Fragment {
      edtNhapGhiChu=view.findViewById(R.id.edtNhapGhiChu);
      edtTienChi=view.findViewById(R.id.edtTienChi);
     giaoDich_db = new GiaoDich_Db(requireContext());
-    tvthongbao=view.findViewById(R.id.tvNotificationCount);
-    iconthongbao=view.findViewById(R.id.ivIconNhacNho);
 
   }
   private void setCurrentDate() {
@@ -224,10 +211,6 @@ public class HomeFragment_ChiTieu extends Fragment {
   public void capNhatSoLanThongBao() {
     // Số lần thông báo tăng lên
     countThongBao++;
-
-    // Cập nhật TextView
-    tvthongbao.setText(String.valueOf(countThongBao));
-    tvthongbao.setVisibility(View.VISIBLE);
   }
   private void hienThiHoiThoaiXemThongBao() {
     AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());

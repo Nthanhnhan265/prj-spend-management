@@ -79,7 +79,7 @@ public class AdapterDSChucNangKhac extends RecyclerView.Adapter {
                                         public void onClick(DialogInterface dialog, int which) {
                                             try {
                                                 GiaoDich_Db giaoDichDb = new GiaoDich_Db(context);
-                                                giaoDichDb.deleteTable(context);
+                                                giaoDichDb.deleteDatabase(context);
                                                 giaoDichDb.ChenDanhMuc();
                                                 FragmentPageKhac.tvSoDu.setText("0");
                                             } catch (Exception ex) {
@@ -102,7 +102,17 @@ public class AdapterDSChucNangKhac extends RecyclerView.Adapter {
                             fragmentTransaction.replace(R.id.container, fragmentKhacTimKiem).addToBackStack(null).commit();
 
                         }
+                        else if(chucNang=="Nhắc nhở") {
+                            FragmentKhacNhacNho fragment = new FragmentKhacNhacNho();
+                            FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.container, fragment).addToBackStack(null).commit();
 
+                        }
+                        else if(chucNang=="Thông báo") {
+                            FragmentKhacThongBao fragment = new FragmentKhacThongBao();
+                            FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.container, fragment).addToBackStack(null).commit();
+                        }
                     }
                 });
             }

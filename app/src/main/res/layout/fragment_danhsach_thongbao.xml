@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="730dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/dark_blue"
+
+
+    >
+<!--    Thanh điều hướng-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/darker_blue"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_before"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/ivThoat"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông báo"
+            android:layout_gravity="center"
+            android:textColor="@color/lighter_blue"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lighter_blue"
+        android:textAlignment="textStart"
+        android:text="Nhắc nhở đến hẹn"
+        android:textSize="18sp"
+        android:paddingHorizontal="6dp"
+        android:textStyle="bold"
+        android:layout_marginTop="6dp"
+        />
+
+<!--    hiển thị danh sách các nhac nho den ngay ở đây-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="6dp"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNhacNho"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

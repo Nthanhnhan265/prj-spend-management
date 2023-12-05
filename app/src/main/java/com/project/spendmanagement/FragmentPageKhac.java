@@ -35,10 +35,9 @@ public class FragmentPageKhac extends Fragment {
         tvSoDu = view.findViewById(R.id.tvSoDu);
         rcChucNang=view.findViewById(R.id.rcChucNang);
         chucNang.clear();
-//        chucNang.add("Báo cáo thu chi trong năm");
+//        chucNang.add("Thông báo");
+        chucNang.add("Nhắc nhở");
         chucNang.add("Tìm kiếm");
-        chucNang.add("Nhắc nhở & thông báo");
-        chucNang.add("Báo cáo thu chi trong năm");
         chucNang.add("Báo cáo danh mục trong năm");
         chucNang.add("Xóa tất cả dữ liệu");
         apdapterChucNang=new AdapterDSChucNangKhac(requireContext(),chucNang);
